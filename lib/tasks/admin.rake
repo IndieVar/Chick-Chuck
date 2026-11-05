@@ -4,35 +4,19 @@ namespace :admin do
   # Languages
   desc 'Start'
   task start: :environment do
-    # Create Admin
     if Admin.exists?
-      p 'Admin already exists!'
+      puts 'Admin already exists!'
     else
-      Admin.create(email: 'aleksvarlaam@gmail.com', password: '1UhsX7Rp', password_confirmation: '1UhsX7Rp',
-                   phone: '+972537013915', confirmed_at: Time.now)
+      email = ENV.fetch('ADMIN_EMAIL') { raise 'Set ADMIN_EMAIL to create the admin account' }
+      password = ENV.fetch('ADMIN_PASSWORD') { raise 'Set ADMIN_PASSWORD to create the admin account' }
+
+      Admin.create!(email:, password:, password_confirmation: password, confirmed_at: Time.current)
+      puts 'Admin created'
     end
 
-    # Statistic
-    if Statistic.exists?
-      p 'Statistic already exists!'
-    else
-      Statistic.create
-      p 'Statistic created'
-    end
+    languages = %w[עברית عربي አማርኛ English Русский Українська Français Español Italiano]
+    languages.each { |language| Language.find_or_create_by!(title: language) }
 
-    # Languages
-    if Language.exists?
-      p 'Languages already exists!'
-    else
-      languages_array = %w[עברית عربي አማርኛ]
-
-      languages_array += %w[
-        English Русский Українська Français Español Italiano
-      ]
-
-      languages_array.each { |language| Language.create(title: language) }
-
-      p "Created #{Language.count} languages"
-    end
+    puts "Languages ready (#{Language.count})"
   end
 end

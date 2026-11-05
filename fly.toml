@@ -7,6 +7,9 @@ app = "chick-chuck"
 primary_region = "mad"
 console_command = "/rails/bin/rails console"
 
+[deploy]
+  release_command = "bin/rails db:migrate"
+
 [processes]
   app = "./bin/rails server"
   sidekiq = "bundle exec sidekiq"

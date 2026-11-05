@@ -4,11 +4,15 @@
         <!-- Avatar -->
         <div class="w-full" itemscope itemtype="http://schema.org/ImageObject">
             <%= tag.span company.title, itemprop: "name", class: "sr-only"%>
-            <%= link_to carrierwave_image_path(company, avatar: true), data: {turbo_frame: 'modal'}, class: "w-full" do %>
-                <%= image_tag company.avatar_large,
-                    itemprop: "contentUrl",
-                    alt: company.title, 
-                    class: "object-cover object-center w-full max-w-xl h-56 sm:h-72 rounded-t-lg cursor-zoom-in" %>
+            <% company_image = image_tag company.avatar_large,
+                itemprop: "contentUrl",
+                alt: company.title,
+                class: "object-cover object-center w-full max-w-xl h-56 sm:h-72 rounded-t-lg #{company.avatar.url.present? ? 'cursor-zoom-in' : ''}" %>
+            <% if company.avatar.url.present? %>
+                <%= link_to company_image, carrierwave_image_path(company, avatar: true),
+                    data: {turbo_frame: 'modal'}, class: "w-full" %>
+            <% else %>
+                <%= company_image %>
             <% end %>
             <%= tag.span company.description.to_plain_text, itemprop: "description", class: "sr-only"%>
         </div>

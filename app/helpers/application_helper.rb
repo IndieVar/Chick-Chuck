@@ -2,9 +2,9 @@
 
 module ApplicationHelper
   include Pagy::Frontend
-  require 'image_helper'
-  require 'navigation_helper'
-  require 'meta_tags_helper'
+  require_relative 'image_helper'
+  require_relative 'navigation_helper'
+  require_relative 'meta_tags_helper'
 
   def device
     agent = request.user_agent

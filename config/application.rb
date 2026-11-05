@@ -23,7 +23,7 @@ Bundler.require(*Rails.groups)
 module ChickChuck
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
+    config.load_defaults 8.0
     config.exceptions_app = lambda { |env|
       ErrorsController.action(:show).call(env)
     }
@@ -45,7 +45,7 @@ module ChickChuck
     # I18n
     config.i18n.default_locale = :en
     config.i18n.fallbacks = true
-    config.i18n.available_locales = %i[en ru uk]
+    config.i18n.available_locales = %i[en ru he]
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Don't generate system test files.

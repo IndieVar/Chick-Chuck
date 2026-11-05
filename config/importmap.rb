@@ -17,4 +17,4 @@ pin 'stimulus-checkbox-select-all', to: 'https://ga.jspm.io/npm:stimulus-checkbo
 pin 'stimulus-read-more', to: 'https://ga.jspm.io/npm:stimulus-read-more@4.1.0/dist/stimulus-read-more.mjs'
 pin 'stimulus-reveal-controller', to: 'https://ga.jspm.io/npm:stimulus-reveal-controller@4.1.0/dist/stimulus-reveal-controller.mjs'
 pin 'trix', to: 'https://ga.jspm.io/npm:trix@2.0.4/dist/trix.esm.min.js'
-pin '@rails/actiontext', to: 'https://ga.jspm.io/npm:@rails/actiontext@7.0.4-2/app/assets/javascripts/actiontext.js'
+pin '@rails/actiontext', to: 'https://ga.jspm.io/npm:@rails/actiontext@8.0.0/app/assets/javascripts/actiontext.js'

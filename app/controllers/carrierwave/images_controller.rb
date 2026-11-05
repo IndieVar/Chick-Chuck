@@ -6,9 +6,9 @@ module Carrierwave
 
     def show
       if helpers.is_avatar?
-        @images = [@imageable.avatar]
+        @images = [@imageable.avatar].select { |avatar| avatar&.url.present? }
       else
-        @images = @imageable.images
+        @images = @imageable.images.select { |image| image.file&.url.present? }
         start_index = params[:id].to_i
         @images = @images.select { |img|
           img.id >= start_index

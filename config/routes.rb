@@ -17,8 +17,8 @@ Rails.application.routes.draw do
         via: :all,
         constraints: { subdomain: 'www' }
   # 404 old pages to remove!
-  get '/he', to: redirect('/404')
-  get '/he/*other', to: redirect('/404')
+  get '/uk', to: redirect('/404')
+  get '/uk/*other', to: redirect('/404')
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
     # 404
     get '404', to: 'errors#page_not_found'

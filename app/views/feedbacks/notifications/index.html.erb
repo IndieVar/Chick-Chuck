@@ -2,8 +2,8 @@
 <% provide :page_title, 'Notifications' %>
 
 <%= render TurboNotificationsComponent.new(title: 'Notifications') do %>
-    <% if @notifications.count > 0%>
-        <%= render @notifications.decorate%>       
+    <% if @visible_notifications.any? %>
+        <%= render @visible_notifications.map(&:decorate) %>
     <% else %>
         <%= tag.li t('notification.no_notice'), class: 'text-center my-3'%>
     <% end%>

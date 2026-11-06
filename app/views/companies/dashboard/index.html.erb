@@ -9,7 +9,9 @@
     <!-- Profile content -->
     <div class="flex justify-center">
         <!-- Rating -->
-        <%= render 'feedbacks/shared/rating', object: @company %>
+        <%= link_to user_path(@company), class: "flex w-full" do %>
+          <%= render 'feedbacks/shared/rating', object: @company %>
+        <% end %>
     </div>
     <!-- Share facebook button -->
     <div class="flex items-center flex-col justify-center space-y-2 space-x-2 rtl:space-x-reverse">

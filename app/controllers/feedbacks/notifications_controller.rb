@@ -11,6 +11,10 @@ module Feedbacks
 
     def set_notifications
       @notifications = current_user.notifications.where.not(type: MessageNotification.name)
+      @visible_notifications = @notifications.select do |notification|
+        content = notification.to_notification
+        !content.respond_to?(:available?) || content.available?
+      end
     end
 
     def read_notifications

@@ -23,19 +23,29 @@ class ReviewNotification < Noticed::Base
     t('notification.review')
   end
 
+  def review
+    params[:review]
+  end
+
+  def available?
+    review.present? && review.reviewable.present? && review.user.present?
+  end
+
   def object
-    params[:review].reviewable
+    review&.reviewable
   end
 
   def url
-    user_url(id: object.id, anchor: "review_#{params[:review].id}")
+    return unless available?
+
+    user_url(id: object.id, anchor: "review_#{review.id}")
   end
 
   def avatar
-    params[:review].user.avatar_thumb
+    review&.user&.avatar_thumb
   end
 
   def author
-    params[:review].user.user_name
+    review&.user&.user_name
   end
 end

@@ -14,6 +14,7 @@ gem 'crawler_detect'
 gem 'devise', '~> 5.0'
 gem 'devise-i18n', '~> 1.16'
 gem 'draper'
+gem 'faker', '~> 3.8'
 gem 'file_validators'
 gem 'fog-aws'
 gem 'image_processing', '~> 1.2'
@@ -50,7 +51,6 @@ gem 'view_component', '~> 3.22'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
-  gem 'ffaker'
   gem 'letter_opener'
   gem 'rspec-rails', '~> 7.0'
 end

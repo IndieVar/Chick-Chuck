@@ -44,7 +44,7 @@ module Users
       @comment = Comment.new
       @reviewable = @user
       @review = current_client&.company_review(@reviewable) || Review.new
-      @reviews = @user.reviews.where.not(content: nil || '', title: nil || '')
+      @reviews = @user.reviews.where.not(content: [nil, '']).where.not(title: [nil, ''])
       @reviews_count = @reviews.count
       @pagy, @reviews = pagy(@reviews, items: 10, fragment: '#reviews')
     end

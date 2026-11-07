@@ -21,15 +21,15 @@ module Contents
       feedbacks = Feedback.all
 
       @global_feedback = {
-        usability: (feedbacks.map(&:usability).sum.to_f / feedbacks.count),
-        speed: (feedbacks.map(&:speed).sum.to_f / feedbacks.count),
-        design: (feedbacks.map(&:design).sum.to_f / feedbacks.count),
-        quality: (feedbacks.map(&:quality).sum.to_f / feedbacks.count)
+        usability: (feedbacks.average(:usability) || 0).to_f,
+        speed: (feedbacks.average(:speed) || 0).to_f,
+        design: (feedbacks.average(:design) || 0).to_f,
+        quality: (feedbacks.average(:quality) || 0).to_f
       }
 
-      @total_rating = (@global_feedback.values.sum / 4).round(1)
+      @total_rating = (@global_feedback.values.sum / 4.0).round(1)
 
-      @reviews = Feedback.where.not(content: nil || '', title: nil || '')
+      @reviews = Feedback.where.not(content: [nil, '']).where.not(title: [nil, ''])
     end
 
     def create

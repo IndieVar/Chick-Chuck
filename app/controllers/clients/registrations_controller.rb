@@ -84,8 +84,8 @@ module Clients
       edit_client_registration_path
     end
 
-    def after_inactive_sign_up_path_for(_resource)
-      new_confirmation_path(_resource)
+    def after_inactive_sign_up_path_for(resource)
+      new_confirmation_path(resource)
     end
 
     # The path used after sign up.

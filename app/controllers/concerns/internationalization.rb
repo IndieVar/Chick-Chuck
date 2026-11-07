@@ -12,7 +12,7 @@ module Internationalization
 
     def switch_locale(&action)
       locale = current_user_locale || locale_from_url || locale_from_headers || I18n.default_locale
-      response.set_header 'Content-Language', locale
+      response.set_header 'Content-Language', locale.to_s
       I18n.with_locale locale, &action
     end
 
@@ -58,8 +58,15 @@ module Internationalization
     end
 
     def detect_from_available(locales)
-      locales.reverse.find { |l| I18n.available_locales.any? { |al| match?(al, l) } }
-      I18n.available_locales.find { |al| match?(al, locale) } if locale
+      locales.reverse_each do |locale|
+        language = locale.split(/[-_]/).first
+        available_locale = I18n.available_locales.find do |candidate|
+          match?(candidate, locale) || match?(candidate, language)
+        end
+        return available_locale if available_locale
+      end
+
+      nil
     end
 
     def match?(str1, str2)
@@ -70,4 +77,5 @@ module Internationalization
       { locale: I18n.locale }
     end
   end
+  # rubocop:enable Metrics/BlockLength
 end

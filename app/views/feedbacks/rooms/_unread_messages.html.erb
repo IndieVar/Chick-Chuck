@@ -1,4 +1,4 @@
 <%= turbo_frame_tag dom_id(room, :unread_messages) do %>
     <%= tag.span count, class: "bg-red-500 p-2 rounded-full text-white" if count > 0%>
-    <%= tag.span room.messages&.last&.created_at&.strftime("%H:%M"), class: 'flex justify-end text-xs text-gray-400 mt-3 '%>
+    <%= tag.span last_message&.created_at&.strftime("%H:%M"), class: 'flex justify-end text-xs text-gray-400 mt-3 '%>
 <% end %>

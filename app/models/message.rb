@@ -17,6 +17,6 @@ class Message < ApplicationRecord
   end
 
   def recipient
-    room.users.where.not(id: user_id)[0]
+    room.recipient(user)
   end
 end

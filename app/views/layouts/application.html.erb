@@ -3,6 +3,7 @@
     lang="<%= response.header['Content-Language']%>" 
     dir="<%= response.header['Content-Language'] == 'he' ? 'rtl' : 'ltr' %>">
   <head>
+    <% google_tag_manager_enabled = session[:cookies_accepted].present? %>
     <!-- Meta -->
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= display_meta_tags(default_meta_tags) %>
@@ -14,7 +15,7 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <!-- Google tag manager -->
-    <%= render 'shared/meta/google_tag_head' if (session[:cookies_accepted].present?) %>
+    <%= render 'shared/meta/google_tag_head' if google_tag_manager_enabled %>
     <!-- Trix editor -->
     <% if current_page?(new_company_registration_url) %>
         <%= javascript_import_module_tag "trix" %>
@@ -26,7 +27,7 @@
 
   <body class="flex flex-col h-screen w-screen justify-between">
       <!-- Google Tag Manager (noscript) -->
-      <%= render 'shared/meta/google_tag_body' if (session[:cookies_accepted].present?) %>
+      <%= render 'shared/meta/google_tag_body' if google_tag_manager_enabled %>
       <!-- Schema json -->
       <%= render 'shared/meta/breadcrumbs_navbar_json'%>
       <%= yield :schema_json %>
@@ -35,7 +36,7 @@
       <!-- Header -->
       <%= yield :navbar%>
       <!-- Main -->
-      <main class="flex w-full grid grid-flow-row auto-rows-max relative <%= 'mt-20' unless controller_name == 'errors' %>" id="top">
+      <main class="w-full grid grid-flow-row auto-rows-max relative <%= 'mt-20' unless controller_name == 'errors' %>" id="top">
           <!-- Coockies -->
           <%= render 'shared/meta/cookies_banner' if session[:cookies_accepted].nil? %>
           <!-- Flash messages -->

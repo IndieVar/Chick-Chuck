@@ -25,9 +25,40 @@ class User < ApplicationRecord
 
   # Scopes
   scope :filter_by_type, ->(type) { where type: }
+  scope :filter_by_exact_user_name, lambda { |user_name|
+    name = user_name.downcase
+    where(
+      <<~SQL.squish,
+        LOWER(users.title) = :name
+        OR (
+          users.type = 'Client'
+          AND CASE
+            WHEN users.first_name IS NOT NULL AND users.first_name <> ''
+              THEN LOWER(CONCAT(users.first_name, ' ', users.last_name))
+            ELSE LOWER(SPLIT_PART(users.email, '@', 1))
+          END = :name
+        )
+        OR (
+          users.type = 'Admin'
+          AND LOWER(CASE
+            WHEN users.first_name IS NOT NULL AND users.first_name <> ''
+              THEN CONCAT('Admin ', users.first_name)
+            ELSE 'Admin'
+          END) = :name
+        )
+      SQL
+      name:
+    )
+  }
   scope :filter_by_user_name, lambda { |user_name|
-                                User.all.select do |user|
-                                  user.user_name.downcase.include?(user_name.downcase)
-                                end
-                              }
+    query = "%#{sanitize_sql_like(user_name.downcase)}%"
+    where(
+      <<~SQL.squish,
+        LOWER(users.title) LIKE :query
+        OR LOWER(CONCAT_WS(' ', users.first_name, users.last_name)) LIKE :query
+        OR LOWER(SPLIT_PART(users.email, '@', 1)) LIKE :query
+      SQL
+      query:
+    )
+  }
 end

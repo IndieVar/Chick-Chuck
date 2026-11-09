@@ -12,7 +12,7 @@ module Users
         title: t('meta.carriers.title'),
         description: t('meta.carriers.desc'),
         keywords: Service.all.decorate.map(&:title).join(', ').sub(/(, )+$/, ''),
-        noindex: request.original_url.include?('?') ? true : false,
+        noindex: request.original_url.include?('?') || false,
         alternate: {
           'x-default' => users_url(locale: nil),
           'en' => users_url(locale: :en),
@@ -21,11 +21,11 @@ module Users
         }
       )
 
-      companies = Company.confirmed.user_filter(filter_params)
-      @best_companies = companies.take(3)
-      latest_companies = companies.drop(3)
+      companies = Company.confirmed.with_directory_details.user_filter(filter_params)
+      @best_companies = companies.limit(3).to_a
+      latest_companies = companies.where.not(id: @best_companies.map(&:id))
       @companies_count = latest_companies.count
-      @pagy_a, @latest_companies = pagy_array(latest_companies, items: 8)
+      @pagy_a, @latest_companies = pagy(latest_companies, items: 8)
     end
 
     def show

@@ -12,27 +12,23 @@ module ClientDecorate
     end
 
     def avatar_thumb
-      if avatar.present?
-        remote_avatar_url || avatar.thumb.url
-      else
-        gender == 'female' ? 'icons/avatar-f.png' : 'icons/avatar-m.png'
-      end
+      avatar_for(:thumb)
     end
 
     def avatar_medium
-      if avatar.present?
-        remote_avatar_url || avatar.medium.url
-      else
-        gender == 'female' ? 'icons/avatar-f.png' : 'icons/avatar-m.png'
-      end
+      avatar_for(:medium)
     end
 
     def avatar_large
-      if avatar.present?
-        remote_avatar_url || avatar.large.url
-      else
-        gender == 'female' ? 'icons/avatar-f.png' : 'icons/avatar-m.png'
-      end
+      avatar_for(:large)
+    end
+
+    private
+
+    def avatar_for(size)
+      return remote_avatar_url || avatar.public_send(size).url if avatar.present?
+
+      gender == 'female' ? 'icons/avatar-f.png' : 'icons/avatar-m.png'
     end
   end
 end

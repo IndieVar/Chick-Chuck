@@ -20,6 +20,7 @@ class Product < ApplicationRecord
   scope :filter_by_city_id,     ->(city_id)     { where city_id: }
   scope :filter_by_condition,   ->(condition)   { where condition: }
   scope :filter_by_delivery,    ->(delivery)    { where delivery: }
+  scope :filter_by_seller, ->(seller) { joins(:user).where(users: { type: seller }) }
   scope :filter_by_price_min,   ->(price_min)   { where 'price >= ?', price_min }
   scope :filter_by_price_max,   ->(price_max)   { where 'price <= ?', price_max }
 
@@ -50,6 +51,6 @@ class Product < ApplicationRecord
   private
 
   def clear_favorites
-    Favorite.where(favorited_type: 'ProductDecorator', favorited_id: id).destroy_all
+    Favorite.for_favorited_record(self, favorited_type: 'ProductDecorator').destroy_all
   end
 end

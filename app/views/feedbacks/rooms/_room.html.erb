@@ -1,25 +1,31 @@
 <%= turbo_stream_from [current_user, room]%>
 
+<% participants = room.users.to_a %>
+<% recipient = participants.find { |user| user.id != current_user.id } %>
+<% messages = room.messages.to_a %>
+<% last_message = messages.max_by(&:created_at) %>
+<% unread_count = messages.count { |message| message.user_id != current_user.id && !message.readed? } %>
+
 <%= turbo_frame_tag room do %>
-    <% if current_user.class.name != Company.name || room.messages.count > 0%>
-        <%= link_to room_path(room.title), class: "flex items-center w-full border-b-2 relative hover:border-gray-300" do %>
+    <% if current_user.class.name != Company.name || messages.any? %>
+        <%= link_to room_path(title: room.title), class: "flex items-center w-full border-b-2 relative hover:border-gray-300" do %>
             <div class="flex flex-row py-4 px-2 items-center space-x-3 rtl:space-x-reverse">
               <!-- Recipient avatar -->
               <div class="">
-                  <%= image_tag room.recipient(current_user).avatar_thumb, class: "object-cover h-12 w-12 rounded-full"%>
+                  <%= image_tag recipient.avatar_thumb, class: "object-cover h-12 w-12 rounded-full"%>
               </div>
   
               <!-- Recipient username and last message -->
               <div>
-                <%= tag.div room.recipient(current_user).user_name, class: "text-lg font-semibold"%>
-                <%= render 'feedbacks/rooms/last_message', room: room %>
+                <%= tag.div recipient.user_name, class: "text-lg font-semibold"%>
+                <%= render 'feedbacks/rooms/last_message', room: room, last_message: %>
               </div>
             </div>
 
             <!-- Unread messages count -->
             <div class="absolute ltr:right-3 rtl:left-3 bottom-2 text-end">
-                <%= render 'feedbacks/rooms/unread_messages', room: room, count: room.messages&.where.not(user: current_user).unread %>
+                <%= render 'feedbacks/rooms/unread_messages', room: room, count: unread_count, last_message: %>
             </div>
         <% end %>
     <% end %>
-<% end if room.users.count > 1%>
+<% end if participants.size > 1 %>

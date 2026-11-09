@@ -5,16 +5,12 @@ class CompanyDecorator < ApplicationDecorator
     "#{User.human_attribute_name('created_at')}: #{l company.created_at, format: :date}"
   end
 
-  def review_star_percent_count(i)
-    return 0 unless company.reviews.exists?
-
-    (company.reviews.select { |review| review.rating == i }.count / company.reviews.count.to_f * 100).round(1)
+  def review_star_percent_count(rating)
+    review_percent_count(:rating, rating)
   end
 
-  def review_price_percent_count(i)
-    return 0 unless company.reviews.exists?
-
-    (company.reviews.select { |review| review.price == i }.count / company.reviews.count.to_f * 100).round(1)
+  def review_price_percent_count(price)
+    review_percent_count(:price, price)
   end
 
   def comments_count
@@ -65,5 +61,20 @@ class CompanyDecorator < ApplicationDecorator
       when 0, 2..nil  then "#{count} תגובות"
       end
     end
+  end
+
+  private
+
+  def review_percent_count(attribute, value)
+    counts = review_counts(attribute)
+    total = counts.values.sum
+    return 0 if total.zero?
+
+    (counts.fetch(value, 0).to_f / total * 100).round(1)
+  end
+
+  def review_counts(attribute)
+    @review_counts ||= {}
+    @review_counts[attribute] ||= company.reviews.group(attribute).count
   end
 end

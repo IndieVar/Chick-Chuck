@@ -18,7 +18,7 @@ module Feedbacks
 
       respond_to do |format|
         if @review.save
-          set_company_rating(@reviewable)
+          @reviewable.refresh_ratings
           format.turbo_stream { flash.now[:success] = t('flash.success.created', model: @review.model_name.human.to_s) }
         else
           format.html { redirect_to @reviewable, alert: t('flash.alert') }
@@ -31,7 +31,7 @@ module Feedbacks
     def update
       respond_to do |format|
         if @review.update(review_params.except(:company_id))
-          set_company_rating(@reviewable)
+          @reviewable.refresh_ratings
           format.turbo_stream { flash.now[:success] = t('flash.success.updated', model: @review.model_name.human.to_s) }
         else
           format.html { redirect_to @reviewable, alert: t('flash.alert') }

@@ -30,7 +30,7 @@ module Devisable
     flash[:success] = "You are welcome, #{current_user.user_name}!"
     referer = request.referer.to_s
 
-    if referer.include?('/clients/sign_in')        ||
+    if referer.include?('/clients/sign_in') ||
        referer.include?('/clients/sign_up')        ||
        referer.include?('/clients/password')       ||
        referer.include?('/clients/confirmation')   ||

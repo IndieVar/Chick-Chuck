@@ -18,28 +18,29 @@ class Company < User
   has_many :products,   class_name: 'Product', dependent: :destroy, foreign_key: :user_id
   has_many :prices,     class_name: 'Price', dependent: :destroy, foreign_key: :user_id
   has_many :reviews,  as: :reviewable,  dependent: :destroy, class_name: 'Review'
-  has_many :comments, as: :commentable, dependent: :destroy, class_name: 'Comment', foreign_key: :user_id
-  has_many :comments, as: :object,      dependent: :destroy, class_name: 'Comment', foreign_key: :user_id
+  has_many :commentable_comments, as: :commentable, dependent: :destroy, class_name: 'Comment'
+  has_many :comments, as: :object, dependent: :destroy, class_name: 'Comment'
   has_many :images,   as: :imageable,   dependent: :destroy, class_name: 'Image'
   accepts_nested_attributes_for :images
 
   # Scopes
   scope :confirmed, -> { where.not(confirmed_at: nil).order(rating: :desc) }
-  scope :filter_by_district_id, lambda { |district_id|
-                                  joins(:districts).where 'districts.id' => district_id
-                                }
-  scope :filter_by_language_id, lambda { |language_id|
-                                  joins(:languages).where 'languages.id' => language_id
-                                }
-  scope :filter_by_service_ids, lambda { |service_ids|
-                                  joins(:services).where('services.id' => service_ids).uniq if service_ids.count > 1
-                                }
+  scope :with_directory_details, -> { includes(:districts, :languages, :rich_text_description) }
+  scope :filter_by_district_id, ->(district_id) { joins(:districts).where(districts: { id: district_id }).distinct }
+  scope :filter_by_language_id, ->(language_id) { joins(:languages).where(languages: { id: language_id }).distinct }
+  scope :filter_by_service_ids, ->(service_ids) { joins(:services).where(services: { id: service_ids }).distinct }
 
   after_destroy :clear_favorites
+
+  def refresh_ratings
+    rating, price = reviews.pick('AVG(rating)', 'AVG(price)')
+
+    update(rating: rating&.round(1) || 0, price: price&.round(1) || 0)
+  end
 
   private
 
   def clear_favorites
-    Favorite.where(favorited_type: 'Company', favorited_id: id).destroy_all
+    Favorite.for_favorited_record(self).delete_all
   end
 end

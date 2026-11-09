@@ -88,7 +88,7 @@
     </div>
     <div class="py-4">
         <!-- Services list -->
-        <div class="flex justify-center items-center w-full grid grid-cols-1 gap-2">
+        <div class="justify-center items-center w-full grid grid-cols-1 gap-2">
             <% company.services.each do |service| %>
                 <%= tag.h2 class: "flex items-center justify-center px-2 py-1.5 text-sm text-base font-semibold text-gray-700 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500" do %>
                     <%= tag.span service.decorate.title %>

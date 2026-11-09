@@ -8,7 +8,7 @@ module Contents
       set_meta_tags(
         title: t('meta.calculator.title'),
         description: t('meta.calculator.desc'),
-        noindex: request.original_url.include?('?') ? true : false,
+        noindex: request.original_url.include?('?') || false,
         alternate: {
           'x-default' => calculator_url(locale: nil),
           'en' => calculator_url(locale: :en),

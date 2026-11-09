@@ -7,29 +7,33 @@ class Client < User
   has_many :products, class_name: 'Product', dependent: :destroy, foreign_key: :user_id
 
   def self.from_omniauth(auth)
-    name_split = auth.info.name.split(' ')
-
-    user = Client.where(email: auth.info.email).first
-    user ||= Client.create!(
-      provider: auth.provider, uid: auth.uid, email: auth.info.email, password: Devise.friendly_token[0, 20], confirmed_at: Time.now,
-      first_name: name_split.first, last_name: name_split.last
-    )
-
-    # if user.remote_avatar_url != auth.info.image
-    #       require 'open-uri'
-    #
-    #       user.remote_avatar_url = auth.info.image
-    #       user.save
-    #     end
-    user
+    find_or_create_by!(email: auth.info.email) do |client|
+      client.assign_attributes(omniauth_attributes(auth))
+    end
+  rescue ActiveRecord::RecordNotUnique, ActiveRecord::RecordInvalid
+    find_by(email: auth.info.email) || raise
   end
 
+  def self.omniauth_attributes(auth)
+    name_parts = auth.info.name.split(' ')
+
+    {
+      provider: auth.provider,
+      uid: auth.uid,
+      password: Devise.friendly_token[0, 20],
+      confirmed_at: Time.current,
+      first_name: name_parts.first,
+      last_name: name_parts.last
+    }
+  end
+  private_class_method :omniauth_attributes
+
   def company_review(company)
-    Review.find_by(user_id: self, reviewable_id: company)
+    company.reviews.find_by(user_id: id)
   end
 
   # Mailer
   def after_confirmation
-    Subscriber.create(email:) unless Subscriber.where(email:).present?
+    Subscriber.find_or_create_by!(email:)
   end
 end

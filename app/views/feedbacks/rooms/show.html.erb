@@ -2,7 +2,7 @@
 <% provide :page_title, t('user_menu.chats') %>
 <% provide :parent_title, t('user_menu.chats') %>
 <% provide :parent_path, rooms_path %>
-<% provide :nav_path, room_path(@room.title) %>
+<% provide :nav_path, room_path(title: @room.title) %>
 <% provide :nav_title, @room.recipient(@current_user).user_name %>
 
 <%= turbo_stream_from @room%>

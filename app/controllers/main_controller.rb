@@ -12,7 +12,7 @@ class MainController < ApplicationController
         'uk' => root_url(locale: :uk)
       }
     )
-    @companies = Company.confirmed.take(3)
+    @companies = Company.confirmed.with_directory_details.take(3)
     @products = Product.published.decorate.take(6)
     # @news = News.all.decorate.last(3)
   end

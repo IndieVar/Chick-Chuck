@@ -24,7 +24,6 @@ module Contents
       total_products = Product.filter(filter_params).newest
       @pagy, @products = pagy(total_products, items: 11, fragment: '#products')
       @products = @products.decorate
-      @products = @products.select { |product| product.user.type == params[:seller] } if params[:seller].present?
       @products_count = total_products.count
     end
 
@@ -50,14 +49,16 @@ module Contents
         title: [t('pages.market'), @user.user_name],
         description: "#{t('about.market.title')}. #{t('home_page.main_features.market_desc')}",
         canonical: user_products_url(@user),
-        noindex: request.original_url.include?('?') ? true : false
+        noindex: request.original_url.include?('?') || false
       )
     end
 
     private
 
     def filter_params
-      params.permit(:category_id, :thing_id, :district_id, :city_id, :price_min, :price_max, :condition, :delivery)
+      params.permit(
+        :category_id, :thing_id, :district_id, :city_id, :price_min, :price_max, :condition, :delivery, :seller
+      )
     end
 
     def update_views

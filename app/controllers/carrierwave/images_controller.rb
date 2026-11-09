@@ -10,9 +10,9 @@ module Carrierwave
       else
         @images = @imageable.images.select { |image| image.file&.url.present? }
         start_index = params[:id].to_i
-        @images = @images.select { |img|
+        @images = @images.select do |img|
           img.id >= start_index
-        } + @images.select do |img|
+        end + @images.select do |img|
           img.id < start_index
         end
       end

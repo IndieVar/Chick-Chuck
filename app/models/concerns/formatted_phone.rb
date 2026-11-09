@@ -11,48 +11,26 @@ module FormattedPhone
     validates :whatsapp, phone: true, allow_blank: true
 
     def formatted_phone
-      parsed_phone = Phonelib.parse(phone)
-      return phone if parsed_phone.invalid?
-
-      formatted =
-        if parsed_phone.country_code == '1'
-          parsed_phone.full_national
-        else
-          parsed_phone.full_international
-        end
-      formatted.gsub!(';', ' x')
-      formatted
+      format_phone(phone)
     end
 
     def formatted_additional_phone
-      parsed_additional_phone = Phonelib.parse(additional_phone)
-      return additional_phone if parsed_additional_phone.invalid?
-
-      formatted =
-        if parsed_additional_phone.country_code == '1'
-          parsed_additional_phone.full_national
-        else
-          parsed_additional_phone.full_international
-        end
-      formatted.gsub!(';', ' x')
-      formatted
+      format_phone(additional_phone)
     end
 
     def formatted_whatsapp
-      parsed_whatsapp = Phonelib.parse(whatsapp)
-      return whatsapp if parsed_whatsapp.invalid?
-
-      formatted =
-        if parsed_whatsapp.country_code == '1'
-          parsed_whatsapp.full_national
-        else
-          parsed_whatsapp.full_international
-        end
-      formatted.gsub!(';', ' x')
-      formatted
+      format_phone(whatsapp)
     end
 
     private
+
+    def format_phone(phone)
+      parsed_phone = Phonelib.parse(phone)
+      return phone if parsed_phone.invalid?
+
+      formatted = parsed_phone.country_code == '1' ? parsed_phone.full_national : parsed_phone.full_international
+      formatted.gsub(';', ' x')
+    end
 
     def normalize_phone
       self.phone = Phonelib.parse(phone).full_e164.presence

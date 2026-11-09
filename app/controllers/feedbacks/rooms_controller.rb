@@ -31,7 +31,7 @@ module Feedbacks
       @new_room = Room.new(users: [current_user, recipient])
 
       if @new_room.save
-        redirect_to room_path(@new_room.title)
+        redirect_to room_path(title: @new_room.title)
       else
         redirect_to rooms_path, alert: t('flash.alert')
       end
@@ -49,17 +49,13 @@ module Feedbacks
 
     def set_rooms
       @current_user = current_user
-      @rooms = search_chat || current_user.rooms.includes(:messages).order('messages.created_at DESC')
+      @rooms = search_chat || current_user.rooms.includes(:users, :messages).order('messages.created_at DESC')
     end
 
     def search_chat
       return unless params[:chatname].present?
 
-      rooms = []
-      current_user.rooms.each do |room|
-        room.users.select { |user| rooms << room if user.user_name.downcase == params[:chatname].downcase }
-      end
-      rooms
+      current_user.rooms.with_user_named(params[:chatname]).includes(:users, :messages)
     end
 
     def check_room_dublicate
@@ -73,7 +69,7 @@ module Feedbacks
 
       @messages = @room.messages.latest
       @new_message = current_user.messages.build(room: @room)
-      redirect_to room_path(@room.title)
+      redirect_to room_path(title: @room.title)
     end
   end
 end

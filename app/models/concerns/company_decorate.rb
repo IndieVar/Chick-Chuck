@@ -10,15 +10,21 @@ module CompanyDecorate
     end
 
     def avatar_thumb
-      avatar.present? ? avatar.thumb.url : '/android-chrome-512x512.png'
+      avatar_url(:thumb, '/android-chrome-512x512.png')
     end
 
     def avatar_medium
-      avatar.present? ? avatar.medium.url : 'logo/og-chick-chuck.webp'
+      avatar_url(:medium, 'logo/og-chick-chuck.webp')
     end
 
     def avatar_large
-      avatar.present? ? avatar.large.url : 'logo/og-chick-chuck.webp'
+      avatar_url(:large, 'logo/og-chick-chuck.webp')
+    end
+
+    private
+
+    def avatar_url(size, fallback)
+      avatar.present? ? avatar.public_send(size).url : fallback
     end
   end
 end

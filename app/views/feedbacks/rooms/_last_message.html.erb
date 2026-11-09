@@ -1,8 +1,8 @@
 <%= turbo_frame_tag dom_id(room, :last_message) do %>
-    <% if room.messages.count > 0 %>
+    <% if last_message.present? %>
         <%= tag.span class: "text-gray-500" do %>
-            <%= room.messages&.latest.last&.content[..30] %>
-            <%= ' ...' if room.messages&.latest.last&.content&.length > 30%>
+            <%= last_message.content[..30] %>
+            <%= ' ...' if last_message.content&.length.to_i > 30 %>
         <% end %>
     <% end%>
 <% end %>

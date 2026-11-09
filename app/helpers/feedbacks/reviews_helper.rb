@@ -2,6 +2,12 @@
 
 module Feedbacks
   module ReviewsHelper
+    REVIEW_ACTION_LINK_CLASS = %w[
+      text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br
+      focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5
+      text-center h-10 flex items-center
+    ].join(' ').freeze
+
     protected
 
     def limit_review
@@ -15,44 +21,37 @@ module Feedbacks
 
       if user_review.present?
         link_to(t('review.edit'), edit_review_path(user_review, company_id: company.id),
-                class: 'text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center h-10 flex items-center',
+                class: REVIEW_ACTION_LINK_CLASS,
                 data: { turbo_frame: 'modal' })
       else
         link_to(t('review.add'), client_signed_in? ? new_review_path(company_id: company.id) : new_client_session_path,
-                class: 'text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center h-10 flex items-center',
+                class: REVIEW_ACTION_LINK_CLASS,
                 data: { turbo_frame: 'modal' })
       end
     end
 
-    def set_company_rating(company)
-      rating = (company.reviews.map(&:rating).sum.to_f / company.reviews.count).round(1)
-      price  = (company.reviews.map(&:price).sum.to_f / company.reviews.count).round(1)
-
-      company.update(rating:, price:)
-    end
-
     def total_feedback_rating(feedback)
-      rating = (feedback.usability + feedback.speed + feedback.design + feedback.quality) / 4
+      rating = (feedback.usability + feedback.speed + feedback.design + feedback.quality) / 4.0
       rating.round(1)
     end
 
-    def review_star_color(rating, i)
-      (0..rating).include?(i) ? 'text-yellow-400' : 'text-gray-400'
+    def review_star_color(rating, index)
+      (0..rating).include?(index) ? 'text-yellow-400' : 'text-gray-400'
     end
 
-    def review_price_color(price, i)
+    def review_price_color(price, index)
       case price
       when 0..3
-        (0..price).include?(i) ? 'text-green-600' : 'text-gray-400'
+        (0..price).include?(index) ? 'text-green-600' : 'text-gray-400'
       when 3..4
-        (0..price).include?(i) ? 'text-yellow-400' : 'text-gray-400'
+        (0..price).include?(index) ? 'text-yellow-400' : 'text-gray-400'
       when 4..5
-        (0..price).include?(i) ? 'text-red-400' : 'text-gray-400'
+        (0..price).include?(index) ? 'text-red-400' : 'text-gray-400'
       end
     end
 
-    def review_hover_price_color(i)
-      case i
+    def review_hover_price_color(index)
+      case index
       when 0..3
         'hover:text-green-600'
       when 3..4

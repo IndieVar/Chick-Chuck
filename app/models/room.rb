@@ -7,7 +7,11 @@ class Room < ApplicationRecord
 
   before_create { self.title = SecureRandom.hex(5) }
 
-  def recipient(current_user)
-    users.where.not(id: current_user).first
+  scope :with_user_named, lambda { |name|
+    joins(:users).merge(User.filter_by_exact_user_name(name)).distinct
+  }
+
+  def recipient(user)
+    users.where.not(id: user).first
   end
 end

@@ -137,7 +137,7 @@ module DemoSeedData
   private
 
   def seed_locations
-    cities = LOCATIONS.flat_map do |location|
+    LOCATIONS.flat_map do |location|
       district = District.find_or_create_by!(en: location[:district][:en]) do |record|
         record.assign_attributes(location[:district])
       end
@@ -148,7 +148,6 @@ module DemoSeedData
         end
       end
     end
-    cities
   end
 
   def seed_languages
@@ -212,25 +211,9 @@ module DemoSeedData
 
   def seed_reviews(clients, companies)
     now = Time.current
-    rows = companies.each_with_index.flat_map do |company, company_index|
-      REVIEWS_PER_COMPANY.times.filter_map do |review_index|
-        client = clients[(company_index * REVIEWS_PER_COMPANY + review_index) % clients.length]
-        next if Review.exists?(user_id: client.id, reviewable_type: company.class.name, reviewable_id: company.id)
-
-        Faker::Config.random = Random.new(30_000 + company_index * REVIEWS_PER_COMPANY + review_index)
-        {
-          rating: 4 + ((company_index + review_index) % 2),
-          price: 3 + ((company_index + review_index) % 3),
-          title: %w[Careful and reliable Excellent moving service Friendly professional team][review_index],
-          content: Faker::Lorem.sentence(word_count: 18),
-          user_id: client.id,
-          reviewable_type: company.class.name,
-          reviewable_id: company.id,
-          created_at: now - (company_index + review_index).days,
-          updated_at: now
-        }
-      end
-    end
+    assignments = review_assignments(clients, companies)
+    existing_reviews = existing_review_keys(assignments, companies)
+    rows = build_review_rows(assignments, existing_reviews, now)
 
     # Bulk insert keeps seeding synthetic reviews from queuing notification emails.
     Review.insert_all!(rows) if rows.any?
@@ -239,6 +222,49 @@ module DemoSeedData
       reviews = company.reviews
       company.update!(rating: reviews.average(:rating), price: reviews.average(:price)) if reviews.exists?
     end
+  end
+
+  def review_assignments(clients, companies)
+    companies.each_with_index.flat_map do |company, company_index|
+      REVIEWS_PER_COMPANY.times.map do |review_index|
+        client = clients[(company_index * REVIEWS_PER_COMPANY + review_index) % clients.length]
+        [company, company_index, review_index, client]
+      end
+    end
+  end
+
+  def existing_review_keys(assignments, companies)
+    Review.where(
+      user_id: assignments.map { |_, _, _, client| client.id }.uniq,
+      reviewable_type: Company.name,
+      reviewable_id: companies.map(&:id)
+    ).pluck(:user_id, :reviewable_id).to_h { |key| [key, true] }
+  end
+
+  def build_review_rows(assignments, existing_reviews, now)
+    assignments.filter_map do |company, company_index, review_index, client|
+      review_key = [client.id, company.id]
+      next if existing_reviews.key?(review_key)
+
+      existing_reviews[review_key] = true
+      Faker::Config.random = Random.new(30_000 + company_index * REVIEWS_PER_COMPANY + review_index)
+      review_attributes([company, company_index, review_index, client], now)
+    end
+  end
+
+  def review_attributes(assignment, now)
+    company, company_index, review_index, client = assignment
+    {
+      rating: 4 + ((company_index + review_index) % 2),
+      price: 3 + ((company_index + review_index) % 3),
+      title: %w[Careful and reliable Excellent moving service Friendly professional team][review_index],
+      content: Faker::Lorem.sentence(word_count: 18),
+      user_id: client.id,
+      reviewable_type: company.class.name,
+      reviewable_id: company.id,
+      created_at: now - (company_index + review_index).days,
+      updated_at: now
+    }
   end
 
   def seed_company_images(companies)
@@ -251,9 +277,11 @@ module DemoSeedData
         File.open(avatar_path) { |file| company.update!(avatar: file) }
       end
 
-      while company.images.count < COMPANY_IMAGE_COUNT
-        image_index = (company_index * COMPANY_IMAGE_COUNT + company.images.count) % gallery_paths.length
+      image_count = company.images.count
+      while image_count < COMPANY_IMAGE_COUNT
+        image_index = (company_index * COMPANY_IMAGE_COUNT + image_count) % gallery_paths.length
         File.open(gallery_paths[image_index]) { |file| company.images.create!(file:) }
+        image_count += 1
       end
     end
   end

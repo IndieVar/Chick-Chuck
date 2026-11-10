@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class NewsDecorator < ApplicationDecorator
+  include LocalizedCount
   delegate_all
 
   def created_at
@@ -8,25 +9,6 @@ class NewsDecorator < ApplicationDecorator
   end
 
   def comments_count
-    case I18n.locale
-    when :en then "#{news.comments.count} Comments"
-    when :ru
-      case news.comments.count
-      when 1          then "#{news.comments.count} Комментарий"
-      when 2, 3, 4    then "#{news.comments.count} Комментария"
-      when 0, 4..nil  then "#{news.comments.count} Комментариев"
-      end
-    when :uk
-      case news.comments.count
-      when 1          then "#{news.comments.count} Коментар"
-      when 2, 3, 4    then "#{news.comments.count} Коментара"
-      when 0, 4..nil  then "#{news.comments.count} Коментарів"
-      end
-    when :he
-      case news.comments.count
-      when 1          then "#{news.comments.count} הערה"
-      when 0, 2..nil  then "#{news.comments.count} הערות"
-      end
-    end
+    localized_count(news.comments.count, :comments)
   end
 end

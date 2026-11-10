@@ -109,7 +109,7 @@ module Users
 
     def filter_product
       @categories = Category.where.not(en: 'Cartons').decorate
-      @districts = District.where.not(en: 'All Israel').decorate
+      @districts = District.excluding_all_israel.decorate
     end
 
     def set_product

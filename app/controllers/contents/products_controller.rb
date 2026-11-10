@@ -69,7 +69,7 @@ module Contents
 
     def params_for_select
       @categories = Category.where.not(en: 'Cartons').decorate
-      @districts = District.where.not(en: 'All Israel').decorate
+      @districts = District.excluding_all_israel.decorate
     end
   end
 end

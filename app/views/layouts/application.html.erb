@@ -1,19 +1,12 @@
 <!DOCTYPE html>
-<html class="h-full bg-gray-50 scroll-smooth" 
-    lang="<%= response.header['Content-Language']%>" 
-    dir="<%= response.header['Content-Language'] == 'he' ? 'rtl' : 'ltr' %>">
+<html class="h-full bg-gray-50 scroll-smooth" <%= html_language_attributes %>>
   <head>
     <% google_tag_manager_enabled = session[:cookies_accepted].present? %>
     <!-- Meta -->
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= display_meta_tags(default_meta_tags) %>
     <%= render 'shared/meta/favicon'%>
-    <!-- CSRF & stylesheets -->
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= render 'shared/meta/head_assets' %>
     <!-- Google tag manager -->
     <%= render 'shared/meta/google_tag_head' if google_tag_manager_enabled %>
     <!-- Trix editor -->

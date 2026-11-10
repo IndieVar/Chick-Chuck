@@ -20,6 +20,8 @@
     <!-- Rating -->
     <%= render 'feedbacks/shared/rating', object: company%>
 <% end %>
+<% districts = company.decorate.districts_for_display %>
+<% languages = company.languages.to_a %>
 <div class="w-full grid grid-cols-1 sm:grid-cols-3">
     <div class="px-6 py-4 w-full max-w-screen sm:col-span-2">
         <%= render 'companies/shared/company_header', company: company, page_title: t('company.about')%>
@@ -29,12 +31,11 @@
                 <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
                     <%= heroicon 'map', class: 'w-6 h-6 flex-none'%>
                     <p class="w-full px-2 text-md">
-                        <% company.districts.decorate.each do |district|%>
+                        <% districts.each_with_index do |district, index|%>
                             <%= link_to users_path(district_id: district), 
                                 class: 'w-full hover:underline', data: {turbo_frame: '_top'} do  %>
-                                <%= tag.span (!company.districts.include?(District.first) && district != company.districts.last) ? district.title + ',' : district.title %>
+                                <%= tag.span district.title + (index < districts.size - 1 ? ',' : '') %>
                             <% end %>
-                            <% break if company.districts.include?(District.first)%>
                         <% end %>
                     </p>
                 </div>
@@ -42,12 +43,11 @@
                 <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
                     <%= heroicon 'language', class: 'w-6 h-6 flex-none'%>
                     <p class="w-full px-2 text-md">
-                        <% company.languages.each do |language|%>
+                        <% languages.each_with_index do |language, index|%>
                             <%= link_to users_path(language_id: language), 
                                 class: 'w-full hover:underline', data: {turbo_frame: '_top'} do  %>
-                                <%= tag.span (!company.languages.include?(District.first) && language != company.languages.last) ? language.title + ',' : language.title %>
+                                <%= tag.span language.title + (index < languages.size - 1 ? ',' : '') %>
                             <% end %>
-                            <% break if company.languages.include?(District.first)%>
                         <% end %>
                     </p>
                 </div>

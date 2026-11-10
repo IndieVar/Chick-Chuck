@@ -1,18 +1,11 @@
 <!DOCTYPE html>
-<html class="h-full bg-gray-50"
-    lang="<%= response.header['Content-Language']%>" 
-    dir="<%= response.header['Content-Language'] == 'he' ? 'rtl' : 'ltr' %>">
+<html class="h-full bg-gray-50" <%= html_language_attributes %>>
   <head>
     <!-- Meta -->
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title><%= full_title(yield(:page_title)) %></title>
     <%= render 'shared/meta/favicon'%>
-    <!-- CSRF & stylesheets -->
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= render 'shared/meta/head_assets' %>
     <!-- Trix -->
     <%= javascript_import_module_tag "trix" %>
     <%= javascript_import_module_tag "@rails/actiontext" %>

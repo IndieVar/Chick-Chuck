@@ -3,6 +3,27 @@
 require 'rails_helper'
 
 RSpec.describe Company, type: :model do
+  describe 'WhatsApp number normalization' do
+    it 'stores a formatted number in E.164 using the selected region' do
+      district = District.create!(ru: 'Округ', en: 'District', he: 'מחוז', uk: 'Округ')
+      city = City.create!(ru: 'Город', en: 'City', he: 'עיר', uk: 'Місто', district:)
+      language = Language.create!(title: 'English')
+
+      company = described_class.create!(
+        email: 'whatsapp-company@example.test',
+        password: 'valid-password',
+        title: 'WhatsApp Company',
+        city:,
+        districts: [district],
+        languages: [language],
+        whatsapp: '(202) 555-0123',
+        whatsapp_country: 'US'
+      )
+
+      expect(company.whatsapp).to eq('+12025550123')
+    end
+  end
+
   describe 'favorite cleanup' do
     it 'deletes favorites without instantiating each favorite record' do
       district = District.create!(ru: 'Округ', en: 'District', he: 'מחוז', uk: 'Округ')

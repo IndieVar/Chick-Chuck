@@ -22,4 +22,9 @@ module ApplicationHelper
     language = response.header['Content-Language']
     tag.attributes(lang: language, dir: language == 'he' ? 'rtl' : 'ltr')
   end
+
+  def phone_country_options
+    Phonelib.phone_data.sort_by { |country, _| [country == Phonelib.default_country ? 0 : 1, country] }
+            .map { |country, data| ["#{country} (+#{data[:country_code]})", country] }
+  end
 end

@@ -17,7 +17,7 @@
             <%= button_tag class: "w-full inline-flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-600 bg-transparent 
                 border rounded border-gray-300 hover:bg-gray-200 hover:text-gray-900 space-x-2 rtl:space-x-reverse" do%>
                 <%= image_tag(asset_path('icons/icons8-whatsapp-48.png'), class: 'w-5 h-5')%>
-                <%= link_to @user.formatted_whatsapp, "https://wa.me/#{@user.whatsapp.split('+')[1]}", target: "_blank"%>
+                <%= link_to @user.formatted_whatsapp, "https://wa.me/#{@user.whatsapp.delete_prefix('+')}", target: "_blank"%>
             <% end if @user.whatsapp.present?%>
             <!-- Telegram -->
             <%= button_tag class: "w-full inline-flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-600 bg-transparent 

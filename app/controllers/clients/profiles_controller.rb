@@ -29,7 +29,8 @@ module Clients
 
     def set_profile_params
       params.require(:client).permit(:first_name, :last_name, :avatar, :gender, :birthday, :city_id, :locale,
-                                     :remove_avatar, :additional_phone, :whatsapp, :telegram, :facebook)
+                                     :remove_avatar, :additional_phone, :additional_phone_country,
+                                     :whatsapp, :whatsapp_country, :telegram, :facebook)
     end
   end
 end

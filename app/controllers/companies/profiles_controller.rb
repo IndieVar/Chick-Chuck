@@ -47,7 +47,8 @@ module Companies
 
     def set_company_info_params
       params.require(:company).permit(
-        :avatar, :additional_phone, :whatsapp, :telegram, :facebook, :title, :website, :description, :remove_avatar, {
+        :avatar, :additional_phone, :additional_phone_country, :whatsapp, :whatsapp_country,
+        :telegram, :facebook, :title, :website, :description, :remove_avatar, {
           district_ids: [], language_ids: [], service_ids: []
         }
       )

@@ -73,7 +73,8 @@ module Clients
 
     def permitted_attributes
       %i[ email phone password password_confirmation locale
-          first_name last_name avatar gender birthday city_id additional_phone whatsapp telegram facebook]
+          first_name last_name avatar gender birthday city_id phone_country additional_phone additional_phone_country
+          whatsapp whatsapp_country telegram facebook]
     end
 
     def configure_account_update_params

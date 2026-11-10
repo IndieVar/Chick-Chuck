@@ -1,6 +1,6 @@
 <!-- Omniauth enter buttons -->
 
-<div class="flex flex-row items-center justify-center lg:justify-center my-6 grid grid-cols-2 gap-6">
+<div class="items-center justify-center lg:justify-center my-6 grid grid-cols-2 gap-6">
     <!-- Facebook -->
     <%= button_to client_facebook_omniauth_authorize_path, method: :post, data: {turbo: "false"}, type: "button", 
         class: "col-span-1 w-full text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex justify-center items-center dark:focus:ring-[#3b5998]/55 space-x-2 rtl:space-x-reverse" do %>

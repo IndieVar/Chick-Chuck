@@ -3,7 +3,7 @@
     <%= form_with model: [:admins, @category, @thing], class: "col-span-full mx-auto my-4 w-full relative" do |f| %>
         <!-- Error messages -->
         <%= tag.div (render 'shared/error_messages', resource: @thing), class: 'col-span-full' %>
-        <div class="w-full items-center flex grid grid-cols-1 md:grid-cols-4 gap-3">
+        <div class="w-full items-center grid grid-cols-1 md:grid-cols-4 gap-3">
           <!-- Ru -->
           <div class="flex items-center text-gray-600 justify-center">
               <div class="flex items-center text-center">

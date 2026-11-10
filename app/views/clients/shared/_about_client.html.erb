@@ -8,7 +8,7 @@
     <!-- Total products -->
     <% if client.products.where(published: true).count.positive? && action_name != 'modal'%>
         <%= link_to user_products_path(client), 
-            class: "flex items-center text-md font-medium hover:underline text-gray-500 mb-3", 
+            class: "flex items-center text-base font-medium hover:underline text-gray-500 mb-3",
             data: { turbo_frame: '_top' }, target: "_blank" do
         %>
             <%= "#{t('product.total_products')}: #{client.products.where(published: true).count}" %>
@@ -16,7 +16,7 @@
         <% end  %>
     <% elsif client.products.where(published: true).count.positive? %>
         <%= tag.span ("#{t('product.total_products')}: #{client.products.where(published: true).count}"), 
-            class: "text-md font-medium hover:underline text-gray-500 mb-3" %>
+            class: "text-base font-medium hover:underline text-gray-500 mb-3" %>
     <% end %>
     
     <!-- Message -->

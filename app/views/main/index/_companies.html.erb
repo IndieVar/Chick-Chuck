@@ -4,7 +4,7 @@
     <%= tag.h2 t('company.top_carriers'), class: 'text-3xl font-semibold text-gray-800 text-center'%>
     <!-- Companies list -->
     <%= turbo_frame_tag 'companies', 
-        class: "flex grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-screen container mx-auto py-8" do %>
+        class: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4  container mx-auto py-8" do %>
         <% if @companies.present?%>
             <!-- Companies -->
             <%= render partial: 'companies/shared/company_card', collection: @companies%>

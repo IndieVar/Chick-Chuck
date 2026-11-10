@@ -15,9 +15,9 @@
         <div data-popover id="<%= "publish_#{model.class.name}_#{model.id}" %>" role="tooltip" class="absolute z-10 invisible inline-block w-auto text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0">
             <div class="px-3 py-2 text-center">
                 <% if model.published == false %>
-                    <%= tag.p t('global.publish_btn'), class: ""%>
+                    <%= tag.p t('global.publish_btn')%>
                 <% else %>
-                    <%= tag.p t('global.hide_btn'), class: ""%>
+                    <%= tag.p t('global.hide_btn')%>
                 <% end %>
             </div>
             <div data-popper-arrow></div>

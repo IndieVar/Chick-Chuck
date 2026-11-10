@@ -4,7 +4,7 @@
 <%= render TurboProfileComponent.new(title: t('contacts'), user: @user) do %>
     <!-- Contacts -->
     <%= tag.div class: "flex justify-center items-center mt-3" do %>
-        <div class="flex justify-center items-center mb-3 rounded-md grid grid-cols-1 gap-0.5" role="group">
+        <div class="grid grid-cols-1 justify-center items-center mb-3 rounded-md gap-0.5" role="group">
             <%= tag.span t('contacts_desc_html'), class: 'text-gray-500 text-center mb-6' if @user.instance_of?(Company)%>
             <!-- Additional Phone number -->
             <%= button_tag itemprop: "telephone", 

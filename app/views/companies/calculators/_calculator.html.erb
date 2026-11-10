@@ -1,5 +1,5 @@
 <!-- Company calculator -->
-<%= turbo_frame_tag dom_id(current_company, :calculator), class: 'col-span-full w-full items-center inline-flex mx-auto w-full grid grid-cols-flow gap-6 border-b border-b-gray-300' do %>
+<%= turbo_frame_tag dom_id(current_company, :calculator), class: 'col-span-full w-full items-center mx-auto grid grid-flow-row gap-6 border-b border-b-gray-300' do %>
     <%= tag.p t('calculator.company_calculator_html'), class: 'text-center text-gray-500 mb-4 px-4' %>
     <!-- Form -->
     <%= render 'companies/calculators/form', model: Calculator.new if current_company.calculator.blank?%>

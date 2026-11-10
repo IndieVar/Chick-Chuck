@@ -10,14 +10,14 @@
          class: 'sm:pt-5 flex items-center text-gray-700 dark:text-gray-200 ltr:mr-4 rtl:ml-4' do |f| %>
         <%= f.hidden_field :recipient_id, value: company.id%>
         <%= heroicon 'chat-bubble-left-right', class: 'w-6 h-6 flex-none'%>
-        <p class="w-full px-2 text-md max-w-screen">
+        <p class="w-full px-2 text-base ">
             <%= f.button t('write_message'), class: 'hover:underline', id: "message", aria: {label: "chats"}  %>
         </p>
     <% end %>
     <!-- Contacts -->
     <div class="sm:pt-5 flex items-center text-gray-700 dark:text-gray-200 ltr:mr-4 rtl:ml-4">
         <%= heroicon 'phone', class: 'w-6 h-6 flex-none'%>
-        <p class="w-full px-2 text-md max-w-screen">
+        <p class="w-full px-2 text-base ">
             <%= link_to user_contacts_path(company), data: {turbo_frame: 'modal'}, aria: {label: company.title + '_contacts'} do %>
                 <%= tag.span t('contacts'), class: 'hover:underline'%>
             <% end %>
@@ -26,7 +26,7 @@
     <!-- about -->
     <%= tag.div class: "sm:pt-5 flex items-center text-gray-700 dark:text-gray-200 ltr:mr-4 rtl:ml-4" do %>
         <%= heroicon 'identification', class: 'w-6 h-6 flex-none'%>
-        <p class="w-full px-2 text-md max-w-screen">
+        <p class="w-full px-2 text-base ">
             <%= link_to user_path(company), data: {turbo_frame: 'modal'}, aria: {label: company.title + '_about'} do %>
                 <%= tag.span t('company.about'), class: 'hover:underline'%>
             <% end %>

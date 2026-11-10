@@ -6,15 +6,15 @@
 
 <div class="grid grid-cols-1 gap-6 md:grid-cols-2 mb-6">
     <!-- Additional Phone input -->
-    <div class="">
+    <div>
        <%= form.label :additional_phone, class: "text-lg" %>
-       <div class="grid grid-cols-4 gap-1">
+       <div class="grid grid-cols-3 gap-1">
          <%= form.select :additional_phone_country, phone_country_options,
           { selected: form.object.additional_phone_country },
-          class: "col-span-1 text-base form-control block w-full px-2 py-2 mt-1 font-normal text-gray-700 bg-white border border-gray-300 rounded focus:border-blue-600 focus:outline-none"
+          class: "col-span-1 text-base  block w-full px-2 py-2 mt-1 font-normal text-gray-700 bg-white border border-gray-300 rounded focus:border-blue-600 focus:outline-none"
          %>
          <%= form.telephone_field :additional_phone,
-          class: "col-span-3 text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+          class: "col-span-2 text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
           placeholder: '050 123 4567', value: form.object.formatted_additional_phone,
           required: false
          %>
@@ -22,15 +22,15 @@
     </div>
 
     <!-- WhatsApp input -->
-    <div class="">
+    <div>
        <%= form.label :whatsapp, 'WhatsApp', class: "text-lg" %>
-       <div class="grid grid-cols-4 space-x-1 rtl:space-x-reverse">
+       <div class="grid grid-cols-3 space-x-1 rtl:space-x-reverse">
        <%= form.select :whatsapp_country, phone_country_options,
         { selected: form.object.whatsapp_country },
-        class: "col-span-1 text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white border border-gray-300 rounded focus:border-blue-600 focus:outline-none"
+        class: "col-span-1 text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white border border-gray-300 rounded focus:border-blue-600 focus:outline-none"
        %>
        <%= form.text_field :whatsapp, 
-        class: "col-span-3 text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+        class: "col-span-2 text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
         placeholder: '050 123 4567', value: form.object.formatted_whatsapp,
         required: false
        %>
@@ -38,28 +38,28 @@
     </div>
 
     <!-- Telegram input -->
-    <div class="">
+    <div>
        <div class="flex items-center space-x-2 rtl:space-x-reverse">
            <%= form.label :telegram, 'Telegram', class: "text-lg" %>
            <!-- Popover button-->
            <%= render 'shared/buttons/popover', text: t('telegram.telegram_popover'), icon: 'icons/icons8-info-50.png'%>
        </div>
        <%= form.text_field :telegram, 
-        class: "text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+        class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
         placeholder: '@example', value: current_user&.telegram,
         required: false
        %>
     </div>
 
     <!-- Facebook input -->
-    <div class="">
+    <div>
        <div class="flex items-center space-x-2 rtl:space-x-reverse">
            <%= form.label :facebook, 'Facebook', class: "text-lg" %>
            <!-- Popover button-->
            <%= render 'shared/buttons/popover', text: t('facebook.facebook_popover'), icon: 'icons/icons8-info-50.png'%>
        </div>
        <%= form.text_field :facebook, 
-        class: "text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+        class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
         placeholder: 'https://web.facebook.com/example',
         required: false
        %>

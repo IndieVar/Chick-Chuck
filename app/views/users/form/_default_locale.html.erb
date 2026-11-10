@@ -19,7 +19,7 @@
   >
     <ul class="py-1 text-sm w-auto text-gray-700 bg-white rounded-lg shadow-lg">
       <% I18n.available_locales.each do |locale| %>
-          <li class="flex items-center w-full font-medium block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 rtl:ml-4 ltr:mr-4 space-x-2 rtl:space-x-reverse">
+          <li class="flex items-center w-full font-medium px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 rtl:ml-4 ltr:mr-4 space-x-2 rtl:space-x-reverse">
               <%= form.radio_button :locale, locale %>
               <%= form.label "locale_#{locale}",
                   class: "flex items-center cursor-pointer" do %>

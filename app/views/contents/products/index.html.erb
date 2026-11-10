@@ -2,12 +2,12 @@
 <% provide :page_title, t('pages.market') %>
 
 
-<%= tag.section class: "grid grid-flow-row auto-rows-max flex w-full px-2" do %>
+<%= tag.section class: "grid grid-flow-row auto-rows-max w-full px-2" do %>
     <!-- Title -->
     <%= tag.h1 t('pages.market'), class: 'text-3xl font-semibold text-gray-800  my-6 text-center'%>
     <!-- Content -->
     <%= turbo_frame_tag 'products',
-        class: "grid grid-cols-1 gap-y-6 sm:gap-6 my-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 flex items-center justify-center mx-auto w-full container" do 
+        class: "grid grid-cols-1 gap-y-6 sm:gap-6 my-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center mx-auto w-full container" do
     %>
         <!-- Filter -->
         <%= render 'filter', path: products_path%>

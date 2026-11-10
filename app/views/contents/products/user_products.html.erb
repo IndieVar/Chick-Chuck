@@ -4,7 +4,7 @@
 
 <!-- About seller -->
 <% if @user.class.name == Company.name%>
-    <div class="px-6 py-4 w-full max-w-screen sm:col-span-2">
+    <div class="px-6 py-4 w-full  sm:col-span-2">
         <%= render 'companies/shared/company_header', company: @user,  page_title: t('pages.market')%>
     </div>
 <% else %>
@@ -22,10 +22,10 @@
 <% end %>
 
 <!-- Products section -->
-<%= tag.section class: "grid grid-flow-row auto-rows-max flex w-full px-2" do %>
+<%= tag.section class: "grid grid-flow-row auto-rows-max w-full px-2" do %>
     <!-- Content -->
     <%= turbo_frame_tag 'products',
-        class: "grid grid-cols-1 gap-6 my-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 flex items-center justify-center mx-auto w-full container" do 
+        class: "grid grid-cols-1 gap-6 my-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center mx-auto w-full container" do
     %>
         <!-- Filter -->
         <%= render 'filter', path: user_products_path(@user)%>

@@ -5,12 +5,12 @@
   <!-- Locale -->
   <%= f.hidden_field :locale, value: I18n.locale %>
 
-<div class="grid grid-cols-1 gap-6 mt-4 md:grid-cols-2 justify-center flex">
+<div class="grid grid-cols-1 gap-6 mt-4 md:grid-cols-2 justify-center">
   <!-- Email input -->
-  <div class="">
+  <div>
      <div class="flex items-center"><span class="text-red-500 mr-1">&nbsp;*</span><%= f.label :email, class: "text-lg" %></div>
      <%= f.email_field :email, autofocus: true, autocomplete: "email", 
-      class: "text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+      class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
       id: "email-input",
       placeholder: "Email adress",
       required: true
@@ -18,10 +18,10 @@
   </div>
   
   <!-- Phone input -->
-  <div class="">
+  <div>
      <div class="flex items-center"><span class="text-red-500 mr-1">&nbsp;*</span><%= f.label :phone, class: "text-lg" %></div>
      <%= f.text_field :phone, autocomplete: "phone", 
-      class: "text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+      class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
       id: "phone-input",
       placeholder: User.human_attribute_name('phone'),
       required: true
@@ -29,7 +29,7 @@
   </div>
 
   <!-- Password input -->
-  <div class="">
+  <div>
     <div class="flex items-center"><span class="text-red-500 mr-1">&nbsp;*</span><%= f.label :password, class: "text-lg mr-1" %>
         <% if @minimum_password_length %>
             <!-- Popover button-->
@@ -37,7 +37,7 @@
         <% end %>
     </div>
     <%= f.password_field :password, autocomplete: "new-password",
-      class: "text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+      class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
       id: "password-input",
       placeholder: User.human_attribute_name('password'),
       required: true
@@ -45,10 +45,10 @@
   </div>
 
   <!-- Password confirmation -->
-  <div class="">
+  <div>
      <div class="flex items-center"><span class="text-red-500 mr-1">&nbsp;*</span><%= f.label :password_confirmation, class: "text-lg" %></div>
      <%= f.password_field :password_confirmation, autocomplete: "new-password",
-       class: "text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+       class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
        id: "passwordConfirmation-input",
        placeholder: User.human_attribute_name('password_confirmation'),
        required: true
@@ -56,10 +56,10 @@
   </div>
   
   <!-- First Name input -->
-  <div class="">
+  <div>
      <div class="flex items-center"><%= f.label :first_name, class: "text-lg" %></div>
      <%= f.text_field :first_name, autocomplete: "first_name", 
-      class: "text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+      class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
       id: "firstName-input",
       placeholder: User.human_attribute_name('first_name'),
       required: false
@@ -67,10 +67,10 @@
   </div>
 
   <!-- Last Name input -->
-  <div class="">
+  <div>
      <%= f.label :last_name, class: "text-lg" %>
      <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", 
-      class: "text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+      class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
       id: "lastName-input",
       placeholder: User.human_attribute_name('last_name'),
       required: false
@@ -79,7 +79,7 @@
 </div>
 
     <!-- Avatar -->
-    <div class="flex grid grid-rows-1 text-center items-center justify-center mt-6">
+    <div class="grid grid-rows-1 text-center items-center justify-center mt-6">
       <div class="flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
         <div class="space-y-1 text-center">
           <%= f.label :avatar, class: "cursor-pointer" do %>

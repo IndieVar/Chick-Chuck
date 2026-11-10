@@ -20,7 +20,7 @@
       <!-- Header -->
       <%= yield :navbar%>
       <!-- Main -->
-      <main class="flex w-full mt-20 grid grid-flow-row auto-rows-max grid grid-cols-4"  id="top">
+      <main class="w-full mt-20 grid grid-flow-row auto-rows-max grid-cols-4" id="top">
           <!-- Profile sidebar menu -->
           <%= tag.div (render 'shared/navigations/user_profile_sidebar'), class: "col-span-1 w-full hover:shadow-lg" if user_signed_in?%>
           <div class="w-full col-span-full lg:col-span-3">

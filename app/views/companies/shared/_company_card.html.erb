@@ -33,7 +33,7 @@
         <!-- District -->
         <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
             <%= heroicon 'map', class: 'w-6 h-6 flex-none'%>
-            <p class="w-full px-2 text-md">
+            <p class="w-full px-2 text-base">
                 <% districts.each_with_index do |district, index|%>
                         <%= link_to users_path(district_id: district), class: 'w-full hover:underline', data: {turbo_frame: '_top'} do  %>
                             <%= tag.span district.title + (index < districts.size - 1 ? ',' : '') %>
@@ -44,7 +44,7 @@
         <!-- Language -->
         <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
             <%= heroicon 'language', class: 'w-6 h-6 flex-none'%>
-            <p class="w-full px-2 text-md">
+            <p class="w-full px-2 text-base">
                 <% languages.each_with_index do |language, index|%>
                         <%= link_to users_path(language_id: language), class: 'w-full hover:underline', data: {turbo_frame: '_top'} do  %>
                             <%= tag.span language.title + (index < languages.size - 1 ? ',' : '') %>

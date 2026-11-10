@@ -85,7 +85,7 @@
                     <span class="w-full relative  py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md">
                         <!-- Sign In As Company-->
                         <%= link_to new_company_session_path, 
-                            class: "font-medium flex block  px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 items-center", 
+                            class: "font-medium flex px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 items-center",
                             data: {action: "dropdown#toggle", turbo_frame: 'modal'}, 
                             tabindex:"-1",
                             id: "companySignInLink" do
@@ -96,7 +96,7 @@
                         <% end %>
                         <!-- Become a Carrier -->
                         <%= link_to new_company_registration_path, 
-                            class: "font-medium flex block  px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 items-center", 
+                            class: "font-medium flex px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 items-center",
                             data: {action: "dropdown#toggle"}, 
                             tabindex:"-1",
                             id:"companySignUpLink" do

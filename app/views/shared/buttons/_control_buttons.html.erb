@@ -1,5 +1,5 @@
 <hr>
-<div class="flex grid grid-cols-3 p-3">
+<div class="grid grid-cols-3 p-3">
     <!-- Edit link -->
     <div class="flex items-center justify-start col-span-1">
         <%= link_to edit_path, 
@@ -16,7 +16,7 @@
     <!-- Delete button -->
     <div class="flex justify-end col-span-1 items-center">
         <%= link_to del_path, 
-            data: { turbo_method: :delete, turbo_confirm: t('global.are_you_sure') }, class: "justify-end items-center flex mx-0 leading-5 text-gray-900 rounded-lg p-2 bg-gray-100 hover:bg-gray-200 inline-block font-medium" do 
+            data: { turbo_method: :delete, turbo_confirm: t('global.are_you_sure') }, class: "justify-end items-center flex mx-0 leading-5 text-gray-900 rounded-lg p-2 bg-gray-100 hover:bg-gray-200 font-medium" do
         %>
           <%= image_tag('icons/icons8-remove-32.png', class: 'w-5 h-5', alt: "remove")%>
         <% end %>

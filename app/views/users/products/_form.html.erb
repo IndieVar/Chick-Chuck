@@ -13,36 +13,36 @@
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse">
               <%= f.label :category, class: "text-lg" %>
               <%= f.collection_select(:category_id, @categories, :id, :title, { prompt: true,  selected: params[:category_id] || @product&.category&.id}, 
-                {class: "text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false})%>
+                {class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false})%>
           </div>
           <!-- Type -->
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse">
               <%= f.label :thing, class: "text-lg" %>
               <%= f.grouped_collection_select(:thing_id, @categories, :things, :title, :id, I18n.locale, 
               { prompt: true, selected: params[:thing_id] || @product.thing_id}, 
-              { class: "text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left"})%>
+              { class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left"})%>
           </div>
           <!-- District -->
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse">
               <%= f.label Product.human_attribute_name('district'), class: "text-lg" %>
-              <%= f.select(:district_id, options_from_collection_for_select(@districts, 'id', 'title', @product.district_id), {include_blank: t('global.select')}, {class: "text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false})%>
+              <%= f.select(:district_id, options_from_collection_for_select(@districts, 'id', 'title', @product.district_id), {include_blank: t('global.select')}, {class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false})%>
           </div>
           <!-- Type -->
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse">
               <%= f.label :city, class: "text-lg" %>
               <%= f.grouped_collection_select(:city_id, @districts, :cities, :title, :id, I18n.locale, 
               { prompt: true, selected: params[:city_id] || @product.city_id}, 
-              { class: "text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left"})%>
+              { class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left"})%>
           </div>
           <!-- Condition -->
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse">
               <%= f.label :condition, class: "text-lg" %>
-              <%= f.select(:condition, options_for_select(Product.condition_select, @product.condition), {include_blank: t('global.select')}, {class: "text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false})%>
+              <%= f.select(:condition, options_for_select(Product.condition_select, @product.condition), {include_blank: t('global.select')}, {class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false})%>
           </div>
           <!-- Delivery -->
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse">
               <%= f.label :delivery, class: "text-lg" %>
-              <%= f.select(:delivery, options_for_select(Product.delivery_select, @product.delivery), {include_blank: t('global.select')}, {class: "text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false})%>
+              <%= f.select(:delivery, options_for_select(Product.delivery_select, @product.delivery), {include_blank: t('global.select')}, {class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false})%>
           </div>
           <!-- Title -->
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse col-span-full">

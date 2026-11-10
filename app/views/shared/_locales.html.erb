@@ -19,14 +19,14 @@
       <% I18n.available_locales.each do |locale| %>
           <li>
             <% if I18n.locale == locale %>
-              <div class="flex items-center w-full font-medium block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 rtl:ml-4 ltr:mr-4">
+              <div class="flex items-center w-full font-medium px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 rtl:ml-4 ltr:mr-4">
                   <%= image_tag("icons/locales/icons8-#{locale}-48.png", 
                     class: "w-5 h-5 ltr:mr-2 rtl:ml-2", alt: "#{locale}-flag")%>
                   <%= t(locale)%>
               </div>
             <% else %>
               <%= link_to current_locale_path(locale), data: {turbo: false, action: "dropdown#toggle"},
-                class: "flex items-center w-full font-medium block px-4 py-2 text-sm text-gray-500 hover:bg-gray-100 rtl:ml-4 ltr:mr-4" do 
+                class: "flex items-center w-full font-medium px-4 py-2 text-sm text-gray-500 hover:bg-gray-100 rtl:ml-4 ltr:mr-4" do
               %>
                   <%= image_tag("icons/locales/icons8-#{locale}-48.png", 
                     class: "w-5 h-5 ltr:mr-2 rtl:ml-2", alt: "#{locale}-flag")%>

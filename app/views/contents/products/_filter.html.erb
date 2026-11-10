@@ -1,12 +1,12 @@
 <!-- Market filter -->
 <%= form_with url: path, method: :get, data: {turbo_frame: 'products'} do |f| %> 
-    <div class="w-full z-10 mx-auto border-gray-300 bg-white divide-y rounded-lg shadow-md hover:shadow-lg p-3 border border-gray-300 text-gray-500">
+    <div class="w-full z-10 mx-auto bg-white divide-y rounded-lg shadow-md hover:shadow-lg p-3 border border-gray-300 text-gray-500">
         <!-- Category -->
         <div class="w-full h-14 items-center flex">
             <%= heroicon 'list-bullet', class: 'w-6 h-6 rtl:ml-1.5 ltr:mr-1.5', alt: "category"%>
             <%= f.collection_select(:category_id, @categories, :id, :title, 
             { include_blank: Product.human_attribute_name('category'), selected: params[:category_id]}, 
-            {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 flex items-center rtl:bg-left"})%>
+            {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 rtl:bg-left"})%>
         </div>
         <!-- Type -->
         <div class="w-full h-14 items-center flex">
@@ -14,11 +14,11 @@
             <% if params[:category_id].present? %>
                 <%= f.collection_select(:thing_id, Thing.where(category_id: params[:category_id]).decorate, :id, :title, 
                 { include_blank: Product.human_attribute_name('thing'), selected: params[:thing_id]}, 
-                {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 flex items-center rtl:bg-left"})%>
+                {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 rtl:bg-left"})%>
             <% else %>
                 <%= f.grouped_collection_select(:thing_id, @categories, :things, :title, :id, I18n.locale, 
                 { include_blank: Product.human_attribute_name('thing'), selected: params[:thing_id]}, 
-                {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 flex items-center rtl:bg-left"})%>
+                {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 rtl:bg-left"})%>
             <% end %>
         </div>
         <!-- District -->
@@ -26,7 +26,7 @@
             <%= heroicon 'map-pin', class: 'w-6 h-6 rtl:ml-1.5 ltr:mr-1.5', alt: "district"%>
             <%= f.collection_select(:district_id, @districts, :id, :title, 
             { include_blank: Product.human_attribute_name('district'), selected: params[:district_id]}, 
-            {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 flex items-center rtl:bg-left"})%>
+            {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 rtl:bg-left"})%>
         </div>
         <!-- City -->
         <div class="w-full h-14 items-center flex">
@@ -34,11 +34,11 @@
             <% if params[:district_id].present?%>
                 <%= f.collection_select(:city_id, City.where(district_id: params[:district_id]).decorate, :id, :title, 
                 { include_blank: Product.human_attribute_name('city'), selected: params[:city_id]}, 
-                {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 flex items-center rtl:bg-left"})%>
+                {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 rtl:bg-left"})%>
             <% else %>
                 <%= f.grouped_collection_select(:city_id, @districts, :cities, :title, :id, I18n.locale, 
                 { include_blank: Product.human_attribute_name('city'), selected: params[:city_id]}, 
-                {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 flex items-center rtl:bg-left"})%>
+                {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 rtl:bg-left"})%>
             <% end %>
         </div>
         <!-- Condition -->
@@ -46,21 +46,21 @@
             <%= heroicon 'information-circle', class: 'w-6 h-6 rtl:ml-1.5 ltr:mr-1.5', alt: "condition"%>
           <%= f.select(:condition, options_for_select(Product.condition_select, params[:condition]), 
               {include_blank: Product.human_attribute_name('condition')}, 
-              {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 flex items-center rtl:bg-left"})%>
+              {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 rtl:bg-left"})%>
         </div>
         <!-- Delivery -->
         <div class="w-full h-14 items-center flex">
             <%= image_tag('icons/icons8-in-transit-50.png', class: 'w-5 h-5 mr-1', alt: "delivery")%>
             <%= f.select(:delivery, options_for_select(Product.delivery_select, params[:delivery]), 
                 {include_blank: Product.human_attribute_name('delivery')}, 
-                {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 flex items-center rtl:bg-left"})%>
+                {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 rtl:bg-left"})%>
         </div>
         <!-- Seller -->
         <div class="w-full h-14 items-center flex">
             <%= heroicon 'users', class: 'w-6 h-6 rtl:ml-1.5 ltr:mr-1.5', alt: "seller"%>
             <%= f.select(:seller, options_for_select(Product.seller_select, params[:seller]), 
                 {include_blank: t('product.seller.title')}, 
-                {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 flex items-center rtl:bg-left"})%>
+                {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 rtl:bg-left"})%>
         </div>
         <!-- Price -->
         <div class="grid grid-cols-2 w-full">
@@ -85,5 +85,3 @@
             <% end %>
         <% end if action_name == 'user_products'%>
     </div>
-
-

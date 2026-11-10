@@ -6,7 +6,7 @@
       <div class="mb-6">
          <%= f.label :login, User.human_attribute_name('login'), class: "text-lg text-gray-100" %>
          <%= f.text_field :login, autofocus: true, 
-          class: "text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+          class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
           id: "email-input",
           placeholder: "#{t('sign_in.login_place')}",
           required: true 
@@ -20,7 +20,7 @@
           <em>(<%= @minimum_password_length %> characters minimum)</em>
          <% end %><br />
           <%= f.password_field :password, autocomplete: "new-password",
-          class: "text-base form-control block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+          class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
           id: "password-input",
           placeholder: "#{t('sign_in.password_place')}",
           required: true
@@ -31,7 +31,7 @@
       <div class="flex justify-between items-center mb-6">
           <div class="form-group form-check">
             <%= f.check_box :remember_me, class: "form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"%>
-            <%= f.label :remember_me, t('sign_in.remember_me'), class: "form-check-label inline-block text-gray-300" %>
+            <%= f.label :remember_me, t('sign_in.remember_me'), class: " inline-block text-gray-300" %>
           </div>
           <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
             <%= link_to t('sign_in.forgot'), new_password_path(resource_name), class: "text-gray-300" %>

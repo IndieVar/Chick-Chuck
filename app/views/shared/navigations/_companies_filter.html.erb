@@ -1,6 +1,6 @@
 <!-- Trucks filter -->
 <%= form_with url: path, method: :get, data: {turbo_frame: frame, controller: 'checkbox-select-all'} do |f| %>
-    <% tag.div class: "w-full absolute #{[action_name, controller_name].eql?(['index', 'main']) ? 'bottom-0' : 'top-0'} inline-flex items-center z-10 grid grid-cols-1 sm:grid-cols-4 border-gray-700 bg-gray-700 border bg-opacity-90 rounded-tl-3xl rounded-br-3xl sm:mx-auto", data: { controller: "reveal" } do %>
+    <% tag.div class: "w-full absolute #{[action_name, controller_name].eql?(['index', 'main']) ? 'bottom-0' : 'top-0'} items-center z-10 grid grid-cols-1 sm:grid-cols-4 border-gray-700 bg-gray-700 border bg-opacity-90 rounded-tl-3xl rounded-br-3xl sm:mx-auto", data: { controller: "reveal" } do %>
         <!-- District -->
         <div class="w-full h-14 items-center flex bg-opacity-90 font-medium rtl:pr-3 ltr:pl-3 rounded-tl-3xl rtl:sm:rounded-none hidden sm:flex"
              data-reveal-target="item"
@@ -31,7 +31,7 @@
                 <ul class="h-72 px-3 pb-3 overflow-y-auto rounded-lg bg-gray-700 min-w-full text-start" aria-labelledby="dropdownServicesButton">
                     <!-- Select All / Deselect All -->
                     <li class="flex items-center p-2 rounded-lg">
-                        <label class="text-base form-control block w-full p-2 font-normal text-gray-300 hover:text-gray-100 bg-clip-padding rounded-lg border border-solid border-gray-500">
+                        <label class="text-base  block w-full p-2 font-normal text-gray-300 hover:text-gray-100 bg-clip-padding rounded-lg border border-solid border-gray-500">
                             <input type="checkbox" data-checkbox-select-all-target="checkboxAll" />
                             <%= tag.span "#{t('global.select_all')} / #{t('global.deselect_all')}"%>
                         </label>
@@ -39,7 +39,7 @@
                     <!-- Services list -->
                     <%= f.collection_check_boxes(:service_ids, Service.all.decorate, :id, :title, multiple: true, checked: params[:service_ids]) do |b| %> 
                         <li class="flex items-center p-2 rounded-lg">
-                            <%= b.label(class: "text-base form-control block w-full p-2 font-normal text-gray-300 hover:text-gray-100 bg-clip-padding rounded-lg border border-solid border-gray-500") do %>
+                            <%= b.label(class: "text-base  block w-full p-2 font-normal text-gray-300 hover:text-gray-100 bg-clip-padding rounded-lg border border-solid border-gray-500") do %>
                                 <%= b.check_box data: { checkbox_select_all_target: 'checkbox' } %>
                                 <%= b.text %>
                             <% end %>

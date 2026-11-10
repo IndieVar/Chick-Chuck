@@ -1,5 +1,5 @@
 <div 
-    class="relative h-auto sm:h-full min-h-screen w-full bg-cover -mt-20 bg-center bg-cover bg-gray-900 bg-scroll" 
+    class="relative h-auto sm:h-full min-h-screen w-full bg-cover -mt-20 bg-center bg-gray-900 bg-scroll"
     style="background-image: url(<%= asset_path('bg/hero-bg.webp')%>)"
 >
     <div class="h-full lg:flex items-center lg:px-6">
@@ -11,7 +11,7 @@
                 <!-- Mobile version description -->
                 <%= tag.div class: "flex justify-center w-full flex-col sm:hidden", 
                     data: { controller: "read-more", 'read-more-more-text-value' => t('global.read_more'), 'read-more-less-text-value' => t('global.read_less')} do %>
-                    <p class="my-content px-2 text-md font-normal text-gray-300 rounded-lg" 
+                    <p class="my-content px-2 text-base font-normal text-gray-300 rounded-lg"
                         data-read-more-target="content"
                     >
                         <%= t('home_page.h2_html')%>
@@ -19,8 +19,8 @@
                     <button data-action="read-more#toggle" class="text-blue-700"><%= t('global.read_more')%></button>
                 <% end %>
                 <!-- Desctop version description -->
-                <div class="flex justify-center w-full sm:px-6 hidden sm:block">
-                    <p class="px-2 text-md font-normal text-gray-300 lg:text-lg rounded-lg" >
+                <div class="hidden justify-center w-full sm:px-6 sm:flex">
+                    <p class="px-2 text-base font-normal text-gray-300 lg:text-lg rounded-lg" >
                         <%= t('home_page.h2_html')%>
                     </p>
                 </div>

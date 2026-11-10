@@ -1,9 +1,9 @@
-<%= form_with model: model, url: url, class: 'flex items-center grid grid-cols-3 col-span-2' do |f|%>
+<%= form_with model: model, url: url, class: 'items-center grid grid-cols-3 col-span-2' do |f|%>
     <div class="col-span-2 flex items-center space-x-3 rtl:space-x-reverse" id="<%= dom_id(thing, 'flash')%>">
         <%= f.number_field :amount, class: "block w-full md:w-auto p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500", required: true%><span class="ml-1">₪</span>
         <%= image_tag(asset_path('icons/icons8-done-40.png'), class: 'w-5 h-5') if price(thing).present?%>
     </div>
     <div class="col-span-1 flex items-center w-full justify-end ">
-        <%= f.submit t('global.save_btn'), class: 'text-center py-2 px-3 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300'%>
+        <%= f.submit t('global.save_btn'), class: 'text-center py-2 px-3 text-xs font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300'%>
     </div>
 <% end %>

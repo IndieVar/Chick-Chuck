@@ -8,7 +8,7 @@
 <!-- Load Facebook SDK for JavaScript -->
 <%= render 'shared/buttons/facebook_sdk_js'%>
 
-<%= tag.div class: "grid grid-flow-row auto-rows-max flex w-full px-2 lg:px-6" do %>
+<%= tag.div class: "grid grid-flow-row auto-rows-max w-full px-2 lg:px-6" do %>
     <!-- About company section -->
     <%= tag.div (render 'companies/shared/company', company: @user), class: 'mb-3 pt-3 col-span-full' %>
     <!-- Global rating -->

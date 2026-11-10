@@ -39,6 +39,10 @@ module Feedbacks
       (0..rating).include?(index) ? 'text-yellow-400' : 'text-gray-400'
     end
 
+    def review_star_fill_percentage(rating, index)
+      ((rating.to_f - index + 1) * 100).clamp(0, 100).round(1)
+    end
+
     def review_price_color(price, index)
       case price
       when 0..3

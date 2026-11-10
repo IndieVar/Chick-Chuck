@@ -1,0 +1,7 @@
+<% fill_percentage = review_star_fill_percentage(rating, index) %>
+<%= tag.span class: "relative inline-block flex-none #{size_class}", aria: { hidden: true } do %>
+    <%= heroicon 'star', variant: 'solid', class: 'absolute inset-0 h-full w-full text-gray-400' %>
+    <%= heroicon 'star', variant: 'solid',
+        class: 'absolute inset-0 h-full w-full text-yellow-400',
+        style: "clip-path: inset(0 #{100 - fill_percentage}% 0 0)" %>
+<% end %>

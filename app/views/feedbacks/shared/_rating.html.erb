@@ -8,13 +8,13 @@
                 <button data-popover-target="<%= object.title %>-rating-count" type="button" class="relative flex items-center">
                     <%= heroicon 'star', variant: 'solid', 
                         class: "w-6 h-6 mr-1 #{total_star_rating_color(object.rating)}" %>
-                    <%= tag.span object.rating %>
+                    <%= tag.span number_with_precision(object.rating, precision: 1) %>
                     <%= heroicon 'user', class: "ml-2 mr-1 w-6 h-6 text-gray-400" %>
                     <%= tag.span object.reviews.count %>
                 </button>
                 <div data-popover id="<%= object.title %>-rating-count" role="tooltip" class="absolute z-10 invisible inline-block w-auto text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0">
                     <div class="px-3 py-2 space-x-1 rtl:space-x-reverse text-center flex items-center text-gray-500 text-sm break-all">
-                        <%= tag.span t('review.out_of', count: object.rating) %>
+                        <%= tag.span t('review.out_of', count: object.rating.round(1)) %>
                         <%= tag.span t('review.total_ratings_count', count: object.reviews.count) %>
                     </div>
                     <div data-popper-arrow></div>

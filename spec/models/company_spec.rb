@@ -69,6 +69,35 @@ end
 
 RSpec.describe Company, type: :model do
   describe 'directory filters' do
+    it 'includes companies serving all Israel when a specific district is selected' do
+      district = District.create!(ru: 'Северный округ', en: 'Northern District', he: 'מחוז הצפון',
+                                  uk: 'Північний округ')
+      all_israel = District.create!(ru: 'Весь Израиль', en: 'All Israel', he: 'כל ישראל',
+                                    uk: 'Весь Ізраїль')
+      city = City.create!(ru: 'Город', en: 'City', he: 'עיר', uk: 'Місто', district:)
+      language = Language.create!(title: 'English')
+      local_company = Company.create!(
+        email: 'local-district-company@example.test',
+        password: 'valid-password',
+        title: 'Local District Company',
+        city:,
+        districts: [district],
+        languages: [language]
+      )
+      nationwide_company = Company.create!(
+        email: 'nationwide-company@example.test',
+        password: 'valid-password',
+        title: 'Nationwide Company',
+        city:,
+        districts: [all_israel],
+        languages: [language]
+      )
+
+      filtered_ids = described_class.filter_by_district_id(district.id).pluck(:id)
+
+      expect(filtered_ids).to contain_exactly(local_company.id, nationwide_company.id)
+    end
+
     it 'does not duplicate companies when district and language joins combine' do
       district = District.create!(ru: 'Округ', en: 'District', he: 'מחוז', uk: 'Округ')
       second_district = District.create!(ru: 'Округ 2', en: 'District 2', he: 'מחוז 2', uk: 'Округ 2')
@@ -83,17 +112,32 @@ RSpec.describe Company, type: :model do
         districts: [district, second_district],
         languages: [language, second_language]
       )
+      other_district_company = Company.create!(
+        email: 'other-district-company@example.test',
+        password: 'valid-password',
+        title: 'Other District Company',
+        city:,
+        districts: [second_district],
+        languages: [language]
+      )
 
       filtered_companies = described_class.filter_by_district_id(district.id)
+      expect(filtered_companies.pluck(:id)).to contain_exactly(company.id)
+
       filtered_companies = filtered_companies.filter_by_language_id(language.id)
 
       expect(filtered_companies.where(id: company.id).count).to eq(1)
+      expect(filtered_companies.where(id: other_district_company.id)).to be_empty
     end
   end
 end
 
 RSpec.describe Company, type: :model do
   describe '.filter_by_service_ids' do
+    it 'does not filter companies when no service is selected' do
+      expect(described_class.user_filter(service_ids: ['']).to_sql).not_to include('"services"')
+    end
+
     it 'filters for a single selected service' do
       sql = described_class.filter_by_service_ids([3]).to_sql
 

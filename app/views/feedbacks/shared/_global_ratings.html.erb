@@ -8,10 +8,10 @@
                 <!-- Rating -->
                 <div class="flex items-center justify-center">
                     <% 1.upto(5) do |i| %>
-                        <%= heroicon 'star', variant: 'solid',
-                            class: "w-6 h-6 #{review_star_color(company.rating, i)}" %>
+                        <%= render 'feedbacks/shared/rating_star', rating: company.rating, index: i,
+                            size_class: 'w-6 h-6' %>
                     <% end %>
-                    <%= tag.p t('review.out_of', count: company.rating), class: "ml-2 text-lg font-medium text-gray-500" %>
+                    <%= tag.p t('review.out_of', count: company.rating.round(1)), class: "ml-2 text-lg font-medium text-gray-500" %>
                 </div>
                 <!-- Price -->
                 <!-- <div class="flex items-center justify-center">
@@ -27,8 +27,8 @@
         <% else %>
             <%= tag.div class: "w-full flex items-center justify-center text-lg font-medium text-gray-500" do %>
                 <% 1.upto(5) do |i| %>
-                    <%= heroicon 'star', variant: 'solid',
-                        class: "w-6 h-6 #{review_star_color(company.rating, i)}" %>
+                    <%= render 'feedbacks/shared/rating_star', rating: company.rating, index: i,
+                        size_class: 'w-6 h-6' %>
                 <% end %>
                 <%= tag.span t('review.no_feedback'), class: 'mx-1' %>
             <% end %>

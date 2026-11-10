@@ -26,9 +26,17 @@ class Company < User
   # Scopes
   scope :confirmed, -> { where.not(confirmed_at: nil).order(rating: :desc) }
   scope :with_directory_details, -> { includes(:districts, :languages, :rich_text_description) }
-  scope :filter_by_district_id, ->(district_id) { joins(:districts).where(districts: { id: district_id }).distinct }
+  scope :filter_by_district_id, lambda { |district_id|
+    all_israel_id = District.find_by(en: 'All Israel')&.id
+    matching_district_ids = [district_id, all_israel_id].compact
+
+    joins(:districts).where(districts: { id: matching_district_ids }).distinct
+  }
   scope :filter_by_language_id, ->(language_id) { joins(:languages).where(languages: { id: language_id }).distinct }
-  scope :filter_by_service_ids, ->(service_ids) { joins(:services).where(services: { id: service_ids }).distinct }
+  scope :filter_by_service_ids, lambda { |service_ids|
+    selected_service_ids = Array(service_ids).reject(&:blank?)
+    selected_service_ids.empty? ? all : joins(:services).where(services: { id: selected_service_ids }).distinct
+  }
 
   after_destroy :clear_favorites
 

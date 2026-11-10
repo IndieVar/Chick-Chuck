@@ -10,7 +10,8 @@ namespace :admin do
       email = ENV.fetch('ADMIN_EMAIL') { raise 'Set ADMIN_EMAIL to create the admin account' }
       password = ENV.fetch('ADMIN_PASSWORD') { raise 'Set ADMIN_PASSWORD to create the admin account' }
 
-      Admin.create!(email:, password:, password_confirmation: password, confirmed_at: Time.current)
+      Admin.create!(email: email, password: password, password_confirmation: password,
+                    confirmed_at: Time.current)
       puts 'Admin created'
     end
 
@@ -20,3 +21,11 @@ namespace :admin do
     puts "Languages ready (#{Language.count})"
   end
 end
+
+# export ADMIN_EMAIL='admin@example.com'
+# printf 'Admin password: '
+# read -s ADMIN_PASSWORD
+# printf '\n'
+# export ADMIN_PASSWORD
+
+# bundle exec rake admin:start

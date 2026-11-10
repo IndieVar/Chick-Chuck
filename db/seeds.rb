@@ -2,113 +2,16 @@
 
 require 'faker'
 require 'securerandom'
+require_relative 'seed_data/catalog'
+require_relative 'seed_data/locations'
+require_relative 'seed_data/services'
 
 module DemoSeedData
   extend self
 
-  LOCATIONS = [
-    {
-      district: { en: 'Tel Aviv District', ru: 'Тель-Авивский округ', uk: 'Тель-Авівський округ', he: 'מחוז תל אביב' },
-      cities: [
-        { en: 'Tel Aviv', ru: 'Тель-Авив', uk: 'Тель-Авів', he: 'תל אביב' },
-        { en: 'Ramat Gan', ru: 'Рамат-Ган', uk: 'Рамат-Ган', he: 'רמת גן' },
-        { en: 'Holon', ru: 'Холон', uk: 'Холон', he: 'חולון' }
-      ]
-    },
-    {
-      district: { en: 'Jerusalem District', ru: 'Иерусалимский округ', uk: 'Єрусалимський округ', he: 'מחוז ירושלים' },
-      cities: [
-        { en: 'Jerusalem', ru: 'Иерусалим', uk: 'Єрусалим', he: 'ירושלים' },
-        { en: 'Beit Shemesh', ru: 'Бейт-Шемеш', uk: 'בית שמש', he: 'בית שמש' }
-      ]
-    },
-    {
-      district: { en: 'Central District', ru: 'Центральный округ', uk: 'Центральний округ', he: 'מחוז המרכז' },
-      cities: [
-        { en: 'Petah Tikva', ru: 'Петах-Тиква', uk: 'Петах-Тіква', he: 'פתח תקווה' },
-        { en: 'Rishon LeZion', ru: 'Ришон-ле-Цион', uk: 'Рішон-ле-Ціон', he: 'ראשון לציון' },
-        { en: 'Netanya', ru: 'Нетания', uk: 'Нетанія', he: 'נתניה' }
-      ]
-    },
-    {
-      district: { en: 'Haifa District', ru: 'Хайфский округ', uk: 'Хайфський округ', he: 'מחוז חיפה' },
-      cities: [
-        { en: 'Haifa', ru: 'Хайфа', uk: 'Хайфа', he: 'חיפה' },
-        { en: 'Tirat Carmel', ru: 'Тират-Кармель', uk: 'Тірат-Кармель', he: 'טירת כרמל' }
-      ]
-    },
-    {
-      district: { en: 'Northern District', ru: 'Северный округ', uk: 'Північний округ', he: 'מחוז הצפון' },
-      cities: [
-        { en: 'Nazareth', ru: 'Назарет', uk: 'Назарет', he: 'נצרת' },
-        { en: 'Tiberias', ru: 'Тверия', uk: 'Тверія', he: 'טבריה' }
-      ]
-    },
-    {
-      district: { en: 'Southern District', ru: 'Южный округ', uk: 'Південний округ', he: 'מחוז הדרום' },
-      cities: [
-        { en: 'Beersheba', ru: 'Беэр-Шева', uk: 'Беер-Шева', he: 'באר שבע' },
-        { en: 'Ashdod', ru: 'Ашдод', uk: 'Ашдод', he: 'אשדוד' }
-      ]
-    }
-  ].freeze
+  DISTRICTS = LocationsSeedData::DISTRICTS.map { |district| district[:name] }
 
-  CATALOG = [
-    {
-      category: { en: 'Furniture', ru: 'Мебель', uk: 'Меблі', he: 'ריהוט' },
-      things: [
-        { en: 'Sofa', ru: 'Диван', uk: 'Диван', he: 'ספה' },
-        { en: 'Dining table', ru: 'Обеденный стол', uk: 'Обідній стіл', he: 'שולחן אוכל' },
-        { en: 'Wardrobe', ru: 'Шкаф', uk: 'Шафа', he: 'ארון בגדים' },
-        { en: 'Bookshelf', ru: 'Книжный шкаф', uk: 'Книжкова шафа', he: 'כוננית ספרים' }
-      ]
-    },
-    {
-      category: { en: 'Home appliances', ru: 'Бытовая техника', uk: 'Побутова техніка', he: 'מכשירי חשמל לבית' },
-      things: [
-        { en: 'Refrigerator', ru: 'Холодильник', uk: 'Холодильник', he: 'מקרר' },
-        { en: 'Washing machine', ru: 'Стиральная машина', uk: 'Пральна машина', he: 'מכונת כביסה' },
-        { en: 'Vacuum cleaner', ru: 'Пылесос', uk: 'Пилосос', he: 'שואב אבק' },
-        { en: 'Microwave oven', ru: 'Микроволновая печь', uk: 'Мікрохвильова піч', he: 'מיקרוגל' }
-      ]
-    },
-    {
-      category: { en: 'Electronics', ru: 'Электроника', uk: 'Електроніка', he: 'אלקטרוניקה' },
-      things: [
-        { en: 'Television', ru: 'Телевизор', uk: 'Телевізор', he: 'טלוויזיה' },
-        { en: 'Computer monitor', ru: 'Монитор', uk: 'Монітор', he: 'מסך מחשב' },
-        { en: 'Laptop', ru: 'Ноутбук', uk: 'Ноутбук', he: 'מחשב נייד' },
-        { en: 'Speaker system', ru: 'Акустическая система', uk: 'Акустична система', he: 'מערכת רמקולים' }
-      ]
-    },
-    {
-      category: { en: 'Kitchen and dining', ru: 'Кухня и столовая', uk: 'Кухня та їдальня', he: 'מטבח ופינת אוכל' },
-      things: [
-        { en: 'Dining chairs', ru: 'Обеденные стулья', uk: 'Обідні стільці', he: 'כיסאות אוכל' },
-        { en: 'Cookware set', ru: 'Набор посуды', uk: 'Набір посуду', he: 'ערכת כלי בישול' },
-        { en: 'Coffee machine', ru: 'Кофемашина', uk: 'Кавомашина', he: 'מכונת קפה' },
-        { en: 'Kitchen cabinet', ru: 'Кухонный шкаф', uk: 'Кухонна шафа', he: 'ארון מטבח' }
-      ]
-    },
-    {
-      category: { en: 'Moving supplies', ru: 'Всё для переезда', uk: 'Все для переїзду', he: 'ציוד למעבר דירה' },
-      things: [
-        { en: 'Moving boxes', ru: 'Коробки для переезда', uk: 'Коробки для переїзду', he: 'ארגזי מעבר' },
-        { en: 'Protective blankets', ru: 'Защитные одеяла', uk: 'Захисні ковдри', he: 'שמיכות הגנה' },
-        { en: 'Hand truck', ru: 'Грузовая тележка', uk: 'Візок для вантажу', he: 'עגלת משא' },
-        { en: 'Storage shelves', ru: 'Стеллажи для хранения', uk: 'Стелажі для зберігання', he: 'מדפי אחסון' }
-      ]
-    },
-    {
-      category: { en: 'Home and garden', ru: 'Дом и сад', uk: 'Дім і сад', he: 'בית וגינה' },
-      things: [
-        { en: 'Desk', ru: 'Письменный стол', uk: 'Письмовий стіл', he: 'שולחן כתיבה' },
-        { en: 'Office chair', ru: 'Офисное кресло', uk: 'Офісне крісло', he: 'כיסא משרדי' },
-        { en: 'Floor lamp', ru: 'Торшер', uk: 'Торшер', he: 'מנורת רצפה' },
-        { en: 'Garden furniture', ru: 'Садовая мебель', uk: 'Садові меблі', he: 'ריהוט גן' }
-      ]
-    }
-  ].freeze
+  CATALOG = CatalogSeedData::CATALOG
 
   LANGUAGES = %w[עברית العربية English Русский Українська].freeze
   CLIENT_COUNT = 100
@@ -119,11 +22,12 @@ module DemoSeedData
 
   def run
     ActiveRecord::Base.transaction do
-      locations = seed_locations
+      districts, locations = seed_districts_and_locations
       languages = seed_languages
       things = seed_catalog
+      services = seed_services
       clients = seed_clients
-      companies = seed_companies(locations, languages)
+      companies = seed_companies(locations, districts, languages, services)
       seed_company_images(companies)
       seed_reviews(clients, companies)
       seed_products(clients, companies, locations, things)
@@ -134,12 +38,31 @@ module DemoSeedData
     end
   end
 
+  def seed_districts
+    DISTRICTS.map do |attributes|
+      district = District.find_by(en: attributes[:en]) ||
+                 District.find_by(ru: attributes[:ru]) ||
+                 District.find_by(he: attributes[:he]) ||
+                 District.new
+      district.assign_attributes(attributes)
+      district.save! if district.new_record? || district.changed?
+      district
+    end
+  end
+
   private
 
+  def seed_districts_and_locations
+    districts = seed_districts
+    [districts, seed_locations]
+  end
+
   def seed_locations
-    LOCATIONS.flat_map do |location|
-      district = District.find_or_create_by!(en: location[:district][:en]) do |record|
-        record.assign_attributes(location[:district])
+    LocationsSeedData::DISTRICTS.flat_map do |location|
+      next [] unless location[:cities].present?
+
+      district = District.find_or_create_by!(en: location[:name][:en]) do |record|
+        record.assign_attributes(location[:name])
       end
 
       location[:cities].map do |attributes|
@@ -151,62 +74,138 @@ module DemoSeedData
   end
 
   def seed_languages
-    LANGUAGES.map { |title| Language.find_or_create_by!(title:) }
+    languages = Language.where(title: LANGUAGES).order(:id).each_with_object({}) do |language, records|
+      records[language.title] ||= language
+    end
+    LANGUAGES.map { |title| languages[title] || Language.create!(title:) }
   end
 
   def seed_catalog
-    CATALOG.flat_map do |data|
-      category = find_or_create_localized(Category, data[:category])
-      data[:things].map do |attributes|
-        find_or_create_localized(Thing, attributes.merge(category:))
+    categories = find_or_create_localized_records(Category, CATALOG.map { |data| data[:name] })
+    thing_attributes = catalog_thing_attributes(categories)
+
+    find_or_create_localized_records(Thing, thing_attributes)
+  end
+
+  def catalog_thing_attributes(categories)
+    seen_translations = %i[en ru he].to_h { |locale| [locale, {}] }
+
+    CATALOG.each_with_index.flat_map do |data, index|
+      data[:things].filter_map do |attributes|
+        next if seen_translations.any? { |locale, values| values.key?(attributes[locale]) }
+
+        seen_translations.each { |locale, values| values[attributes[locale]] = true }
+        attributes.merge(category: categories[index])
       end
     end
   end
 
-  def find_or_create_localized(model, attributes)
-    model.find_by(en: attributes[:en]) ||
-      model.find_by(ru: attributes[:ru]) ||
-      model.find_by(he: attributes[:he]) ||
-      model.create!(attributes)
+  def seed_services
+    find_or_create_localized_records(Service, ServiceSeedData::SERVICES)
+  end
+
+  def find_or_create_localized_records(model, attribute_sets)
+    records = localized_records(model, attribute_sets)
+    attribute_sets.map do |attributes|
+      localized_record(records, attributes) || model.create!(attributes).tap { |record| records << record }
+    end
+  end
+
+  def localized_records(model, attribute_sets)
+    return [] if attribute_sets.empty?
+
+    model.where(en: attribute_sets.map { |attributes| attributes[:en] })
+         .or(model.where(ru: attribute_sets.map { |attributes| attributes[:ru] }))
+         .or(model.where(he: attribute_sets.map { |attributes| attributes[:he] }))
+         .order(:id)
+         .to_a
+  end
+
+  def localized_record(records, attributes)
+    records.find { |record| record.en == attributes[:en] } ||
+      records.find { |record| record.ru == attributes[:ru] } ||
+      records.find { |record| record.he == attributes[:he] }
   end
 
   def seed_clients
-    CLIENT_COUNT.times.map do |index|
-      Faker::Config.random = Random.new(10_000 + index)
-      Client.find_or_create_by!(email: format('demo.client.%03d@example.test', index + 1)) do |client|
-        client.assign_attributes(
-          first_name: Faker::Name.first_name,
-          last_name: Faker::Name.last_name,
-          password: SecureRandom.hex(24),
-          confirmed_at: Time.current,
-          locale: %w[en ru uk he][index % 4]
-        )
-      end
+    emails = CLIENT_COUNT.times.map { |index| demo_email('client', index) }
+    clients_by_email = Client.where(email: emails).index_by(&:email)
+
+    CLIENT_COUNT.times.map { |index| seed_client(index, emails[index], clients_by_email) }
+  end
+
+  def seed_client(index, email, clients_by_email)
+    Faker::Config.random = Random.new(10_000 + index)
+    clients_by_email[email] || Client.find_or_create_by!(email:) do |client|
+      client.assign_attributes(client_attributes(index))
     end
   end
 
-  def seed_companies(cities, languages)
+  def client_attributes(index)
+    {
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      password: SecureRandom.hex(24),
+      confirmed_at: Time.current,
+      locale: %w[en ru uk he][index % 4]
+    }
+  end
+
+  def seed_companies(cities, districts, languages, services)
     hebrew = languages.find { |language| language.title == 'עברית' }
     english = languages.find { |language| language.title == 'English' }
+    emails = COMPANY_COUNT.times.map { |index| demo_email('carrier', index) }
+    companies_by_email = Company.where(email: emails).index_by(&:email)
+    seed_data = { emails:, companies_by_email:, cities:, districts:, languages: [hebrew, english], services: }
 
-    COMPANY_COUNT.times.map do |index|
-      Faker::Config.random = Random.new(20_000 + index)
-      city = cities[index % cities.length]
-      Company.find_or_create_by!(email: format('demo.carrier.%03d@example.test', index + 1)) do |company|
-        company.assign_attributes(
-          title: "#{Faker::Company.name} Moving #{index + 1}",
-          first_name: Faker::Name.first_name,
-          last_name: Faker::Name.last_name,
-          password: SecureRandom.hex(24),
-          confirmed_at: Time.current,
-          city:,
-          description: Faker::Lorem.paragraph(sentence_count: 3),
-          website: "https://#{Faker::Internet.domain_name}",
-          districts: [city.district],
-          languages: [hebrew, english]
-        )
-      end
+    COMPANY_COUNT.times.map { |index| seed_company(index, seed_data) }
+  end
+
+  def seed_company(index, seed_data)
+    Faker::Config.random = Random.new(20_000 + index)
+    company = company_record(index, seed_data)
+    city = seed_data[:cities][index % seed_data[:cities].length]
+    company.districts = company_districts(index, city, seed_data[:districts])
+    company.services = company_services(index, seed_data[:services])
+    company
+  end
+
+  def company_record(index, seed_data)
+    email = seed_data[:emails][index]
+    city = seed_data[:cities][index % seed_data[:cities].length]
+    seed_data[:companies_by_email][email] || create_company(index, email, city, seed_data[:languages])
+  end
+
+  def create_company(index, email, city, languages)
+    Company.find_or_create_by!(email:) do |record|
+      record.assign_attributes(company_attributes(index, city, languages))
     end
+  end
+
+  def company_attributes(index, city, languages)
+    {
+      title: "#{Faker::Company.name} Moving #{index + 1}",
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      password: SecureRandom.hex(24),
+      confirmed_at: Time.current,
+      city:,
+      description: Faker::Lorem.paragraph(sentence_count: 3),
+      website: "https://#{Faker::Internet.domain_name}",
+      districts: [city.district],
+      languages:
+    }
+  end
+
+  def company_services(index, services)
+    [services[index % services.length], services[(index + 1) % services.length]]
+  end
+
+  def company_districts(index, city, districts)
+    service_districts = districts.reject { |district| district.en == 'All Israel' }
+    additional_district = service_districts.rotate(index).find { |district| district.id != city.district_id }
+
+    [city.district, additional_district].compact.uniq
   end
 
   def seed_reviews(clients, companies)
@@ -218,9 +217,18 @@ module DemoSeedData
     # Bulk insert keeps seeding synthetic reviews from queuing notification emails.
     Review.insert_all!(rows) if rows.any?
 
+    refresh_company_ratings(companies)
+  end
+
+  def refresh_company_ratings(companies)
+    ratings = Review.where(reviewable_type: Company.name, reviewable_id: companies.map(&:id))
+                    .group(:reviewable_id)
+                    .pluck(:reviewable_id, Arel.sql('AVG(rating)'), Arel.sql('AVG(price)'))
+                    .to_h { |company_id, rating, price| [company_id, [rating, price]] }
+
     companies.each do |company|
-      reviews = company.reviews
-      company.update!(rating: reviews.average(:rating), price: reviews.average(:price)) if reviews.exists?
+      rating, price = ratings[company.id]
+      company.update!(rating:, price:) if rating
     end
   end
 
@@ -268,56 +276,103 @@ module DemoSeedData
   end
 
   def seed_company_images(companies)
-    avatar_path = Rails.root.join('app/assets/images/bg/bg-truck-1000-rtl.png')
     gallery_paths = Dir[Rails.root.join('app/assets/images/seed/products/*.jpg')].sort
     raise "No carrier gallery images found in #{Rails.root.join('app/assets/images/seed/products')}" if gallery_paths.empty?
 
+    image_counts = company_image_counts(companies)
     companies.each_with_index do |company, company_index|
-      if company.avatar.blank?
-        File.open(avatar_path) { |file| company.update!(avatar: file) }
-      end
+      seed_company_images_for(company, company_index, image_counts.fetch(company.id, 0), gallery_paths)
+    end
+  end
 
-      image_count = company.images.count
-      while image_count < COMPANY_IMAGE_COUNT
-        image_index = (company_index * COMPANY_IMAGE_COUNT + image_count) % gallery_paths.length
-        File.open(gallery_paths[image_index]) { |file| company.images.create!(file:) }
-        image_count += 1
-      end
+  def company_image_counts(companies)
+    Image.where(imageable_type: Company.name, imageable_id: companies.map(&:id))
+         .group(:imageable_id)
+         .count
+  end
+
+  def seed_company_images_for(company, company_index, image_count, gallery_paths)
+    avatar_path = Rails.root.join('app/assets/images/bg/bg-truck-1000-rtl.png')
+    File.open(avatar_path) { |file| company.update!(avatar: file) } if company.avatar.blank?
+
+    while image_count < COMPANY_IMAGE_COUNT
+      image_index = (company_index * COMPANY_IMAGE_COUNT + image_count) % gallery_paths.length
+      File.open(gallery_paths[image_index]) { |file| company.images.create!(file:) }
+      image_count += 1
     end
   end
 
   def seed_products(clients, companies, cities, things)
-    PRODUCT_COUNT.times do |index|
-      Faker::Config.random = Random.new(40_000 + index)
-      thing = things[index % things.length]
-      city = cities[(index * 7) % cities.length]
-      seller = index % 5 == 0 ? companies[(index / 5) % companies.length] : clients[index % clients.length]
-      title = format('Demo listing %03d: %s', index + 1, thing.en)
+    titles = PRODUCT_COUNT.times.map { |index| product_title(index, things) }
+    products_by_title = Product.where(title: titles).index_by(&:title)
+    products = PRODUCT_COUNT.times.map do |index|
+      plan = product_seed_plan(index, clients, companies, cities, things)
+      seed_product(index, titles[index], products_by_title, plan)
+    end
 
-      product = Product.find_or_create_by!(title:) do |record|
-        record.assign_attributes(
-          user: seller,
-          category: thing.category,
-          thing:,
-          district: city.district,
-          city:,
-          condition: index.even? ? 1 : 2,
-          delivery: index % 3 == 0 ? 0 : city.district_id,
-          price: 50 + ((index * 137) % 4_950),
-          description: Faker::Lorem.sentence(word_count: 16),
-          published: true,
-          sold: false
-        )
-      end
-      attach_product_image(product, index)
+    attach_missing_product_images(products)
+  end
+
+  def product_seed_plan(index, clients, companies, cities, things)
+    thing = things[index % things.length]
+    city = cities[(index * 7) % cities.length]
+    seller = index % 5 == 0 ? companies[(index / 5) % companies.length] : clients[index % clients.length]
+
+    [seller, city, thing]
+  end
+
+  def seed_product(index, title, products_by_title, plan)
+    Faker::Config.random = Random.new(40_000 + index)
+    seller, city, thing = plan
+    product = products_by_title[title] || Product.create!(product_attributes(index, title, seller, city, thing))
+
+    [product, index]
+  end
+
+  def product_attributes(index, title, seller, city, thing)
+    {
+      title:,
+      user: seller,
+      category: thing.category,
+      thing:,
+      district: city.district,
+      city:,
+      condition: index.even? ? 1 : 2,
+      delivery: index % 3 == 0 ? 0 : city.district_id,
+      price: 50 + ((index * 137) % 4_950),
+      description: Faker::Lorem.sentence(word_count: 16),
+      published: true,
+      sold: false
+    }
+  end
+
+  def product_title(index, things)
+    format('Demo listing %03d: %s', index + 1, things[index % things.length].en)
+  end
+
+  def attach_missing_product_images(products)
+    products_with_images = existing_product_image_ids(products)
+
+    products.each do |product, index|
+      attach_product_image(product, index) unless products_with_images.key?(product.id)
     end
   end
 
-  def attach_product_image(product, index)
-    return if product.images.exists?
+  def existing_product_image_ids(products)
+    product_ids = products.map { |product, _| product.id }
+    Image.where(imageable_type: Product.name, imageable_id: product_ids)
+         .distinct
+         .pluck(:imageable_id)
+         .to_h { |id| [id, true] }
+  end
 
+  def attach_product_image(product, index)
     image_path = Rails.root.join('app/assets/images/seed/products', "#{(index % 7) + 1}.jpg")
     File.open(image_path) { |file| product.images.create!(file:) }
+  end
+
+  def demo_email(kind, index)
+    format("demo.#{kind}.%03d@example.test", index + 1)
   end
 end
 

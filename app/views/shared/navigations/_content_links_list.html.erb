@@ -50,12 +50,14 @@
                 class: "#{link_class} px-4 py-2 hover:bg-gray-100 block w-full !mx-0", current_page: current_page, 
                 data: {action: "dropdown#toggle", turbo_frame: '_top'} %>
         </li>
+        <li>
+            <!-- News -->
+            <% if News.count.positive? %>
+                <%= nav_tab t('pages.news'), news_index_path,
+                    class: link_class, current_page: current_page, 
+                    data: {action: "dropdown#toggle", turbo_frame: '_top'} %>
+            <% end %>
+        </li>
       </ul>
   </div>
 </div>
-<!-- News -->
-<% if News.count.positive? %>
-    <%= nav_tab t('pages.news'), news_index_path,
-        class: link_class, current_page: current_page, 
-        data: {action: "dropdown#toggle", turbo_frame: '_top'} %>
-<% end %>

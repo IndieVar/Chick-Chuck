@@ -69,9 +69,9 @@ Rails.application.routes.draw do
     resources :feedbacks, only: %i[index create edit update], controller: 'contents/feedbacks'
 
     # News content
-    # resources :news, only: %i[show index], controller: 'contents/news' do
-    #   resources :comments, only: %i[new edit create update destroy], controller: 'feedbacks/comments'
-    # end
+    resources :news, only: %i[show index], controller: 'contents/news' do
+      resources :comments, only: %i[new edit create update destroy], controller: 'feedbacks/comments'
+    end
 
     # --- End of content ---
 

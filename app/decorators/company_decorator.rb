@@ -10,7 +10,7 @@ class CompanyDecorator < ApplicationDecorator
   def districts_for_display
     districts = company.districts.to_a
     all_israel = districts.find { |district| district.en == 'All Israel' }
-    districts = District.excluding_all_israel.order(:id).to_a if all_israel
+    districts = [all_israel] if all_israel
 
     DistrictDecorator.decorate_collection(districts)
   end

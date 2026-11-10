@@ -12,7 +12,8 @@
                   data: { action: "turbo-modal#hideModal" }, 
                   type: "button", 
                   class:"text-xs bg-gray-900 font-medium rounded-lg hover:bg-gray-700 text-white px-4 py-2.5 duration-300 transition-colors focus:outline-none" %>
-              <%= link_to t('global.accept'), cookies_path(cookies: true), method: :post,  data: {turbo_frame: '_top'},
+              <%= button_to t('global.accept'), cookies_path(cookies: true), method: :post,
+                  form: { data: { turbo_frame: '_top' } },
                   class: "text-xs bg-gray-900 font-medium rounded-lg hover:bg-gray-700 text-white px-4 py-2.5 duration-300 transition-colors focus:outline-none" %>
           </div>
       <% end %>

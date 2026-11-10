@@ -4,9 +4,10 @@
 options:
   bin-cd: true
   fullstaq: true
-  jemalloc: true
   label:
     fly_launch_runtime: rails
   postgresql: true
+  prepare: false
   redis: true
   swap: 512M
+  tigris: true

@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     # Favicon
     get 'favicon.png', to: 'main#favicon', format: 'png', as: :favicon
     # Cookies
-    get 'cookies', to: 'main#cookies', as: :cookies, defaults: { format: 'turbo_stream' }
+    post 'cookies', to: 'main#cookies', as: :cookies, defaults: { format: 'turbo_stream' }
 
     # --- Content ---
 

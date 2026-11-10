@@ -3,9 +3,15 @@
 namespace :fly do
   desc 'Start'
   task :start do
-    sh 'fly ssh console --pty -C "/rails/bin/rails admin:start"'
-    sh 'fly ssh console --pty -C "/rails/bin/rails catalog:start"'
-    sh 'fly ssh console --pty -C "/rails/bin/rails districts:start"'
+    start_tasks = %w[admin:start catalog:start districts:start services:start]
+
+    if ENV['FLY_APP_NAME'].present?
+      start_tasks.each { |task_name| Rake::Task[task_name].invoke }
+    else
+      start_tasks.each do |task_name|
+        sh %(fly ssh console --pty -C "/rails/bin/rails #{task_name}")
+      end
+    end
   end
 
   task :console do

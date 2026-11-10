@@ -62,3 +62,5 @@ group :development do
 end
 
 gem 'dockerfile-rails', '>= 1.3', group: :development
+
+gem "aws-sdk-s3", "~> 1.240", require: false

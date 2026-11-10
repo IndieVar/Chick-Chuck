@@ -4,14 +4,13 @@ require 'rails_helper'
 
 RSpec.describe CompanyDecorator do
   describe '#districts_for_display' do
-    it 'shows every district except the All Israel option when All Israel is selected' do
+    it 'shows only All Israel when that option is selected' do
       district = District.create!(ru: 'Округ', en: 'District', he: 'מחוז', uk: 'Округ')
       all_israel = District.create!(ru: 'Весь Израиль', en: 'All Israel', he: 'כל ישראל', uk: 'Увесь Ізраїль')
-      second_district = District.create!(ru: 'Другой округ', en: 'Other District', he: 'מחוז אחר', uk: 'Інший округ')
       company = Company.new(districts: [district, all_israel])
       displayed_districts = described_class.new(company).districts_for_display
 
-      expect(displayed_districts.map(&:object)).to eq([district, second_district])
+      expect(displayed_districts.map(&:object)).to eq([all_israel])
     end
 
     it 'shows every associated district when All Israel is not selected' do

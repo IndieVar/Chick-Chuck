@@ -18,7 +18,7 @@
     <%= render 'shared/meta/current_user_meta' if user_signed_in? %>
   </head>
 
-  <body class="flex flex-col h-screen w-screen justify-between">
+  <body class="flex min-h-screen w-full flex-col justify-between">
       <!-- Google Tag Manager (noscript) -->
       <%= render 'shared/meta/google_tag_body' if google_tag_manager_enabled %>
       <!-- Schema json -->

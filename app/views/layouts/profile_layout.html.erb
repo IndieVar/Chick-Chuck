@@ -13,7 +13,7 @@
     <%= render 'shared/meta/current_user_meta'%>
   </head>
 
-  <body class="flex flex-col h-screen w-screen justify-between">
+  <body class="flex min-h-screen w-full flex-col justify-between">
       <% if user_signed_in? %>
         <%= turbo_stream_from "broadcast_to_user_#{current_user.id}" %>
       <% end %>

@@ -5,34 +5,36 @@
         class: "col-span-full md:px-[14rem] w-full justify-center mb-4" if ['edit', 'update'].include?(action_name) %>
 
     <!-- Product form -->
-    <%= form_with model: [:users, @product], class: "contents", html: { multipart: true } do |f| %>
+    <%= form_with model: [:users, @product], class: "contents", html: { multipart: true }, data: { controller: "dependent-select" } do |f| %>
       <!-- Errors -->
       <%= render 'shared/error_messages', resource: @product %>
       <div class="grid grid-cols-1 gap-6 mt-4 md:grid-cols-2">
           <!-- Category type -->
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse">
               <%= f.label :category, class: "text-lg" %>
-              <%= f.collection_select(:category_id, @categories, :id, :title, { prompt: true,  selected: params[:category_id] || @product&.category&.id}, 
-                {class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false})%>
+              <%= f.collection_select(:category_id, @categories, :id, :title, { prompt: true, selected: @product.category_id },
+                { class: "text-base block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false, data: { dependent_select_target: "category", action: "change->dependent-select#filterThings" } }) %>
           </div>
           <!-- Type -->
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse">
               <%= f.label :thing, class: "text-lg" %>
-              <%= f.grouped_collection_select(:thing_id, @categories, :things, :title, :id, I18n.locale, 
-              { prompt: true, selected: params[:thing_id] || @product.thing_id}, 
-              { class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left"})%>
+              <%= f.select(:thing_id,
+                options_for_select(@categories.flat_map { |category| category.things.map { |thing| [thing.public_send(I18n.locale), thing.id, { data: { category_id: category.id } }] } }, @product.thing_id),
+                { prompt: true },
+                { class: "text-base block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", data: { dependent_select_target: "thing" } }) %>
           </div>
           <!-- District -->
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse">
               <%= f.label Product.human_attribute_name('district'), class: "text-lg" %>
-              <%= f.select(:district_id, options_from_collection_for_select(@districts, 'id', 'title', @product.district_id), {include_blank: t('global.select')}, {class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false})%>
+              <%= f.select(:district_id, options_from_collection_for_select(@districts, 'id', 'title', @product.district_id), { include_blank: t('global.select') }, { class: "text-base block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false, data: { dependent_select_target: "district", action: "change->dependent-select#filterCities" } }) %>
           </div>
           <!-- Type -->
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse">
               <%= f.label :city, class: "text-lg" %>
-              <%= f.grouped_collection_select(:city_id, @districts, :cities, :title, :id, I18n.locale, 
-              { prompt: true, selected: params[:city_id] || @product.city_id}, 
-              { class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left"})%>
+              <%= f.select(:city_id,
+                options_for_select(@districts.flat_map { |district| district.cities.map { |city| [city.public_send(I18n.locale), city.id, { data: { district_id: district.id } }] } }, @product.city_id),
+                { prompt: true },
+                { class: "text-base block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", data: { dependent_select_target: "city" } }) %>
           </div>
           <!-- Condition -->
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse">

@@ -18,6 +18,8 @@ uk:
       save_btn:         "Зберегти"
       are_you_sure:     "Ви впевнені?"
       select:           "Виберіть: "
+      search_in_list:   "Пошук у списку"
+      no_search_results: "Нічого не знайдено"
       destroy_btn:      "Видалити"
       edit_btn:         "Змінити"
       add_btn:          "Додати %{model}"

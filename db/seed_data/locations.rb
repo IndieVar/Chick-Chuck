@@ -127,4 +127,61 @@ module LocationsSeedData
           ]
         }
       ].freeze
+
+  # Source: Israel CBS 2023 locality file, Israel Government Data Portal dataset
+  # d9b1e04c-426f-4e32-ba40-a1ad9d8748a7.
+  CBS_DISTRICTS = {
+    'הצפון' => 'Northern District',
+    'חיפה' => 'Haifa District',
+    'תל אביב' => 'Tel-Aviv District',
+    'המרכז' => 'Central District',
+    'ירושלים' => 'Jerusalem District',
+    'הדרום' => 'Southern District',
+    'אזור יהודה ושומרון' => 'Judea and Samaria District'
+  }.freeze
+
+  CBS_LOCALITY_ALIASES = {
+    'יקנעם עילית' => 'יקנעם',
+    'נהרייה' => 'נהריה',
+    'באקה אל-גרביה' => 'באקה אל-גרבייה',
+    'הרצלייה' => 'הרצליה',
+    'תל אביב -יפו' => 'תל אביב'
+  }.freeze
+
+  def self.load_official_localities
+    localized_names = DISTRICTS.to_h do |district|
+      [district[:name][:en], district.fetch(:cities, []).to_h { |city| [normalize_name(city[:he]), city] }]
+    end
+
+    File.foreach(File.join(__dir__, 'israel_localities.tsv')).with_index do |line, index|
+      next if index.zero?
+
+      district_code, hebrew_name, english_name, transliteration = line.chomp.split("\t", -1)
+      district_name = CBS_DISTRICTS.fetch(district_code)
+      district = DISTRICTS.find { |item| item[:name][:en] == district_name }
+      next unless district
+
+      names = localized_names.fetch(district_name)
+      normalized_hebrew_name = normalize_name(hebrew_name)
+      existing_city = names[normalized_hebrew_name] ||
+                      names[normalize_name(CBS_LOCALITY_ALIASES[hebrew_name])]
+      if existing_city
+        existing_city[:he] = hebrew_name
+        names[normalized_hebrew_name] = existing_city
+        next
+      end
+
+      localized_name = [english_name, transliteration, hebrew_name].find { |name| !name.to_s.empty? }
+      city = { ru: localized_name, en: localized_name, uk: localized_name, he: hebrew_name }
+      district[:cities] ||= []
+      district[:cities] << city
+      names[normalized_hebrew_name] = city
+    end
+  end
+
+  def self.normalize_name(name)
+    name.to_s.gsub(/[\u200E-\u200F\u202A-\u202E\u2066-\u2069]/, '').strip.downcase
+  end
+
+  load_official_localities
 end

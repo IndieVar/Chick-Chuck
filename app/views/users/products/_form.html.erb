@@ -12,13 +12,17 @@
           <!-- Category type -->
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse">
               <%= f.label :category, class: "text-lg" %>
-              <%= f.collection_select(:category_id, @categories, :id, :title, { prompt: true, selected: @product.category_id },
-                { class: "text-base block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false, data: { dependent_select_target: "category", action: "change->dependent-select#filterThings" } }) %>
+              <%= render 'shared/searchable_select',
+                aria_label: Product.human_attribute_name('category'),
+                select: f.collection_select(:category_id, @categories, :id, :title, { prompt: true, selected: @product.category_id },
+                  { class: "text-base block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false, data: { dependent_select_target: "category", action: "change->dependent-select#filterThings" } }) %>
           </div>
           <!-- Type -->
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse">
               <%= f.label :thing, class: "text-lg" %>
-              <%= f.select(:thing_id,
+              <%= render 'shared/searchable_select',
+                aria_label: Product.human_attribute_name('thing'),
+                select: f.select(:thing_id,
                 options_for_select(@categories.flat_map { |category| category.things.map { |thing| [thing.public_send(I18n.locale), thing.id, { data: { category_id: category.id } }] } }, @product.thing_id),
                 { prompt: true },
                 { class: "text-base block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", data: { dependent_select_target: "thing" } }) %>
@@ -26,12 +30,16 @@
           <!-- District -->
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse">
               <%= f.label Product.human_attribute_name('district'), class: "text-lg" %>
-              <%= f.select(:district_id, options_from_collection_for_select(@districts, 'id', 'title', @product.district_id), { include_blank: t('global.select') }, { class: "text-base block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false, data: { dependent_select_target: "district", action: "change->dependent-select#filterCities" } }) %>
+              <%= render 'shared/searchable_select',
+                aria_label: Product.human_attribute_name('district'),
+                select: f.select(:district_id, options_from_collection_for_select(@districts, 'id', 'title', @product.district_id), { include_blank: t('global.select') }, { class: "text-base block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false, data: { dependent_select_target: "district", action: "change->dependent-select#filterCities" } }) %>
           </div>
           <!-- Type -->
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse">
               <%= f.label :city, class: "text-lg" %>
-              <%= f.select(:city_id,
+              <%= render 'shared/searchable_select',
+                aria_label: Product.human_attribute_name('city'),
+                select: f.select(:city_id,
                 options_for_select(@districts.flat_map { |district| district.cities.map { |city| [city.public_send(I18n.locale), city.id, { data: { district_id: district.id } }] } }, @product.city_id),
                 { prompt: true },
                 { class: "text-base block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", data: { dependent_select_target: "city" } }) %>
@@ -39,12 +47,16 @@
           <!-- Condition -->
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse">
               <%= f.label :condition, class: "text-lg" %>
-              <%= f.select(:condition, options_for_select(Product.condition_select, @product.condition), {include_blank: t('global.select')}, {class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false})%>
+              <%= render 'shared/searchable_select',
+                aria_label: Product.human_attribute_name('condition'),
+                select: f.select(:condition, options_for_select(Product.condition_select, @product.condition), { include_blank: t('global.select') }, { class: "text-base block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false }) %>
           </div>
           <!-- Delivery -->
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse">
               <%= f.label :delivery, class: "text-lg" %>
-              <%= f.select(:delivery, options_for_select(Product.delivery_select, @product.delivery), {include_blank: t('global.select')}, {class: "text-base  block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false})%>
+              <%= render 'shared/searchable_select',
+                aria_label: Product.human_attribute_name('delivery'),
+                select: f.select(:delivery, options_for_select(Product.delivery_select, @product.delivery), { include_blank: t('global.select') }, { class: "text-base block w-full px-4 py-2 mt-1 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rtl:bg-left", required: false }) %>
           </div>
           <!-- Title -->
           <div class="flex items-center text-gray-600 justify-center space-x-2 rtl:space-x-reverse col-span-full">

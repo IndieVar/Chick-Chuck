@@ -18,6 +18,8 @@ en:
       save_btn:         "Save"
       are_you_sure:     "Are you sure?"
       select:           "Select: "
+      search_in_list:   "Search in list"
+      no_search_results: "No results found"
       destroy_btn:      "Remove"
       edit_btn:         "Edit"
       add_btn:          "Add %{model}"

@@ -18,6 +18,8 @@ ru:
       save_btn:         "Сохранить"
       are_you_sure:     "Вы уверены?"
       select:           "Выберете: "
+      search_in_list:   "Поиск по списку"
+      no_search_results: "Ничего не найдено"
       destroy_btn:      "Удалить"
       edit_btn:         "Изменить"
       add_btn:          "Добавить %{model}"

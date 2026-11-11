@@ -66,9 +66,12 @@ module DemoSeedData
       end
 
       location[:cities].map do |attributes|
-        City.find_or_create_by!(en: attributes[:en], district:) do |record|
-          record.assign_attributes(attributes)
-        end
+        city = district.cities.find_by(en: attributes[:en]) ||
+               district.cities.find_by(he: attributes[:he]) ||
+               district.cities.new
+        city.assign_attributes(attributes)
+        city.save! if city.new_record? || city.changed?
+        city
       end
     end
   end

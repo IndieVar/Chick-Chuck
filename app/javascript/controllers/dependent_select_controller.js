@@ -16,6 +16,25 @@ export default class extends Controller {
     this.filterOptions(this.districtTarget, this.cityTarget, "districtId")
   }
 
+  selectThing() {
+    this.selectParentOrSubmit(this.thingTarget, this.categoryTarget, "categoryId")
+  }
+
+  selectCity() {
+    this.selectParentOrSubmit(this.cityTarget, this.districtTarget, "districtId")
+  }
+
+  selectParentOrSubmit(childSelect, parentSelect, dataKey) {
+    const parentId = childSelect.selectedOptions[0]?.dataset[dataKey]
+    if (!parentSelect.value && parentId) {
+      parentSelect.value = parentId
+      parentSelect.dispatchEvent(new Event("change", { bubbles: true }))
+      return
+    }
+
+    this.element.closest("form")?.requestSubmit()
+  }
+
   filterOptions(parentSelect, childSelect, dataKey) {
     const parentId = parentSelect.value
     let selectedOptionHidden = false
@@ -29,5 +48,6 @@ export default class extends Controller {
     })
 
     if (selectedOptionHidden) childSelect.value = ""
+    childSelect.dispatchEvent(new CustomEvent("searchable-select:refresh"))
   }
 }

@@ -18,6 +18,8 @@ he:
       save_btn:         "לשמור"
       are_you_sure:     "אתה בטוח?"
       select:           "בחר: "
+      search_in_list:   "חיפוש ברשימה"
+      no_search_results: "לא נמצאו תוצאות"
       destroy_btn:      "להסיר"
       edit_btn:         "לערוך"
       add_btn:          "להוסיף %{model}"

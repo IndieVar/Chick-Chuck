@@ -1,11 +1,12 @@
-<button data-popover-target="<%= text %>" type="button" class="flex-none">
+<% popover_id = "popover-#{SecureRandom.hex(8)}" %>
+<button data-popover-target="<%= popover_id %>" type="button" class="flex-none">
     <% if ['registrations', 'sessions'].include?(controller_name)%>
         <%= image_tag('icons/icons8-info-50.png', class: "w-5 h-5 flex-none ltr:mr-2 rtl:ml-2", alt: "icons8-info-50")%>
     <% else %>
         <%= image_tag(icon, class: "w-6 h-6 flex-none ltr:mr-2 rtl:ml-2", alt: icon.split('/').last.split('.').first)%>
     <% end %>
 </button>
-<div data-popover id="<%= text %>" role="tooltip" class="absolute z-20 invisible inline-block w-auto text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0">
+<div data-popover id="<%= popover_id %>" role="tooltip" class="absolute z-20 invisible inline-block w-auto text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0">
     <div class="px-3 py-2  text-center">
         <%= tag.p text, class: "text-gray-500 text-sm"%>
     </div>

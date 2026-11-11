@@ -2,9 +2,9 @@
     <header class="bg-white bg-opacity-90 fixed top-0 z-50 w-full">
         <div class="relative" data-controller="dropdown">
           <div class="w-full mx-auto px-4 sm:px-6">
-            <div class="flex items-center border-b-2 border-gray-100 py-4">
+            <div class="relative flex min-w-0 items-center gap-2 border-b-2 border-gray-100 py-4 sm:gap-4">
               <!-- Logotype -->
-              <div class="flex justify-start w-auto flex-auto">
+              <div class="flex min-w-0 flex-1 justify-start">
                   <%= link_to root_path, class: 'flex items-center', data: {turbo_frame: '_top'} do %>
                       <!-- Chick-Chuck logotype mobile -->
                       <%= image_tag('logo/chick-chuck-mobile-logo.webp', 
@@ -15,25 +15,26 @@
                   <% end %>
               </div>
               <!-- Mobile menu button -->
-              <div class="flex justify-center flex-none lg:hidden w-auto">
+              <div class="absolute left-1/2 flex -translate-x-1/2 justify-center xl:hidden">
                 <button 
                     data-action="dropdown#toggle click@window->dropdown#hide" 
                     type="button" 
-                    class="rounded-lg p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" 
+                    class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gray-100/90 text-gray-700 border border-gray-300 shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    aria-label="<%= t('global.open_menu') %>"
+                    aria-controls="mobile-menu-button"
                     aria-expanded="false"
-                    aria-labelledby="mobile-menu-button" 
                 >
-                    <%= heroicon 'bars-3', class: 'h-6 w-6'%>
+                    <%= heroicon 'bars-3', class: 'h-7 w-7'%>
                 </button>
               </div>
               <!-- Navigations -->
-              <nav class="hidden lg:flex space-x-6 rtl:space-x-reverse">
+              <nav class="hidden shrink-0 space-x-4 lg:space-x-6 rtl:space-x-reverse lg:flex">
                   <%= render 'shared/navigations/content_links_list', 
                       link_class: "text-base font-medium hover:text-gray-900",
                       current_page: current_page %>
               </nav>
               <!-- User menu -->
-              <div class="flex items-center justify-end flex-auto w-auto space-x-5 rtl:space-x-reverse">
+              <div class="flex w-auto flex-none items-center justify-end gap-2 sm:flex-1 sm:gap-4 lg:gap-5 space-x-2 rtl:space-x-reverse">
                   <!-- Locales -->
                   <%= render 'shared/locales'%>
                   <!-- Menu -->
@@ -42,7 +43,9 @@
             </div>
           </div>
           <!-- Mobile menu -->
-          <%= render 'shared/navigations/mobile_menu', current_page: current_page %>
+          <div class="xl:hidden">
+            <%= render 'shared/navigations/mobile_menu', current_page: current_page %>
+          </div>
         </div>
     </header>
 <% end %>

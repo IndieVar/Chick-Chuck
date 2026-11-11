@@ -5,7 +5,7 @@
     <%= render 'feedbacks/notifications/notifications_section'%>
 <% end %>
 
-<div class="flex items-center space-x-4">
+<div class="flex items-center gap-4 ltr:space-x-4 rtl:space-x-reverse">
     <!-- Become a Carrier -->
     <%= link_to new_company_registration_path, class: "hidden relative xl:inline-flex items-center justify-center p-0.5 overflow-hidden text-base font-medium rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800
         #{current_page?(new_company_registration_path) ? 'text-gray-900' : 'text-gray-600'}" do %>

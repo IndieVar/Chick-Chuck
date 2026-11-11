@@ -22,15 +22,15 @@
 <% end %>
 <% districts = company.decorate.districts_for_display %>
 <% languages = company.languages.to_a %>
-<div class="w-full grid grid-cols-1 sm:grid-cols-3">
-    <div class="px-6 py-4 w-full  sm:col-span-2">
+<div class="grid w-full min-w-0 grid-cols-1 lg:grid-cols-3">
+    <div class="w-full min-w-0 px-4 py-4 sm:px-6 lg:col-span-2">
         <%= render 'companies/shared/company_header', company: company, page_title: t('company.about')%>
         <div class="flex flex-col justify-between">
             <div class="flex justify-start flex-col">
                 <!-- District -->
                 <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
                     <%= heroicon 'map', class: 'w-6 h-6 flex-none'%>
-                    <p class="w-full px-2 text-base">
+                    <p class="w-full min-w-0 break-words px-2 text-base">
                         <% districts.each_with_index do |district, index|%>
                             <%= link_to users_path(district_id: district), 
                                 class: 'w-full hover:underline', data: {turbo_frame: '_top'} do  %>
@@ -42,7 +42,7 @@
                 <!-- Language -->
                 <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
                     <%= heroicon 'language', class: 'w-6 h-6 flex-none'%>
-                    <p class="w-full px-2 text-base">
+                    <p class="w-full min-w-0 break-words px-2 text-base">
                         <% languages.each_with_index do |language, index|%>
                             <%= link_to users_path(language_id: language), 
                                 class: 'w-full hover:underline', data: {turbo_frame: '_top'} do  %>
@@ -86,7 +86,7 @@
             <%= company.description %>
         <% end if company.description.present? %>
     </div>
-    <div class="py-4">
+    <div class="min-w-0 py-4">
         <!-- Services list -->
         <div class="justify-center items-center w-full grid grid-cols-1 gap-2">
             <% company.services.each do |service| %>

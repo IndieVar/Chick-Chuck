@@ -9,6 +9,6 @@
 <!-- Form -->
 <%= render 'companies/galleries/form', imageable: @company%>
 <!-- Gallery -->
-<div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6" id="gallery">
+<div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3" id="gallery">
     <%= render partial: 'companies/galleries/image', collection: @images %>
 </div>

@@ -1,18 +1,18 @@
-<%= turbo_frame_tag product do %>
-    <div class="<%= ['index', 'main'].eql?([action_name, controller_name]) ? 'w-[22rem] sm:w-[20rem]' : 'w-full'%>
-            flex-shrink-0 bg-white rounded-lg border border-gray-200 shadow-md hover:shadow-xl">
+<%= turbo_frame_tag product, class: ('w-full max-w-[22rem] flex-shrink-0' if ['index', 'main'].eql?([action_name, controller_name])) do %>
+    <div class="<%= ['index', 'main'].eql?([action_name, controller_name]) ? 'w-full max-w-[22rem]' : 'w-full'%>
+            min-w-0 flex-shrink-0 snap-start bg-white rounded-lg border border-gray-200 shadow-md hover:shadow-xl">
         <!-- Images -->
         <%= render 'carrierwave/images/carousel', object: product %>
         <%= tag.div class: "p-5 grid #{'sm:grid-cols-2' if ['show', 'products'].eql?([action_name, controller_name])}" do %>
             <!-- Header -->
-            <div class="col-span-full flex items-center justify-between mb-3 space-x-3">
+            <div class="col-span-full flex min-w-0 items-center justify-between gap-3 mb-3">
                 <!-- Title -->
                 <% if action_name == 'show' %>
-                    <%= tag.h1 product.title, class: "text-2xl font-bold tracking-tight text-gray-600" %>
+                    <%= tag.h1 product.title, class: "min-w-0 break-words text-xl sm:text-2xl font-bold tracking-tight text-gray-600" %>
                 <% elsif current_page?(root_path)%>
-                    <%= tag.p product.title, class: "text-2xl font-bold tracking-tight text-gray-600" %>
+                    <%= tag.p product.title, class: "min-w-0 break-words text-xl sm:text-2xl font-bold tracking-tight text-gray-600" %>
                 <% else %>
-                    <%= tag.h2 product.title, class: "text-2xl font-bold tracking-tight text-gray-600" %>
+                    <%= tag.h2 product.title, class: "min-w-0 break-words text-xl sm:text-2xl font-bold tracking-tight text-gray-600" %>
                 <% end %>
                 <!-- Icons -->
                 <%= tag.div class: "flex justify-center items-center relative -my-1" do %>

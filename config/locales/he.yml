@@ -23,6 +23,8 @@ he:
       add_btn:          "להוסיף %{model}"
       read_more:        "עוד"
       read_less:        "להסתיר"
+      open_menu:        "פתח את התפריט הראשי"
+      close_menu:       "סגור את התפריט הראשי"
       view_all:         "צפייה בכל"
       send_btn:         "לשלוח"
       dismiss_btn:      "להחמיץ את"

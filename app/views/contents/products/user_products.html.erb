@@ -22,10 +22,10 @@
 <% end %>
 
 <!-- Products section -->
-<%= tag.section class: "grid grid-flow-row auto-rows-max w-full px-2" do %>
+<%= tag.section class: "grid min-w-0 w-full grid-cols-1 grid-flow-row auto-rows-max px-2" do %>
     <!-- Content -->
     <%= turbo_frame_tag 'products',
-        class: "grid grid-cols-1 gap-6 my-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center mx-auto w-full container" do
+        class: "grid min-w-0 grid-cols-1 gap-6 my-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center mx-auto w-full container" do
     %>
         <!-- Filter -->
         <%= render 'filter', path: user_products_path(@user)%>

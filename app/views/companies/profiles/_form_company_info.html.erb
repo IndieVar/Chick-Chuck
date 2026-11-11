@@ -27,7 +27,7 @@
         <!-- Districts -->
         <div class="mb-6">
            <%= form.label :districts, class: "text-lg" %>
-           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mt-1">
+           <div class="grid grid-cols-1 gap-3 mt-1 sm:grid-cols-2 xl:grid-cols-3">
                <%= form.collection_check_boxes(:district_ids, District.all, :id, I18n.locale) do |b| %> 
                    <%= b.label class: "text-base  block w-full p-2 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300", data: {'checkbox-select-all-target' => b.text == District.first.decorate.title ?  "checkboxAll" : ''} do %>
                          <%= b.check_box data: { checkbox_select_all_target: 'checkbox' } %>
@@ -43,7 +43,7 @@
                <%= form.label :languages, class: "text-lg" %>
                <%= render 'shared/buttons/popover', text: t('language.language_select'), icon: 'icons/icons8-info-50.png'%>
            </div>
-           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mt-1">
+           <div class="grid grid-cols-1 gap-3 mt-1 sm:grid-cols-2 xl:grid-cols-3">
               <%= form.collection_check_boxes(:language_ids, Language.all, :id, :title) do |b| %> 
                   <%= b.label(class: "text-base  block w-full p-2 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 ") { b.check_box + '  ' + b.text}%>
               <% end%>
@@ -53,7 +53,7 @@
         <!-- Services -->
         <div class="mb-6">
            <%= form.label :services, class: "text-lg" %>
-           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mt-1">
+           <div class="grid grid-cols-1 gap-3 mt-1 sm:grid-cols-2 xl:grid-cols-3">
                <%= form.collection_check_boxes(:service_ids, Service.all, :id, I18n.locale) do |b| %> 
                    <%= b.label(class: "text-base  block w-full p-2 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 ") { b.check_box + '  ' + b.text}%>
                <% end%>

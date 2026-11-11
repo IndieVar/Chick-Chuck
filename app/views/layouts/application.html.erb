@@ -18,7 +18,7 @@
     <%= render 'shared/meta/current_user_meta' if user_signed_in? %>
   </head>
 
-  <body class="flex min-h-screen w-full flex-col justify-between">
+  <body class="flex min-h-screen w-full min-w-0 flex-col justify-between">
       <!-- Google Tag Manager (noscript) -->
       <%= render 'shared/meta/google_tag_body' if google_tag_manager_enabled %>
       <!-- Schema json -->
@@ -29,7 +29,7 @@
       <!-- Header -->
       <%= yield :navbar%>
       <!-- Main -->
-      <main class="w-full grid grid-flow-row auto-rows-max relative <%= 'mt-20' unless controller_name == 'errors' %>" id="top">
+      <main class="relative  grid min-w-0 grid-cols-1 auto-rows-max grid-flow-row <%= 'mt-20' unless controller_name == 'errors' %>" id="top">
           <!-- Coockies -->
           <%= render 'shared/meta/cookies_banner' if session[:cookies_accepted].nil? %>
           <!-- Flash messages -->
@@ -40,7 +40,7 @@
           <!-- Modal -->
           <%= turbo_frame_tag 'modal'%>
           <!-- Content -->
-          <div class="min-h-screen relative overflow-x-hidden">
+          <div class="relative min-h-screen min-w-0 w-full">
               <%= yield %>
           </div>
       </main>      

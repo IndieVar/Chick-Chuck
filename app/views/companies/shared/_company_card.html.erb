@@ -1,5 +1,5 @@
 <%= turbo_frame_tag company_card, 
-    class: "w-full max-w-lg overflow-hidden bg-white rounded-lg shadow-md hover:shadow-xl dark:bg-gray-800 
+    class: "w-full min-w-0 max-w-lg overflow-hidden bg-white rounded-lg shadow-md hover:shadow-xl dark:bg-gray-800
         #{'border border-gray-200' unless controller_name == 'products'}" do %>
     <% districts = company_card.decorate.districts_for_display %>
     <% languages = company_card.languages.to_a %>
@@ -16,16 +16,16 @@
     </div>
     <!-- Rating -->
     <%= render 'feedbacks/shared/rating', object: company_card%>
-    <div class="px-6 py-4">
+    <div class="min-w-0 px-4 py-4 sm:px-6">
         <!-- Title -->
         <%= link_to user_path(company_card), target: "_blank", data: { turbo_frame: '_top' },  
-            class: "text-xl font-semibold text-gray-800 flex items-center hover:underline" do %>
+            class: "min-w-0 break-words text-lg sm:text-xl font-semibold text-gray-800 flex items-center hover:underline" do %>
                <%= tag.span company_card.title %>
                <%= heroicon 'cursor-arrow-rays', class: "ml-1 w-6 h-6 z-20 text-orange-700 hover:text-gray-800 flex-none" %> 
         <% end %>
         <!-- Description -->
         <%= tag.div data: { controller: "read-more", 'read-more-more-text-value' => t('global.read_more'), 'read-more-less-text-value' => t('global.read_less')} do %>
-          <p class="my-content my-2 text-gray-700 dark:text-gray-400" data-read-more-target="content">
+          <p class="my-content my-2 break-words text-gray-700 dark:text-gray-400" data-read-more-target="content">
             <%= company_card.description.to_plain_text %>
           </p>
           <button data-action="read-more#toggle" class="text-blue-800"><%= t('global.read_more')%></button>
@@ -33,7 +33,7 @@
         <!-- District -->
         <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
             <%= heroicon 'map', class: 'w-6 h-6 flex-none'%>
-            <p class="w-full px-2 text-base">
+            <p class="min-w-0 w-full break-words px-2 text-base">
                 <% districts.each_with_index do |district, index|%>
                         <%= link_to users_path(district_id: district), class: 'w-full hover:underline', data: {turbo_frame: '_top'} do  %>
                             <%= tag.span district.title + (index < districts.size - 1 ? ',' : '') %>
@@ -44,7 +44,7 @@
         <!-- Language -->
         <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
             <%= heroicon 'language', class: 'w-6 h-6 flex-none'%>
-            <p class="w-full px-2 text-base">
+            <p class="min-w-0 w-full break-words px-2 text-base">
                 <% languages.each_with_index do |language, index|%>
                         <%= link_to users_path(language_id: language), class: 'w-full hover:underline', data: {turbo_frame: '_top'} do  %>
                             <%= tag.span language.title + (index < languages.size - 1 ? ',' : '') %>

@@ -1,13 +1,13 @@
 <!-- All companies and their prices -->
-<%= link_to user_modal_path(company), class: "mb-3 flex items-center p-1 relative border-b border-b-gray-300 hover:border-b-gray-500 text-gray-600 hover:text-gray-800", data: { turbo_frame: 'modal' } do %>
+<%= link_to user_modal_path(company), class: "relative mb-3 flex min-w-0 items-center gap-2 border-b border-b-gray-300 p-1 text-gray-600 hover:border-b-gray-500 hover:text-gray-800", data: { turbo_frame: 'modal' } do %>
     <!-- Avatar -->
     <%= image_tag(company.avatar_thumb,
         class: "object-cover h-7 w-7 rounded-full border border-gray-500 m-1", alt: "avatar")%>
     <!-- Company_name -->
-    <%= tag.p company.title, class: 'text-2xl' %>
-    <%= heroicon 'cursor-arrow-rays', class: "ml-1 w-6 h-6 text-orange-700 hover:text-gray-800" %>
+    <%= tag.p company.title, class: 'min-w-0 flex-1 break-words text-base sm:text-lg' %>
+    <%= heroicon 'cursor-arrow-rays', class: "w-6 h-6 flex-none text-orange-700 hover:text-gray-800" %>
     <!-- Company total price -->
-    <%= tag.p class: "absolute right-1 block w-full md:w-[8rem] text-xl text-end" do %>
+    <%= tag.p class: "ml-auto flex-none text-end text-base sm:text-xl" do %>
         <%= total_price(company)%><span class="ml-1">₪</span>
     <% end %>
 <% end if company.prices.present? && company.calculator.present? %>

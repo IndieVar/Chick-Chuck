@@ -5,9 +5,9 @@
     <% end %>
     <!-- Things -->
     <%= tag.div class: "overflow-x-auto mb-4" do %>
-        <div class="grid grid-cols-3 gap-6 bg-gray-200 p-1">
+        <div class="grid grid-cols-1 gap-2 bg-gray-200 p-2 sm:grid-cols-3 sm:gap-6">
             <%= tag.div t('price.title'), class: 'col-span-1'%>
-            <%= tag.div t('calculator.price'), class: 'col-span-2'%>
+            <%= tag.div t('calculator.price'), class: 'sm:col-span-2'%>
         </div>
         <%= render partial: 'companies/prices/thing', collection: category.things.decorate%>
     <% end %>

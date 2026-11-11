@@ -1,7 +1,7 @@
 <%= provide :footer do %>
     <footer class="bg-gray-200 mt-8 relative">
-        <!-- Logo -->
-        <%= link_to '#top', class: 'absolute ltr:right-2 rtl:left-2 bottom-5 z-20', 
+        <!-- Link to Top -->
+        <%= link_to '#top', class: 'absolute ltr:right-3 rtl:left-3 bottom-5 z-20', 
             data: {controller: 'scroll-to', 'scroll-to-offset-value' => "150"} do %>
             <%= image_tag('icons/icons8-up-2-50.png', class: 'w-8 hover:w-10 h-full', alt: "arrow up")%>
         <% end unless controller_name == 'errors'%>

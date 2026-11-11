@@ -23,6 +23,8 @@ uk:
       add_btn:          "Додати %{model}"
       read_more:        "Детальніше"
       read_less:        "Приховувати"
+      open_menu:        "Відкрити головне меню"
+      close_menu:       "Закрити головне меню"
       view_all:         "Дивитись усе"
       send_btn:         "Відправити"
       dismiss_btn:      "Пропустити"

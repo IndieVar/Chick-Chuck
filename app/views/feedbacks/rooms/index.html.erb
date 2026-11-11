@@ -7,7 +7,7 @@
 
 <div class="-mt-12 -mx-4 rounded-lg">
     <!-- Chatting -->
-    <div class="flex flex-col bg-gray-50 w-full h-[40rem] md:border-r-2 overflow-y-auto">
+    <div class="flex h-[70vh] min-h-[20rem] max-h-[40rem] w-full flex-col overflow-y-auto bg-gray-50 md:border-r-2">
         <!-- Search chat -->
         <%= form_with url: :rooms, method: :get, data: {turbo_frame: '_top'}, class: "border-b-2 py-4 px-2" do |f|%>
             <%= f.text_field :chatname, class: "py-2 px-2 border-2 border-gray-200 rounded-2xl w-full", placeholder: t('chat.search')%>

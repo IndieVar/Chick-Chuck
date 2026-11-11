@@ -3,12 +3,12 @@
     <!-- Title -->
     <%= tag.h3 t('pages.market'), class: 'text-3xl font-semibold text-gray-800 text-center'%>
     <!-- Products list -->
-    <%= turbo_frame_tag 'products', class: "flex overflow-x-scroll w-[22rem] sm:w-screen container mx-auto py-8 space-x-6 rtl:space-x-reverse" do %>
+    <%= turbo_frame_tag 'products', class: "market-products mx-auto flex w-full max-w-full snap-x snap-mandatory gap-6 overflow-x-auto px-3 py-8 sm:px-5 rtl:space-x-reverse" do %>
         <% if @products.present?%>
             <!-- Products -->
             <%= render partial: 'contents/products/product', collection: @products %>
             <!-- View all -->
-            <div class="flex-shrink-0 justify-center items-center text-center h-auto w-[300px] m-auto">
+            <div class="flex w-full max-w-[18.75rem] flex-shrink-0 snap-start items-center justify-center text-center">
                 <%= link_to products_path, class: "flex text-base font-medium justify-center items-center text-center text-gray-500 hover:text-gray-700 hover:underline", data: {turbo_frame: '_top'} do %>
                     <%= t('global.view_all')%>
                     <%= heroicon I18n.locale == :he ? 'arrow-small-left' : 'arrow-small-right', 

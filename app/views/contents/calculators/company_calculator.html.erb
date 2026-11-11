@@ -3,7 +3,7 @@
 
 
 <!-- Header -->
-<%= tag.section class: "grid grid-flow-row auto-rows-max w-full px-2 lg:px-6" do %>
+<%= tag.section class: "grid min-w-0 w-full grid-cols-1 grid-flow-row auto-rows-max px-2 lg:px-6" do %>
     <div class="px-6 py-4 w-full  sm:col-span-2">
         <%= render 'companies/shared/company_header', company: @company,  page_title: t('calculator.title')%>
     </div>
@@ -11,11 +11,11 @@
 
 <!-- Calculator -->
 <%= turbo_frame_tag 'calculation',
-    class: "container mx-auto grid grid-flow-row auto-rows-max w-full justify-center mb-6" do 
+    class: "container mx-auto grid min-w-0 grid-cols-1 grid-flow-row auto-rows-max w-full justify-center mb-6" do
 %>
     <%= tag.p t('calculator.note_html'), class: 'text-center text-gray-500 mb-4 px-4' %>
     <!-- Form -->
-    <div class="sm:min-w-[32rem] pb-6 shadow-md hover:shadow-xl rounded-xl">
+    <div class="w-full max-w-full pb-6 shadow-md hover:shadow-xl rounded-xl sm:min-w-[32rem]">
         <%= render 'contents/calculators/form', path: company_calculator_path(@company), 
             total_prices: (render 'company_price', company: @company), frame: '_top'%>
     </div>

@@ -6,7 +6,7 @@
   data-transition-enter-to="opacity-100 scale-100"
   data-transition-leave-from="opacity-100 scale-100"
   data-transition-leave-to="opacity-0 scale-95"
-  class="hidden absolute z-50 top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden overflow-y-auto max-h-screen"
+  class="hidden absolute z-50 top-0 inset-x-0 p-2 transition transform origin-top-right overflow-y-auto max-h-screen"
 >
     <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
       <!-- Dropdown menu header -->
@@ -20,7 +20,7 @@
           <div class="-mr-2">
             <button 
                 data-action="dropdown#toggle click@window->dropdown#hide" 
-                type="button" class="bg-white rounded-lg p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                type="button" aria-label="<%= t('global.close_menu') %>" class="bg-white rounded-lg p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
             >
                 <%= heroicon 'x-mark', class: 'h-6 w-6'%>
             </button>

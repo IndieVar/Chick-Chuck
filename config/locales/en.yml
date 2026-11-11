@@ -23,6 +23,8 @@ en:
       add_btn:          "Add %{model}"
       read_more:        "Read more"
       read_less:        "Read less"
+      open_menu:        "Open main menu"
+      close_menu:       "Close main menu"
       view_all:         "View all"
       send_btn:         "Send"
       dismiss_btn:      "Dismiss" 

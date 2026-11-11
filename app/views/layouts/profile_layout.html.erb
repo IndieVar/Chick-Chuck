@@ -13,26 +13,26 @@
     <%= render 'shared/meta/current_user_meta'%>
   </head>
 
-  <body class="flex min-h-screen w-full flex-col justify-between">
+  <body class="flex min-h-screen w-full min-w-0 flex-col justify-between">
       <% if user_signed_in? %>
         <%= turbo_stream_from "broadcast_to_user_#{current_user.id}" %>
       <% end %>
       <!-- Header -->
       <%= yield :navbar%>
       <!-- Main -->
-      <main class="w-full mt-20 grid grid-flow-row auto-rows-max grid-cols-4" id="top">
+      <main class="mt-20 grid w-full min-w-0 grid-flow-row auto-rows-max grid-cols-1 lg:grid-cols-4" id="top">
           <!-- Profile sidebar menu -->
           <%= tag.div (render 'shared/navigations/user_profile_sidebar'), class: "col-span-1 w-full hover:shadow-lg" if user_signed_in?%>
-          <div class="w-full col-span-full lg:col-span-3">
-              <div class="text-gray-700 relative 
+          <div class="col-span-full w-full min-w-0 lg:col-span-3">
+              <div class="relative min-w-0 text-gray-700
                   <%= [controller_name, action_name].eql?(['rooms', 'show']) ? 'sm:p-4' : 'p-4'%>"
               >
                   <!-- Page Navigation -->
                   <%= render 'shared/navigations/profile_navigation' unless [controller_name, action_name].eql?(['rooms', 'show'])%>
                   <!-- Flash messages -->
                   <%= tag.div (render 'shared/flash_messages'), class: 'fixed right-3 sm:right-6 sm:top-20 z-30 sm:max-w-sm', id: "flash_messages"%>
-                  <section class="w-full mx-auto rounded-md shadow-md hover:shadow-lg 
-                      <%= [controller_name, action_name].eql?(['rooms', 'show']) ? 'p-0 h-screen' : 'p-6 min-h-screen'%> "
+                  <section class="mx-auto w-full min-w-0 rounded-md shadow-md hover:shadow-lg
+                      <%= [controller_name, action_name].eql?(['rooms', 'show']) ? 'p-0 min-h-[calc(100vh-5rem)]' : 'p-3 sm:p-6 min-h-screen'%> "
                   >
                       <%= tag.h1 yield(:main_title), class:"mb-6 text-xl font-bold text-gray-700"%>
                       <!-- Content -->

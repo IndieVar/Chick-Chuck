@@ -6,10 +6,33 @@ html {
   overflow-x: clip;
 }
 
+.market-products {
+  contain: layout;
+}
+
+@layer base {
+  body {
+    min-width: 0;
+  }
+
+  img,
+  video,
+  iframe {
+    max-width: 100%;
+  }
+
+  input,
+  select,
+  textarea {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
 /*Pagy*/
 .pagy-nav,
 .pagy-nav-js {
-  @apply flex space-x-2 justify-center my-3 pt-3;
+  @apply flex flex-wrap max-w-full space-x-2 justify-center my-3 pt-3;
 }
 
 .pagy-nav .page a,

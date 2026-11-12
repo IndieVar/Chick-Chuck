@@ -1,5 +1,5 @@
 <!-- Ratings -->
-<div class="w-full items-center flex justify-between px-6 py-3 bg-gray-700 <%= 'homepage-carrier-rating' if controller_name == 'main' %> <%= 'carrier-directory-card__rating' if controller_name == 'users' && action_name == 'index' %>">
+<div class="w-full items-center flex justify-between px-6 py-3 bg-gray-700 <%= 'carrier-directory-card__rating' if controller_name == 'main' || (controller_name == 'users' && action_name == 'index') %>">
     <% if object.rating.positive? %>
         <%= turbo_frame_tag dom_id(object, "rating"),
             class: "w-full flex items-center justify-center my-1 space-x-2 relative" do %>

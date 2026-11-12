@@ -1,41 +1,41 @@
+<% redesigned_card = controller_name == 'main' || (controller_name == 'users' && action_name == 'index') %>
 <%= turbo_frame_tag company_card, 
     class: "w-full max-w-lg overflow-hidden bg-white rounded-lg shadow-md hover:shadow-xl dark:bg-gray-800 
         #{'border border-gray-200' unless controller_name == 'products'}
-        #{'homepage-carrier-card' if controller_name == 'main'}
-        #{'carrier-directory-card' if controller_name == 'users' && action_name == 'index'}" do %>
+        #{'carrier-directory-card' if redesigned_card}" do %>
     <% districts = company_card.decorate.districts_for_display %>
     <% languages = company_card.languages.to_a %>
     <!-- Avatar -->
-    <div class="w-full" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="w-full <%= 'carrier-directory-card__cover' if redesigned_card %>" itemscope itemtype="http://schema.org/ImageObject">
         <%= tag.span company_card.title, itemprop: "name", class: "sr-only"%>
-        <%= link_to user_path(company_card), data: { turbo: false} do%>
+        <%= link_to user_path(company_card), data: { turbo: false}, class: ('carrier-directory-card__image-link' if redesigned_card) do%>
             <%= image_tag company_card.avatar_medium,
                 itemprop: "contentUrl",
                 alt: company_card.title,
-                class:"object-cover object-center w-full h-56"%>
+                class: "#{redesigned_card ? 'object-contain' : 'object-cover'} object-center w-full h-56 #{'carrier-directory-card__image' if redesigned_card}"%>
         <% end %>
         <%= tag.span company_card.description.to_plain_text, itemprop: "description", class: "sr-only"%>
     </div>
     <!-- Rating -->
     <%= render 'feedbacks/shared/rating', object: company_card%>
-    <div class="px-6 py-4">
+    <div class="px-6 py-4 <%= 'carrier-directory-card__body' if redesigned_card %>">
         <!-- Title -->
         <%= link_to user_path(company_card), target: "_blank", data: { turbo_frame: '_top' },  
-            class: "text-xl font-semibold text-gray-800 flex items-center hover:underline" do %>
+            class: "text-xl font-semibold text-gray-800 flex items-center hover:underline #{'carrier-directory-card__title' if redesigned_card}" do %>
                <%= tag.span company_card.title %>
                <%= heroicon 'cursor-arrow-rays', class: "ml-1 w-6 h-6 z-20 text-orange-700 hover:text-gray-800 flex-none" %> 
         <% end %>
         <!-- Description -->
-        <%= tag.div data: { controller: "read-more", 'read-more-more-text-value' => t('global.read_more'), 'read-more-less-text-value' => t('global.read_less')} do %>
-          <p class="my-content my-2 text-gray-700 dark:text-gray-400" data-read-more-target="content">
+        <%= tag.div data: { controller: "read-more", 'read-more-more-text-value' => t('global.read_more'), 'read-more-less-text-value' => t('global.read_less')}, class: ('carrier-directory-card__description' if redesigned_card) do %>
+          <p class="my-content my-2 text-gray-700 dark:text-gray-400 <%= 'carrier-directory-card__summary' if redesigned_card %>" data-read-more-target="content">
             <%= company_card.description.to_plain_text %>
           </p>
-          <button data-action="read-more#toggle" class="text-blue-800"><%= t('global.read_more')%></button>
+          <button data-action="read-more#toggle" class="text-blue-800 <%= 'carrier-directory-card__read-more' if redesigned_card %>"><%= t('global.read_more')%></button>
         <% end if company_card.description.present? %>
         <!-- District -->
-        <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+        <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200 <%= 'carrier-directory-card__meta' if redesigned_card %>">
             <%= heroicon 'map', class: 'w-6 h-6 flex-none'%>
-            <p class="w-full px-2 text-base">
+            <p class="w-full px-2 text-base <%= 'carrier-directory-card__meta-values' if redesigned_card %>">
                 <% districts.each_with_index do |district, index|%>
                         <%= link_to users_path(district_id: district), class: 'w-full hover:underline', data: {turbo_frame: '_top'} do  %>
                             <%= tag.span district.title + (index < districts.size - 1 ? ',' : '') %>
@@ -44,9 +44,9 @@
             </p>
         </div>
         <!-- Language -->
-        <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+        <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200 <%= 'carrier-directory-card__meta' if redesigned_card %>">
             <%= heroicon 'language', class: 'w-6 h-6 flex-none'%>
-            <p class="w-full px-2 text-base">
+            <p class="w-full px-2 text-base <%= 'carrier-directory-card__meta-values' if redesigned_card %>">
                 <% languages.each_with_index do |language, index|%>
                         <%= link_to users_path(language_id: language), class: 'w-full hover:underline', data: {turbo_frame: '_top'} do  %>
                             <%= tag.span language.title + (index < languages.size - 1 ? ',' : '') %>
@@ -55,7 +55,7 @@
             </p>
         </div>
         <!-- Views -->
-        <div class="flex justify-center text-sm mt-4 text-gray-700 dark:text-gray-200">
+        <div class="flex justify-center text-sm mt-4 text-gray-700 dark:text-gray-200 <%= 'carrier-directory-card__views' if redesigned_card %>">
             <%= render 'shared/buttons/views', object: company_card, popover_target: company_card.title %>
         </div>
     </div>

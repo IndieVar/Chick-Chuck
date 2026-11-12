@@ -1,15 +1,29 @@
 <% currently_at t('pages.calculator') %>
 <% provide :page_title, t('pages.calculator') %>
 
-<!-- Calculator -->
-<%= turbo_frame_tag 'calculation',
-    class: "container mx-auto grid grid-flow-row auto-rows-max w-full justify-center mb-6" do 
-%>
-    <!-- Title -->
-    <%= tag.h1 t('calculator.title'), class: 'text-3xl font-semibold text-gray-800 my-6 text-center mx-2'%>
-    <%= tag.p t('calculator.note_html'), class: 'text-center text-gray-500 mb-4 px-4' %>
-    <!-- Form -->
-    <div class="sm:min-w-[32rem] pb-6 shadow-md hover:shadow-xl rounded-xl">
-        <%= render 'form', path: calculator_path, total_prices: (render 'companies_prices'), frame: '_top'%>
-    </div>
+<%= tag.section class: 'moving-calculator-page' do %>
+    <%= turbo_frame_tag 'calculation', class: 'moving-calculator-page__frame' do %>
+        <div class="moving-calculator-page__shell">
+            <header class="moving-calculator-page__hero">
+                <div class="moving-calculator-page__hero-copy">
+                    <span class="moving-calculator-page__eyebrow"><%= t('pages.calculator') %></span>
+                    <%= tag.h1 t('calculator.title'), class: 'moving-calculator-page__title' %>
+                    <%= tag.p t('calculator.note_html'), class: 'moving-calculator-page__note' %>
+                </div>
+                <div class="moving-calculator-page__hero-art" aria-hidden="true">
+                    <%= image_tag 'icons/icons8-calculator-blue-64.png', alt: '', class: 'moving-calculator-page__hero-icon' %>
+                </div>
+            </header>
+
+            <section class="moving-calculator-page__calculator-card">
+                <header class="moving-calculator-page__calculator-heading">
+                    <span class="moving-calculator-page__calculator-mark" aria-hidden="true">
+                        <%= heroicon 'adjustments-horizontal', class: 'w-5 h-5' %>
+                    </span>
+                    <span><%= t('calculator.options') %></span>
+                </header>
+                <%= render 'form', path: calculator_path, total_prices: (render 'companies_prices'), frame: '_top' %>
+            </section>
+        </div>
+    <% end %>
 <% end %>

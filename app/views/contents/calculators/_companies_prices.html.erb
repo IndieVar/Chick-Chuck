@@ -1,15 +1,39 @@
-<!-- All companies and their prices -->
-<% @companies.each do |company|%>
-    <%= link_to user_modal_path(company), class: "mb-3 flex items-center p-1 relative border-b border-b-gray-300 hover:border-b-gray-500 text-gray-600 hover:text-gray-800", data: { turbo_frame: 'modal' } do %>
-        <!-- Avatar -->
-        <%= image_tag(company.avatar_thumb,
-            class: "object-cover h-7 w-7 rounded-full border border-gray-500 m-1", alt: "avatar")%>
-        <!-- Company_name -->
-        <%= tag.p company.title, class: 'text-2xl' %>
-        <%= heroicon 'cursor-arrow-rays', class: "ml-1 w-6 h-6 text-orange-700 hover:text-gray-800" %>
-        <!-- Company total price -->
-        <%= tag.p class: "absolute right-1 block w-full md:w-[8rem] text-xl text-end" do %>
-            <%= total_price(company)%><span class="ml-1">₪</span>
+<% if params.key?(:distance) %>
+<section class="moving-calculator-page__company-results" aria-labelledby="calculator-estimates-heading">
+    <header class="moving-calculator-page__results-heading">
+        <%= tag.h2 t('calculator.estimates'), id: 'calculator-estimates-heading' %>
+    </header>
+    <div class="moving-calculator-page__company-list">
+        <% @companies.each do |company| %>
+            <%= link_to user_modal_path(company, source: 'calculator'), class: 'moving-calculator-page__company-result',
+                data: { turbo_frame: 'modal' } do %>
+                <span class="moving-calculator-page__company-identity">
+                    <span class="moving-calculator-page__company-avatar-wrap">
+                        <%= image_tag company.avatar_thumb, class: 'moving-calculator-page__company-avatar',
+                            alt: company.title %>
+                    </span>
+                    <span class="moving-calculator-page__company-details">
+                        <span class="moving-calculator-page__company-type"><%= t('product.seller.company') %></span>
+                        <span class="moving-calculator-page__company-name"><%= company.title %></span>
+                        <% if company.rating.to_f.positive? %>
+                            <span class="moving-calculator-page__company-rating">
+                                <%= heroicon 'star', class: 'w-4 h-4', aria: { hidden: true } %>
+                                <bdi dir="ltr"><%= number_with_precision(company.rating, precision: 1, strip_insignificant_zeros: true) %></bdi>
+                            </span>
+                        <% end %>
+                    </span>
+                </span>
+                <span class="moving-calculator-page__company-estimate">
+                    <span class="moving-calculator-page__company-estimate-label"><%= t('calculator.total_estimate') %></span>
+                    <strong class="moving-calculator-page__company-price">
+                        <bdi dir="ltr"><%= number_with_precision(total_price(company), precision: 1, strip_insignificant_zeros: true) %> ₪</bdi>
+                    </strong>
+                </span>
+                <span class="moving-calculator-page__company-link-icon" aria-hidden="true">
+                    <%= heroicon 'arrow-right', class: 'w-4 h-4 rtl:rotate-180' %>
+                </span>
+            <% end if company.prices.present? && company.calculator.present? %>
         <% end %>
-    <% end if company.prices.present? && company.calculator.present? %>
+    </div>
+</section>
 <% end %>

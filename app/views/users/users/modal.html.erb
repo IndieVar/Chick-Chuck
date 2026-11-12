@@ -1,9 +1,18 @@
 <% currently_at @user.user_name%>
 <% provide :page_title, @user.user_name%>
+<% calculator_carrier_modal = @user.is_a?(Company) && params[:source] == 'calculator' %>
 
-<%= render TurboProfileComponent.new(title: nil, user: nil) do %>
+<%= render TurboProfileComponent.new(
+    title: nil,
+    user: nil,
+    modal_class: ('calculator-carrier-modal' if calculator_carrier_modal)
+) do %>
     <% if @user.class.name == Company.name %>
-        <%= render 'companies/shared/company_card', company_card: @user%>
+        <% if calculator_carrier_modal %>
+            <%= render 'companies/shared/calculator_modal_card', company: @user %>
+        <% else %>
+            <%= render 'companies/shared/company_card', company_card: @user %>
+        <% end %>
     <% else %>
         <%= render 'clients/shared/about_client', client: @user%>
     <% end %>

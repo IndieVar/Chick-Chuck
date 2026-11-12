@@ -8,10 +8,15 @@
       turbo_modal_target: "modal"},
       class: "overflow-y-auto overflow-x-hidden max-h-[40rem] justify-center items-center shadow-md hover:shadow-xl rounded-lg
               fixed w-4/5 sm:w-2/3 md:w-auto top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 mx-auto
-              #{'contacts-modal' if @modal_class == 'contacts-modal'}" do
+              #{'contacts-modal' if @modal_class == 'contacts-modal'}
+              #{'calculator-carrier-modal' if @modal_class == 'calculator-carrier-modal'}" do
   %>
-      <div class="relative p-6 w-full max-w-lg h-full sm:h-auto bg-gray-50 border rounded-lg <%= 'contacts-modal__panel' if @modal_class == 'contacts-modal' %>">
-        <div class="text-center mx-2 h-auto <%= 'contacts-modal__header' if @modal_class == 'contacts-modal' %>">
+      <div class="relative p-6 w-full max-w-lg h-full sm:h-auto bg-gray-50 border rounded-lg
+                  <%= 'contacts-modal__panel' if @modal_class == 'contacts-modal' %>
+                  <%= 'calculator-carrier-modal__panel' if @modal_class == 'calculator-carrier-modal' %>">
+        <div class="text-center mx-2 h-auto
+                    <%= 'contacts-modal__header' if @modal_class == 'contacts-modal' %>
+                    <%= 'calculator-carrier-modal__header' if @modal_class == 'calculator-carrier-modal' %>">
             <!-- Title -->
             <%= tag.h1 class: "z-10 w-full flex flex-col justify-center font-medium text-center text-gray-800 mx-auto" do %>
                 <%= tag.span @title, class: 'text-xl text-gray-500'%>

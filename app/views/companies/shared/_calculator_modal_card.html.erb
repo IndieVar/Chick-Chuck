@@ -1,0 +1,76 @@
+<% districts = company.decorate.districts_for_display %>
+<% languages = company.languages.to_a %>
+
+<%= turbo_frame_tag company, class: 'calculator-carrier-modal__card' do %>
+    <header class="calculator-carrier-modal__hero">
+        <div class="calculator-carrier-modal__identity">
+            <span class="calculator-carrier-modal__badge"><%= t('product.seller.company') %></span>
+            <%= link_to user_path(company), target: '_blank', data: { turbo_frame: '_top' },
+                class: 'calculator-carrier-modal__title' do %>
+                <%= tag.h2 company.title %>
+                <%= heroicon 'arrow-right', class: 'calculator-carrier-modal__title-icon rtl:rotate-180', aria: { hidden: true } %>
+            <% end %>
+            <div class="calculator-carrier-modal__rating">
+                <%= render 'feedbacks/shared/rating', object: company %>
+            </div>
+        </div>
+        <div class="calculator-carrier-modal__avatar-frame" itemscope itemtype="http://schema.org/ImageObject">
+            <%= tag.span company.title, itemprop: 'name', class: 'sr-only' %>
+            <% avatar = image_tag company.avatar_large, itemprop: 'contentUrl', alt: company.title,
+                class: 'calculator-carrier-modal__avatar' %>
+            <% if company.avatar.url.present? %>
+                <%= link_to avatar, carrierwave_image_path(company, avatar: true),
+                    data: { turbo_frame: 'modal' }, class: 'calculator-carrier-modal__avatar-link' %>
+            <% else %>
+                <%= avatar %>
+            <% end %>
+        </div>
+    </header>
+
+    <div class="calculator-carrier-modal__body">
+        <% if company.description.present? %>
+            <p class="calculator-carrier-modal__description"><%= company.description.to_plain_text %></p>
+        <% end %>
+
+        <div class="calculator-carrier-modal__metadata">
+            <% if districts.present? %>
+                <div class="calculator-carrier-modal__meta">
+                    <%= heroicon 'map', class: 'calculator-carrier-modal__meta-icon', aria: { hidden: true } %>
+                    <div class="calculator-carrier-modal__meta-copy">
+                        <% districts.each_with_index do |district, index| %>
+                            <%= link_to users_path(district_id: district), data: { turbo_frame: '_top' } do %>
+                                <%= tag.span district.title + (index < districts.size - 1 ? ',' : '') %>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+            <% if languages.present? %>
+                <div class="calculator-carrier-modal__meta">
+                    <%= heroicon 'language', class: 'calculator-carrier-modal__meta-icon', aria: { hidden: true } %>
+                    <div class="calculator-carrier-modal__meta-copy">
+                        <% languages.each_with_index do |language, index| %>
+                            <%= link_to users_path(language_id: language), data: { turbo_frame: '_top' } do %>
+                                <%= tag.span language.title + (index < languages.size - 1 ? ',' : '') %>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+
+        <div class="calculator-carrier-modal__actions">
+            <%= render 'feedbacks/rooms/form', recipient: company %>
+            <%= link_to user_contacts_path(company), data: { turbo_frame: 'modal' },
+                aria: { label: "#{company.title}_contacts" },
+                class: 'calculator-carrier-modal__contact' do %>
+                <%= heroicon 'phone', class: 'w-5 h-5', aria: { hidden: true } %>
+                <%= tag.span t('contacts') %>
+            <% end %>
+        </div>
+
+        <footer class="calculator-carrier-modal__footer">
+            <%= render 'shared/buttons/views', object: company, popover_target: company.title %>
+        </footer>
+    </div>
+<% end %>

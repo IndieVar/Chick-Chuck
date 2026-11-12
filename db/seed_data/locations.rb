@@ -148,35 +148,93 @@ module LocationsSeedData
     'תל אביב -יפו' => 'תל אביב'
   }.freeze
 
+  # CBS forms for urban localities, moshavim, and kibbutzim.
+  CBS_LOCALITY_FORM_CODES = %w[
+    120 130 140 150 160 170 180 190 250 260 270 280 290 310 330
+  ].freeze
+
+  CYRILLIC_TRANSLITERATION = {
+    'sh' => 'ш', 'ts' => 'ц', 'tz' => 'ц', 'kh' => 'х', 'ch' => 'ч', 'zh' => 'ж',
+    'th' => 'т', 'ai' => 'ай', 'ay' => 'ай', 'ei' => 'ей', 'oi' => 'ой',
+    'a' => 'а', 'b' => 'б', 'c' => 'к', 'd' => 'д', 'e' => 'е', 'f' => 'ф',
+    'g' => 'г', 'h' => 'х', 'i' => 'и', 'j' => 'дж', 'k' => 'к', 'l' => 'л',
+    'm' => 'м', 'n' => 'н', 'o' => 'о', 'p' => 'п', 'q' => 'к', 'r' => 'р',
+    's' => 'с', 't' => 'т', 'u' => 'у', 'v' => 'в', 'w' => 'в', 'x' => 'кс',
+    'y' => 'й', 'z' => 'з'
+  }.freeze
+  CYRILLIC_TRANSLITERATION_PATTERN = Regexp.union(
+    CYRILLIC_TRANSLITERATION.keys.sort_by { |key| -key.length }
+  )
+
   def self.load_official_localities
     localized_names = DISTRICTS.to_h do |district|
       [district[:name][:en], district.fetch(:cities, []).to_h { |city| [normalize_name(city[:he]), city] }]
     end
 
     File.foreach(File.join(__dir__, 'israel_localities.tsv')).with_index do |line, index|
-      next if index.zero?
-
-      district_code, hebrew_name, english_name, transliteration = line.chomp.split("\t", -1)
-      district_name = CBS_DISTRICTS.fetch(district_code)
-      district = DISTRICTS.find { |item| item[:name][:en] == district_name }
-      next unless district
-
-      names = localized_names.fetch(district_name)
-      normalized_hebrew_name = normalize_name(hebrew_name)
-      existing_city = names[normalized_hebrew_name] ||
-                      names[normalize_name(CBS_LOCALITY_ALIASES[hebrew_name])]
-      if existing_city
-        existing_city[:he] = hebrew_name
-        names[normalized_hebrew_name] = existing_city
-        next
-      end
-
-      localized_name = [english_name, transliteration, hebrew_name].find { |name| !name.to_s.empty? }
-      city = { ru: localized_name, en: localized_name, uk: localized_name, he: hebrew_name }
-      district[:cities] ||= []
-      district[:cities] << city
-      names[normalized_hebrew_name] = city
+      add_official_locality(line, localized_names) unless index.zero?
     end
+  end
+
+  def self.add_official_locality(line, localized_names)
+    district_code, hebrew_name, english_name, transliteration, form_code = parse_tsv_line(line)
+    return unless CBS_LOCALITY_FORM_CODES.include?(form_code)
+
+    district_name = CBS_DISTRICTS.fetch(district_code)
+    district = DISTRICTS.find { |item| item[:name][:en] == district_name }
+    return unless district
+
+    names = localized_names.fetch(district_name)
+    add_locality_name(district, names, hebrew_name, english_name, transliteration)
+  end
+
+  def self.add_locality_name(district, names, hebrew_name, english_name, transliteration)
+    normalized_name = normalize_name(hebrew_name)
+    existing_city = names[normalized_name] || names[normalize_name(CBS_LOCALITY_ALIASES[hebrew_name])]
+    return update_existing_locality(existing_city, names, normalized_name, hebrew_name) if existing_city
+
+    append_locality(district, names, hebrew_name, english_name, transliteration)
+  end
+
+  def self.update_existing_locality(city, names, normalized_name, hebrew_name)
+    city[:he] = hebrew_name
+    names[normalized_name] = city
+  end
+
+  def self.append_locality(district, names, hebrew_name, english_name, transliteration)
+    normalized_name = normalize_name(hebrew_name)
+    city = build_locality(hebrew_name, english_name, transliteration)
+    district[:cities] ||= []
+    district[:cities] << city
+    names[normalized_name] = city
+  end
+
+  def self.build_locality(hebrew_name, english_name, transliteration)
+    english_name = [english_name, transliteration].find { |name| !name.to_s.empty? }
+    raise "Missing English locality name for #{hebrew_name}" unless english_name
+
+    cyrillic_name = transliterate_locality_name(english_name)
+    { ru: cyrillic_name, en: english_name, uk: cyrillic_name, he: hebrew_name }
+  end
+
+  def self.parse_tsv_line(line)
+    line.chomp.split("\t", -1).map do |field|
+      next field unless field.start_with?('"') && field.end_with?('"')
+
+      field[1...-1].gsub('""', '"')
+    end
+  end
+
+  def self.transliterate_locality_name(name)
+    name.split(/([ -]+)/).map { |part| transliterate_locality_part(part) }.join
+  end
+
+  def self.transliterate_locality_part(part)
+    return part if part.match?(/\A[ -]+\z/)
+
+    word = part.downcase.delete("'’")
+    word = word.sub(/\Aya/, 'я').sub(/\Aye/, 'е').sub(/\Ayo/, 'йо').sub(/\Ayu/, 'ю')
+    word.gsub(CYRILLIC_TRANSLITERATION_PATTERN) { |latin| CYRILLIC_TRANSLITERATION.fetch(latin) }.capitalize
   end
 
   def self.normalize_name(name)

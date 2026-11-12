@@ -1,23 +1,12 @@
 <% currently_at t('moving_preparation.title') %>
 <% provide :page_title, t('moving_preparation.title') %>
 
-
-<%= tag.section class: "grid grid-cols-4 w-full mx-auto h-full " do %>
-    <!-- Main content -->
-    <section class="bg-gray-50 col-span-full lg:col-span-3">
-        <div class="px-6 mx-auto text-center">
-            <!-- Main Title -->
-            <%= tag.h2 t('moving_preparation.title'), class: "text-3xl font-semibold text-gray-800 my-6 text-center"%>
-            <div class="max-w-3xl mx-auto">
-                <!-- Header content -->
-                <%= render 'contents/moving_preparation/header_content'%>
-                <!-- Content list for mobile size -->
-                <%= tag.div (render 'contents/moving_preparation/contents_list'), class: 'lg:hidden'%>
-                <!-- Main content -->
-                <%= render 'contents/moving_preparation/main_content'%>
-            </div>
-        </div>
-    </section>
-    <!-- Content list -->
-    <%= tag.div (render 'contents/moving_preparation/contents_list'), class: 'hidden lg:block'%>
-<% end %>
+<main class="moving-preparation-page">
+    <%= render 'contents/moving_preparation/header_content' %>
+    <div class="moving-preparation-page__layout">
+        <%= render 'contents/moving_preparation/contents_list' %>
+        <article class="moving-preparation-article">
+            <%= render 'contents/moving_preparation/main_content' %>
+        </article>
+    </div>
+</main>

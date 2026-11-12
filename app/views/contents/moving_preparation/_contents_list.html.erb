@@ -1,14 +1,15 @@
-<section class="flex flex-col w-full mx-4 text-center h-full px-6 py-8 bg-gray-50 lg:border-l col-span-1">
-        <!-- Title -->
-        <%= tag.h2 t('moving_preparation.list'), class: "text-2xl font-semibold text-gray-800"%>
-
-        <!-- Content list -->
-        <ul class="mx-3 space-y-3 text-center justify-center mt-6 list-disc">
-            <% 10.times do |i| %>
-                <li>
-                    <%= link_to t("moving_preparation.content_#{i+1}_t"), "#content_#{i+1}",
-                         class: 'text-gray-500 hover:text-gray-800', data: {controller: "scroll-to"}%>
-                </li>
-            <% end %>
-        </ul>
-</section>
+<nav class="moving-preparation-toc" aria-label="<%= t('moving_preparation.list') %>">
+    <h2 class="moving-preparation-toc__title"><%= t('moving_preparation.list') %></h2>
+    <ol class="moving-preparation-toc__list">
+        <% 10.times do |i| %>
+            <li>
+                <%= link_to "#content_#{i + 1}",
+                    class: 'moving-preparation-toc__link',
+                    data: { controller: 'scroll-to', 'scroll-to-offset-value' => '105' } do %>
+                    <span class="moving-preparation-toc__number"><%= format('%02d', i + 1) %></span>
+                    <span><%= t("moving_preparation.content_#{i + 1}_t") %></span>
+                <% end %>
+            </li>
+        <% end %>
+    </ol>
+</nav>

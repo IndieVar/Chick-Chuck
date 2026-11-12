@@ -1,26 +1,8 @@
 <% currently_at t('pages.about') %>
 <% provide :page_title, t('pages.about') %>
 
-<%= tag.section class: "grid grid-cols-4 w-full mx-auto h-full " do %>
-    <!-- Main content -->
-    <section class="bg-gray-50 col-span-full">
-        <div class="px-6 mx-auto text-center">
-            <!-- Main Title -->
-            <%= tag.h1 t('pages.about'), class: "text-3xl font-semibold text-gray-800 my-6 text-center"%>
-            <div class="container mx-auto">
-                <!-- Header content -->
-                <%= render 'contents/about/header_content'%>
-                <!-- Arrow down -->
-                <div class="flex justify-center mt-16">
-                    <%= link_to '#content', data: {controller: 'scroll-to', 'scroll-to-offset-value' => "50"} do %>
-                        <%= heroicon 'chevron-double-down', class: 'w-6 h-6 text-gray-500 hover:text-gray-900'%>
-                    <% end %>
-                </div>
-                <!-- Main content -->
-                <%= render 'contents/about/main_content'%>
-                <!-- Statistic -->
-                <%# render 'contents/about/statistic'%>
-            </div>
-        </div>
-    </section>
-<% end %>
+<main class="about-page">
+    <%= render 'contents/about/header_content' %>
+    <%= render 'contents/about/main_content' %>
+    <%= render 'contents/about/statistic' %>
+</main>

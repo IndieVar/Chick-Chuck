@@ -1,31 +1,30 @@
-<%= turbo_frame_tag review, 
-    class: "border p-4 rounded-lg shadow-md hover:shadow-lg bg-gray-100" do%>
+<%= turbo_frame_tag review, class: 'feedback-review' do %>
     <article>
-        <!-- Author -->
-        <div class="flex items-center mb-4 space-x-4">
-            <%= image_tag(review.user.avatar_thumb, class: "w-10 h-10 rounded-full object-cover", alt: review.user.user_name) %>
-            <div class="space-y-1 font-medium dark:text-white">
-                <p>
-                    <%= tag.span review.user.user_name%>
-                    <%= tag.time review.user.decorate.created_at, datetime: review.user.decorate.created_at, 
-                        class: "block text-sm text-gray-500 dark:text-gray-400" %>
-                </p>
+        <header class="feedback-review__author">
+            <%= image_tag review.user.avatar_thumb, class: 'feedback-review__avatar', alt: review.user.user_name %>
+            <div class="feedback-review__author-details">
+                <%= tag.span review.user.user_name, class: 'feedback-review__author-name' %>
+                <%= tag.time review.user.decorate.created_at,
+                    datetime: review.user.decorate.created_at,
+                    class: 'feedback-review__author-date' %>
             </div>
+        </header>
+
+        <%= tag.h3 review.title, class: 'feedback-review__title' %>
+        <div class="feedback-review__rating">
+            <div class="feedback-review__stars" aria-hidden="true">
+                <% 1.upto(5) do |i| %>
+                    <%= heroicon 'star', variant: 'solid',
+                        class: "w-5 h-5 #{review_star_color(total_feedback_rating(review), i)}" %>
+                <% end %>
+            </div>
+            <%= tag.p "#{t('feedback.total_rating')} #{t('review.out_of', count: total_feedback_rating(review))}",
+                class: 'feedback-review__rating-label' %>
         </div>
-        <!-- Stars -->
-        <%= tag.h3 review.title, class: "font-semibold text-gray-900 dark:text-white" %>
-        <div class="flex items-center my-1">
-            <% 1.upto(5) do |i| %>
-                <%= heroicon 'star', variant: 'solid',
-                    class: "w-5 h-5 #{review_star_color(total_feedback_rating(review), i)}" %>
-            <% end %>
-            <%= tag.p "#{t('feedback.total_rating')} #{t('review.out_of', count: total_feedback_rating(review))}", class: "ml-2 text-sm font-medium text-gray-500" %>
-        </div>
-        <!-- Created_at -->
-        <footer class="mb-5 text-sm text-gray-500 dark:text-gray-400">
-            <p><time datetime="<%= review.created_at%>"><%= review.decorate.created_at%></time></p>
+
+        <footer class="feedback-review__date">
+            <time datetime="<%= review.created_at %>"><%= review.decorate.created_at %></time>
         </footer>
-        <!-- Content -->
-        <%= tag.p review.content, itemprop: "description", class: "mb-2 text-gray-500 dark:text-gray-400" %>
+        <%= tag.p review.content, itemprop: 'description', class: 'feedback-review__content' %>
     </article>
 <% end %>

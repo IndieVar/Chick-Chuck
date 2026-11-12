@@ -1,7 +1,14 @@
 <% 10.times do |i| %>
-    <%= tag.h3 t("moving_preparation.content_#{i+1}_t"), class: "text-lg my-6 font-bold text-gray-800 lg:text-2xl", id: "content_#{i+1}"%>
-    <%= tag.p t("moving_preparation.content_#{i+1}_c"), class:"text-gray-500"%>
+    <section class="moving-preparation-step" id="content_<%= i + 1 %>">
+        <span class="moving-preparation-step__number"><%= format('%02d', i + 1) %></span>
+        <div class="moving-preparation-step__content">
+            <%= tag.h2 t("moving_preparation.content_#{i + 1}_t"), class: 'moving-preparation-step__title' %>
+            <%= tag.p t("moving_preparation.content_#{i + 1}_c"), class: 'moving-preparation-step__description' %>
+        </div>
+    </section>
 <% end %>
 
-<!-- -->
-<%= tag.p t("moving_preparation.footer"), class:"text-gray-500 mt-6"%>
+<aside class="moving-preparation-finish">
+    <span class="moving-preparation-finish__icon"><%= heroicon 'check-circle', class: 'w-6 h-6' %></span>
+    <p><%= t('moving_preparation.footer') %></p>
+</aside>

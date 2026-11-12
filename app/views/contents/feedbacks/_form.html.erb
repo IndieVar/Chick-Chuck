@@ -1,20 +1,22 @@
 <!-- Feedback form -->
 <%= turbo_frame_tag @feedback do %>
     <%= form_with model: @feedback,
-        class: "flex justify-center pt-6", data: {turbo_frame: '_top'} do |f| 
+        class: "feedback-form flex justify-center pt-6", data: {turbo_frame: '_top'} do |f|
     %>
       <!-- Errors -->
       <% if @feedback.errors.any? %>
-        <% @feedback.errors.each do |error| %>
-          <%= error.full_message %>
-        <% end %>
+        <div class="feedback-form__errors">
+            <% @feedback.errors.each do |error| %>
+                <%= error.full_message %>
+            <% end %>
+        </div>
       <% end %>
-      <div class="flex flex-col w-full h-full dark:bg-gray-900 dark:text-gray-100">
+      <div class="feedback-form__body flex flex-col w-full h-full dark:bg-gray-900 dark:text-gray-100">
       	<div class="flex flex-col items-center w-full">
-            <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
+            <div class="feedback-form__ratings w-full grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
                 <!-- Usability -->
-          		<div class="flex flex-col items-center space-y-2">
-          			<%= tag.span t('feedback.form.usability'), 
+                <div class="feedback-form__question flex flex-col items-center space-y-2">
+                    <%= tag.span t('feedback.form.usability'),
                         class: "text-center text-gray-500" %>
                     <fieldset>
                         <span class="star-cb-group">
@@ -28,8 +30,8 @@
                     </fieldset>
           		</div>
                 <!-- Speed -->
-          		<div class="flex flex-col items-center space-y-2">
-          			<%= tag.span t('feedback.form.speed'), 
+                <div class="feedback-form__question flex flex-col items-center space-y-2">
+                    <%= tag.span t('feedback.form.speed'),
                         class: "text-center text-gray-500" %>
                     <fieldset>
                         <span class="star-cb-group">
@@ -43,8 +45,8 @@
                     </fieldset>
           		</div>
                 <!-- Design -->
-          		<div class="flex flex-col items-center space-y-2">
-          			<%= tag.span t('feedback.form.design'), 
+                <div class="feedback-form__question flex flex-col items-center space-y-2">
+                    <%= tag.span t('feedback.form.design'),
                         class: "text-center text-gray-500" %>
                     <fieldset>
                         <span class="star-cb-group">
@@ -57,8 +59,8 @@
                     </fieldset>
           		</div>
                 <!-- Quality -->
-          		<div class="flex flex-col items-center space-y-2">
-          			<%= tag.span t('feedback.form.quality'), 
+                <div class="feedback-form__question flex flex-col items-center space-y-2">
+                    <%= tag.span t('feedback.form.quality'),
                         class: "text-center text-gray-500" %>
                     <fieldset>
                         <span class="star-cb-group">
@@ -72,8 +74,8 @@
                     </fieldset>
           		</div>
                 <!-- informative -->
-          		<div class="flex flex-col items-center space-y-2">
-          			<%= tag.span t('feedback.form.informative'), 
+                <div class="feedback-form__question flex flex-col items-center space-y-2">
+                    <%= tag.span t('feedback.form.informative'),
                         class: "text-center text-gray-500" %>
 
                     <div class="flex items-center w-44 text-sm font-medium rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -92,8 +94,8 @@
                     </div> 
           		</div>
                 <!-- Problems -->
-          		<div class="flex flex-col items-center space-y-2">
-          			<%= tag.span t('feedback.form.problems'), 
+                <div class="feedback-form__question flex flex-col items-center space-y-2">
+                    <%= tag.span t('feedback.form.problems'),
                         class: "text-center text-gray-500" %>
                     
                     <div class="flex items-center w-44 text-sm font-medium rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -116,13 +118,13 @@
       		<div class="flex flex-col w-full">
                 <!-- Title -->
                 <%= f.text_field :title, placeholder: t('review.form.title_placeholder'), value: @feedback.title || nil,
-                    class: "p-2 rounded-md resize-none w-full h-auto bg-gray-100 dark:text-gray-100 dark:bg-gray-900"%>
+                    class: "feedback-form__text-field p-2 rounded-md resize-none w-full h-auto bg-gray-100 dark:text-gray-100 dark:bg-gray-900"%>
                 <!-- Content -->
                 <%= f.text_area  :content, placeholder: t('review.form.comment_placeholder'), value: @feedback.content || nil,
-                    class: "p-2 mt-3 rounded-md w-full h-[6rem] sm:h-[8rem] bg-gray-100 dark:text-gray-100 dark:bg-gray-900"%>
+                    class: "feedback-form__text-field p-2 mt-3 rounded-md w-full h-[6rem] sm:h-[8rem] bg-gray-100 dark:text-gray-100 dark:bg-gray-900"%>
                 <!-- Submit -->
                 <%= f.submit t('global.send_btn'), 
-                    class: "py-4 mt-6 mb-3 font-semibold rounded-lg text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  dark:text-gray-900 dark:bg-violet-400 cursor-pointer" %>
+                    class: "feedback-form__submit py-4 mt-6 mb-3 font-semibold rounded-lg text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br dark:text-gray-900 dark:bg-violet-400 cursor-pointer" %>
       		</div>
       	</div>
       </div>

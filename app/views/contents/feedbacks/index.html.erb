@@ -1,27 +1,42 @@
 <% currently_at t('review.reviews') %>
 <% provide :page_title, t('review.reviews') %>
 
-<%# turbo_stream_from @statistic%>       
-<!-- Comments section-->
-<div class="px-6 space-y-6 pb-6">
-    <%= tag.h1 t('comment.about_page_title'), 
-        class: "pt-6 text-3xl font-semibold text-gray-900 text-center", id: 'feedback_title'%>
-        
-    <%= render 'contents/feedbacks/shared/rating'%>
-            
+<main class="feedbacks-page">
+    <header class="feedbacks-hero">
+        <span class="feedbacks-hero__eyebrow"><%= t('pages.knowledge_base') %></span>
+        <%= tag.h1 t('comment.about_page_title'), class: 'feedbacks-hero__title', id: 'feedback_title' %>
+        <%= render 'contents/feedbacks/shared/rating' %>
+    </header>
+
+    <section class="feedbacks-page__summary" aria-label="<%= t('feedback.total_rating') %>">
+        <%= render 'contents/feedbacks/shared/global_feedbacks' %>
+    </section>
+
     <% if (client_signed_in? || company_signed_in?) && !@feedback.id.present? %>
-        <%= render 'contents/feedbacks/form'%>
-    <% else%>
-        <%= render 'contents/feedbacks/shared/edit_feedback_button'%>
+        <section class="feedbacks-page__form-panel">
+            <div class="feedbacks-page__form-heading">
+                <%= heroicon 'chat-bubble-bottom-center-text', class: 'w-5 h-5' %>
+                <%= tag.h2 t('feedback.form.title') %>
+            </div>
+            <%= render 'contents/feedbacks/form' %>
+        </section>
+    <% else %>
+        <div class="feedbacks-page__action">
+            <%= render 'contents/feedbacks/shared/edit_feedback_button' %>
+        </div>
     <% end %>
-    
-    <%= render 'contents/feedbacks/shared/global_feedbacks'%>
-    
-    <!-- Title -->
-    <%= tag.h3 "#{t('review.reviews')}: #{@reviews.count}", 
-        class: "my-5 text-2xl font-semibold text-gray-900 text-center col-span-full", id: 'reviews'%>
-    <!-- Reviews list -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="reviews_list">
-        <%= render partial: 'contents/feedbacks/shared/review', collection: @reviews%>
-    </div>
-</div>
+
+    <section class="feedbacks-page__reviews" id="reviews">
+        <div class="feedbacks-page__reviews-heading">
+            <%= tag.h2 t('review.reviews') %>
+            <span><%= @reviews.count %></span>
+        </div>
+        <div class="feedbacks-page__reviews-grid" id="reviews_list">
+            <% if @reviews.any? %>
+                <%= render partial: 'contents/feedbacks/shared/review', collection: @reviews %>
+            <% else %>
+                <p class="feedbacks-page__empty"><%= t('review.no_feedback') %></p>
+            <% end %>
+        </div>
+    </section>
+</main>

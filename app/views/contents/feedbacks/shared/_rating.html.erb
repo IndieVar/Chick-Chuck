@@ -1,31 +1,19 @@
-<!-- Ratings -->
-<div class="w-full items-center flex justify-between px-6 py-3 bg-gray-700">
-    <% if Feedback.count.positive? %>
-        <%= turbo_frame_tag "rating",
-            class: "w-full flex items-center justify-center my-1 space-x-2 relative" do %>
-            <!-- Rating Star -->
-            <%= tag.div class: "flex items-center text-lg font-medium text-gray-200" do %>
-                <button data-popover-target="total-rating" type="button" class="relative flex items-center">
-                    <%= heroicon 'star', variant: 'solid', 
-                        class: "w-6 h-6 mr-1 #{total_star_rating_color(@total_rating)}" %>
-                    <%= tag.span @total_rating %>
-                    <%= heroicon 'user', class: "ml-2 mr-1 w-6 h-6 text-gray-400" %>
-                    <%= tag.span Feedback.count %>
-                </button>
-                <div data-popover id="total-rating" role="tooltip" class="absolute z-10 invisible inline-block w-auto text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0">
-                    <div class="px-3 py-2 space-x-1 rtl:space-x-reverse text-center flex items-center text-gray-500 text-sm break-all">
-                        <%= tag.span t('review.out_of', count: @total_rating) %>
-                        <%= tag.span t('review.total_ratings_count', count: Feedback.count) %>
-                    </div>
-                    <div data-popper-arrow></div>
-                </div>
-            <% end %>
+<section class="feedback-score" aria-label="<%= t('feedback.total_rating') %>">
+    <span class="feedback-score__icon"><%= heroicon 'star', variant: 'solid', class: 'w-6 h-6' %></span>
+    <div class="feedback-score__value">
+        <%= number_with_precision(@total_rating, precision: 1) %>
+    </div>
+    <div class="feedback-score__details">
+        <span class="feedback-score__label"><%= t('feedback.total_rating') %></span>
+        <% if Feedback.count.positive? %>
+            <div class="feedback-score__stars" aria-hidden="true">
+                <% 1.upto(5) do |i| %>
+                    <%= heroicon 'star', variant: 'solid', class: "w-4 h-4 #{review_star_color(@total_rating, i)}" %>
+                <% end %>
+            </div>
+            <span class="feedback-score__count"><%= t('review.total_ratings_count', count: Feedback.count) %></span>
+        <% else %>
+            <span class="feedback-score__count"><%= t('review.no_feedback') %></span>
         <% end %>
-    <% else %>
-        <%= tag.div class: "w-full flex items-center justify-center font-medium text-gray-300" do %>
-            <%= heroicon 'star', variant: 'solid', 
-                class: "w-6 h-6 mr-1 text-gray-400" %>
-            <%= tag.span t('review.no_feedback') %>
-        <% end %>
-    <% end %>
-</div>
+    </div>
+</section>

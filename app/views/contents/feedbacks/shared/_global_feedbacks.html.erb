@@ -1,0 +1,19 @@
+<div class="feedback-dimensions">
+    <% %i[usability speed design quality].each do |attribute| %>
+        <% value = @global_feedback.fetch(attribute).to_f.clamp(0, 5) %>
+        <article class="feedback-dimension">
+            <div class="feedback-dimension__heading">
+                <h2><%= t("activerecord.attributes.feedback.#{attribute}") %></h2>
+                <span><%= number_with_precision(value, precision: 1) %></span>
+            </div>
+            <div class="feedback-dimension__track"
+                 role="progressbar"
+                 aria-label="<%= t("activerecord.attributes.feedback.#{attribute}") %>"
+                 aria-valuemin="0"
+                 aria-valuemax="5"
+                 aria-valuenow="<%= value %>">
+                <span style="width: <%= value / 5 * 100 %>%"></span>
+            </div>
+        </article>
+    <% end %>
+</div>

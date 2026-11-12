@@ -67,6 +67,18 @@ en:
         send_btn:         'Send me password reset instructions'
     sign_up:
         title:            'Sign up'
+        eyebrow:          'Make your next move easier'
+        intro:            'Find movers, save useful listings, and keep your moving plans organized with a Relomio account.'
+        form_title:       'Create your account'
+        form_note:        'Register with Facebook or Google, or use the form below.'
+        credential:       'Account details'
+        personal:         'About you'
+        profile:          'Profile photo'
+        benefits_title:   'Your account lets you'
+        benefit_favorites: 'Save movers and items to your favorites.'
+        benefit_contact:  'Contact movers and discuss the details of your move.'
+        benefit_market:   'Leave reviews and post items for sale.'
+        benefits_note:    'You can add a profile photo and contact details now or return to them later.'
         btn:              'Create account'
     contacts:         'Contacts'
     contacts_desc_html:   "Please inform the carrier that you found it on the site chick-chuck.com and don’t forget to leave your feedback after moving. <br> Your opinion is very important."

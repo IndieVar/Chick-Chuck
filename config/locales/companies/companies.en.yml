@@ -35,8 +35,18 @@ en:
         sign_up:    
             link:             "Become a Carrier"
             title:            "Company registration"
+            eyebrow:          "For moving companies in Israel"
+            intro:            "Create a mover profile so people planning a move can learn about your services and contact you."
+            form_title:       "Tell us about your company"
+            form_note:        "Start with the essentials — you can update your profile later."
+            benefits_title:   "Your profile can help you"
+            benefit_profile:  "Introduce your company and add its logo."
+            benefit_services: "List your service areas, languages, and services."
+            benefit_reviews:  "Show customer reviews and help more clients find you."
+            benefits_note:    "After registering, continue setting up your profile from your account."
             credential:       "Credential information"
             personal:         "Representative information"
+            profile:          "Company profile"
             slogan_length:    "%{length} characters maximum"
         gallery:          
             title:        "Gallery"

@@ -1,16 +1,55 @@
 <% currently_at t('company.sign_up.title') %>
 <% provide :page_title, t('company.sign_up.title') %>
 
-<section class="w-full mt-0 pt-0">
-    <div class="text-center my-6 mx-2">
-        <%= tag.h2 t('company.sign_up.title'), class: "text-3xl font-semibold text-gray-800 capitalize my-6 text-center"%>
+<section class="company-registration" aria-labelledby="company-registration-title">
+    <header class="company-registration__hero">
+        <div class="company-registration__hero-copy">
+            <span class="company-registration__eyebrow"><%= t('company.sign_up.eyebrow') %></span>
+            <%= tag.h1 t('company.sign_up.title'), id: 'company-registration-title', class: 'company-registration__title' %>
+            <%= tag.p t('company.sign_up.intro'), class: 'company-registration__intro' %>
+        </div>
+        <span class="company-registration__hero-icon" aria-hidden="true">
+            <%= heroicon 'building-office-2', class: 'w-10 h-10' %>
+        </span>
+    </header>
+
+    <div class="company-registration__layout">
+        <section class="company-registration__form-card" aria-labelledby="company-registration-form-title">
+            <div class="company-registration__form-heading">
+                <span class="company-registration__form-heading-icon" aria-hidden="true">
+                    <%= heroicon 'clipboard-document-check', class: 'w-5 h-5' %>
+                </span>
+                <div>
+                    <%= tag.h2 t('company.sign_up.form_title'), id: 'company-registration-form-title' %>
+                    <%= tag.p t('company.sign_up.form_note') %>
+                </div>
+            </div>
+            <%= render 'form_new' %>
+        </section>
+
+        <aside class="company-registration__benefits">
+            <span class="company-registration__benefits-icon" aria-hidden="true">
+                <%= heroicon 'sparkles', class: 'w-6 h-6' %>
+            </span>
+            <%= tag.h2 t('company.sign_up.benefits_title'), class: 'company-registration__benefits-title' %>
+            <ul class="company-registration__benefits-list">
+                <li>
+                    <%= heroicon 'check-circle', class: 'w-5 h-5' %>
+                    <span><%= t('company.sign_up.benefit_profile') %></span>
+                </li>
+                <li>
+                    <%= heroicon 'check-circle', class: 'w-5 h-5' %>
+                    <span><%= t('company.sign_up.benefit_services') %></span>
+                </li>
+                <li>
+                    <%= heroicon 'check-circle', class: 'w-5 h-5' %>
+                    <span><%= t('company.sign_up.benefit_reviews') %></span>
+                </li>
+            </ul>
+            <div class="company-registration__benefits-note">
+                <%= heroicon 'information-circle', class: 'w-5 h-5' %>
+                <p><%= t('company.sign_up.benefits_note') %></p>
+            </div>
+        </aside>
     </div>
-  <div class="px-6 h-full w-full text-gray-800">
-    <div class="flex xl:justify-center lg:justify-between justify-center align-top flex-wrap gap-6">
-      <div class="w-full p-6 mx-auto rounded-lg shadow-lg">
-          <!-- Registsration Form -->
-          <%= render 'form_new'%>
-      </div>
-    </div>
-  </div>
 </section>

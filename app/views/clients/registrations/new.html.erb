@@ -1,22 +1,58 @@
 <% currently_at t('sign_up.title') %>
 <% provide :page_title, t('sign_up.title') %>
 
-<section class="w-full mt-0 pt-0">
-    <!-- Title -->
-    <div class="text-center my-6 mx-2">
-        <%= tag.h2 t('sign_up.title'), class: "text-3xl font-semibold text-gray-800 capitalize my-6 text-center"%>
-    </div>
-    <!-- Omniauth -->
-    <div class="grid -mt-6 mx-6 sm:mx-auto sm:justify-center">
-        <%= tag.div (render 'shared/buttons/omniauth_enter') %>
-    </div>
-    <!-- Form -->
-    <div class="px-6 h-full w-full text-gray-800">
-        <div class="flex xl:justify-center lg:justify-between justify-center align-top flex-wrap gap-6">
-          <div class="w-full p-6 mx-auto rounded-lg shadow-lg">
-              <!-- Registsration Form -->
-              <%= render 'clients/registrations/form_new'%>
-          </div>
+<section class="client-registration" aria-labelledby="client-registration-title">
+    <header class="client-registration__hero">
+        <div class="client-registration__hero-copy">
+            <span class="client-registration__eyebrow"><%= t('sign_up.eyebrow') %></span>
+            <%= tag.h1 t('sign_up.title'), id: 'client-registration-title', class: 'client-registration__title' %>
+            <%= tag.p t('sign_up.intro'), class: 'client-registration__intro' %>
         </div>
+        <span class="client-registration__hero-icon" aria-hidden="true">
+            <%= heroicon 'user', class: 'w-10 h-10' %>
+        </span>
+    </header>
+
+    <div class="client-registration__layout">
+        <section class="client-registration__form-card" aria-labelledby="client-registration-form-title">
+            <div class="client-registration__form-heading">
+                <span class="client-registration__form-heading-icon" aria-hidden="true">
+                    <%= heroicon 'user', class: 'w-5 h-5' %>
+                </span>
+                <div>
+                    <%= tag.h2 t('sign_up.form_title'), id: 'client-registration-form-title' %>
+                    <%= tag.p t('sign_up.form_note') %>
+                </div>
+            </div>
+            <div class="client-registration__social">
+                <%= render 'shared/buttons/omniauth_enter' %>
+            </div>
+            <%= render 'clients/registrations/form_new' %>
+        </section>
+
+        <aside class="client-registration__benefits">
+            <span class="client-registration__benefits-icon" aria-hidden="true">
+                <%= heroicon 'sparkles', class: 'w-6 h-6' %>
+            </span>
+            <%= tag.h2 t('sign_up.benefits_title'), class: 'client-registration__benefits-title' %>
+            <ul class="client-registration__benefits-list">
+                <li>
+                    <%= heroicon 'heart', class: 'w-5 h-5' %>
+                    <span><%= t('sign_up.benefit_favorites') %></span>
+                </li>
+                <li>
+                    <%= heroicon 'chat-bubble-bottom-center-text', class: 'w-5 h-5' %>
+                    <span><%= t('sign_up.benefit_contact') %></span>
+                </li>
+                <li>
+                    <%= heroicon 'shopping-bag', class: 'w-5 h-5' %>
+                    <span><%= t('sign_up.benefit_market') %></span>
+                </li>
+            </ul>
+            <div class="client-registration__benefits-note">
+                <%= heroicon 'information-circle', class: 'w-5 h-5' %>
+                <p><%= t('sign_up.benefits_note') %></p>
+            </div>
+        </aside>
     </div>
 </section>

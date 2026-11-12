@@ -34,6 +34,7 @@ he:
             language:
                 title:            "כותרת"
     user_menu:   
+        account_menu:    "תפריט חשבון"
         sign_in:          "להיכנס"
         sign_in_company:  "בוא כשליח"
         sign_up:          "להירשם"

@@ -34,6 +34,7 @@ ru:
             language:
                 title:            'Заголовок'
     user_menu:   
+        account_menu:    'Меню аккаунта'
         sign_in:          'Войти'
         sign_in_company:  'Войти как перевозчик'
         sign_up:          'Зарегистрироваться'

@@ -34,6 +34,7 @@ uk:
             language:
                 title:            'Заголовок'
     user_menu:   
+        account_menu:    'Меню облікового запису'
         sign_in:          'Увійти'
         sign_in_company:  'Приходьте перевізником'
         sign_up:          'Зареєструватися'

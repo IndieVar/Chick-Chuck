@@ -1,48 +1,41 @@
 <%= provide :navbar do %>
-    <header class="site-header bg-white/95 backdrop-blur-md fixed top-0 z-50 w-full shadow-sm">
-        <div class="relative" data-controller="dropdown">
-          <div class="w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center border-b-2 border-gray-100 py-4">
-              <!-- Logotype -->
-              <div class="flex justify-start w-auto flex-auto">
-                  <%= link_to root_path, class: 'flex items-center', data: {turbo_frame: '_top'} do %>
-                      <!-- Relomio logotype mobile -->
-                      <%= image_tag('logo/relomio-mark.svg',
-                        class: "sm:hidden h-10 w-10 object-contain", alt: 'Relomio') %>
-                      <!-- Relomio logotype -->
-                      <%= image_tag('logo/relomio-logo.svg',
-                        class: "hidden sm:block h-10 w-48 object-contain", alt: 'Relomio')%>
-                  <% end %>
-              </div>
-              <!-- Mobile menu button -->
-              <div class="flex justify-center flex-none lg:hidden w-auto">
-                <button 
-                    data-action="dropdown#toggle click@window->dropdown#hide" 
-                    type="button" 
-                    class="rounded-lg p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" 
-                    aria-controls="mobile-menu-panel"
-                    aria-label="<%= t('pages.open_menu') %>"
-                >
-                    <%= heroicon 'bars-3', class: 'h-6 w-6'%>
-                </button>
-              </div>
-              <!-- Navigations -->
-              <nav class="hidden lg:flex items-center gap-5">
-                  <%= render 'shared/navigations/content_links_list', 
-                      link_class: "text-sm font-semibold text-gray-600 hover:text-blue-700 whitespace-nowrap",
-                      current_page: current_page %>
-              </nav>
-              <!-- User menu -->
-              <div class="flex items-center justify-end flex-auto w-auto space-x-5 rtl:space-x-reverse">
-                  <!-- Locales -->
-                  <%= render 'shared/locales'%>
-                  <!-- Menu -->
-                  <%= render 'shared/navigations/user_menu'%>
-              </div>
-            </div>
+  <header class="site-header bg-white/95 backdrop-blur-md fixed top-0 z-50 w-full">
+    <div class="relative" data-controller="dropdown">
+      <div class="site-header__container w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="site-header__row flex items-center">
+          <div class="site-header__brand">
+            <%= link_to root_path, class: 'flex items-center', data: { turbo_frame: '_top' } do %>
+              <%= image_tag('logo/relomio-mark.svg',
+                class: 'site-header__mobile-logo sm:hidden object-contain', alt: 'Relomio') %>
+              <%= image_tag('logo/relomio-logo.svg',
+                class: 'site-header__desktop-logo hidden sm:block object-contain', alt: 'Relomio') %>
+            <% end %>
           </div>
-          <!-- Mobile menu -->
-          <%= render 'shared/navigations/mobile_menu', current_page: current_page %>
+
+          <button
+            data-action="dropdown#toggle click@window->dropdown#hide"
+            type="button"
+            class="site-header__mobile-toggle lg:hidden"
+            aria-controls="mobile-menu-panel"
+            aria-label="<%= t('pages.open_menu') %>"
+          >
+            <%= heroicon 'bars-3', class: 'h-5 w-5' %>
+          </button>
+
+          <nav class="site-header__nav hidden lg:flex items-center">
+            <%= render 'shared/navigations/content_links_list',
+              link_class: 'site-header__nav-link',
+              current_page: current_page %>
+          </nav>
+
+          <div class="site-header__actions">
+            <%= render 'shared/locales' %>
+            <%= render 'shared/navigations/user_menu' %>
+          </div>
         </div>
-    </header>
+      </div>
+
+      <%= render 'shared/navigations/mobile_menu', current_page: current_page %>
+    </div>
+  </header>
 <% end %>

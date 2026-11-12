@@ -33,6 +33,7 @@ en:
             language:
                 title:            'Title'
     user_menu:   
+        account_menu:    'Account menu'
         sign_in:          'Log in'
         sign_in_company:  'Log in as company'
         sign_up:          'Sign up'

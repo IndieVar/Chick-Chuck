@@ -44,6 +44,7 @@ module Contents
       @pagy, @products = pagy(total_products, items: 11, fragment: '#products')
       @products = @products.decorate
       @products_count = total_products.count
+      @seller_products_count = @user.products.published.count
 
       set_meta_tags(
         title: [t('pages.market'), @user.user_name],

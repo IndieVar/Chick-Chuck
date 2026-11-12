@@ -1,41 +1,93 @@
 <% currently_at t('product.user_products', user_name: @user.user_name) %>
 <% provide :page_title, t('product.user_products', user_name: @user.user_name) %>
 
+<% seller_name = @user.user_name %>
+<% seller_is_company = @user.is_a?(Company) %>
+<% seller_type = t(seller_is_company ? 'product.seller.company' : 'product.seller.client') %>
 
-<!-- About seller -->
-<% if @user.class.name == Company.name%>
-    <div class="px-6 py-4 w-full  sm:col-span-2">
-        <%= render 'companies/shared/company_header', company: @user,  page_title: t('pages.market')%>
-    </div>
-<% else %>
-    <%= tag.section class: "mx-5 my-3 flex flex-col items-center" do %>
-        <!-- Avatar -->
-        <%= image_tag(@user.avatar_thumb, class: "object-cover w-20 h-20 mx-2 mb-3 rounded-full border border-white", alt: "avatar")%>
-        <!-- Name -->
-        <%= tag.h1 class: "font-medium text-2xl text-center hover:underline text-gray-800" do %>
-            <%= link_to user_modal_path(@user), data: { turbo_frame: 'modal' }, class: 'flex items-center' do %>
-                <%= @user.user_name %>
-                <%= heroicon 'cursor-arrow-rays', class: "ml-1 w-6 h-6 text-orange-700 hover:text-gray-800" %>
+<%= tag.section class: 'marketplace-page market-seller-page' do %>
+    <header class="marketplace-page__hero market-seller-page__hero">
+        <div class="market-seller-page__identity">
+            <%= image_tag @user.avatar_thumb, class: 'market-seller-page__avatar', alt: seller_name %>
+            <div class="market-seller-page__identity-copy">
+                <div class="market-seller-page__eyebrow-row">
+                    <span class="marketplace-page__eyebrow"><%= t('product.seller.title') %></span>
+                    <span class="market-seller-page__type"><%= seller_type %></span>
+                </div>
+                <%= tag.h1 class: 'marketplace-page__title market-seller-page__title' do %>
+                    <% if seller_is_company %>
+                        <%= seller_name %>
+                    <% else %>
+                        <%= link_to user_modal_path(@user), data: { turbo_frame: 'modal' },
+                            class: 'market-seller-page__profile-link' do %>
+                            <%= seller_name %>
+                            <%= heroicon 'cursor-arrow-rays', class: 'w-5 h-5' %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+
+        <div class="market-seller-page__hero-actions">
+            <div class="market-seller-page__inventory">
+                <span class="market-seller-page__inventory-icon" aria-hidden="true">
+                    <%= heroicon 'shopping-bag', class: 'w-5 h-5' %>
+                </span>
+                <span class="market-seller-page__inventory-count"><%= @seller_products_count %></span>
+                <span class="market-seller-page__inventory-label"><%= t('product.total_products') %></span>
+            </div>
+            <%= link_to products_path, class: 'market-seller-page__back-link' do %>
+                <%= heroicon 'arrow-left', class: 'w-4 h-4 rtl:rotate-180', aria: { hidden: true } %>
+                <%= t('product.all_products') %>
+            <% end %>
+        </div>
+    </header>
+
+    <% if seller_is_company %>
+        <div class="market-seller-page__company-actions">
+            <%= form_with model: Room.new, remote: true,
+                data: { turbo_frame: user_signed_in? ? '_top' : 'modal' },
+                class: 'market-seller-page__company-message' do |f| %>
+                <%= f.hidden_field :recipient_id, value: @user.id %>
+                <%= f.button id: 'message', aria: { label: 'chats' },
+                    class: 'market-seller-page__company-action' do %>
+                    <%= heroicon 'chat-bubble-left-right', class: 'w-5 h-5' %>
+                    <%= tag.span t('write_message') %>
+                <% end %>
+            <% end %>
+            <%= link_to user_contacts_path(@user), data: { turbo_frame: 'modal' },
+                aria: { label: "#{seller_name}_contacts" },
+                class: 'market-seller-page__company-action' do %>
+                <%= heroicon 'phone', class: 'w-5 h-5' %>
+                <%= tag.span t('contacts') %>
+            <% end %>
+            <%= link_to user_path(@user), data: { turbo_frame: 'modal' },
+                aria: { label: "#{seller_name}_about" },
+                class: 'market-seller-page__company-action' do %>
+                <%= heroicon 'identification', class: 'w-5 h-5' %>
+                <%= tag.span t('company.about') %>
+            <% end unless current_page?(user_path(@user)) %>
+        </div>
+    <% end %>
+
+    <section class="market-seller-page__catalog">
+        <header class="market-seller-page__catalog-header">
+            <span class="marketplace-page__eyebrow"><%= t('pages.market') %></span>
+            <%= tag.h2 t('product.user_products', user_name: seller_name) %>
+        </header>
+
+        <%= turbo_frame_tag 'products',
+            class: "marketplace-page__grid grid grid-cols-1 gap-y-6 sm:gap-6 my-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center mx-auto w-full container" do %>
+            <%= render 'filter', path: user_products_path(@user) %>
+            <% if @products.present? %>
+                <%= render partial: 'contents/products/product', collection: @products %>
+            <% else %>
+                <%= tag.div (render 'contents/shared/unavailable', model: t('product.products')),
+                    class: 'marketplace-page__empty' %>
             <% end %>
         <% end %>
-    <% end %>
-<% end %>
-
-<!-- Products section -->
-<%= tag.section class: "grid grid-flow-row auto-rows-max w-full px-2" do %>
-    <!-- Content -->
-    <%= turbo_frame_tag 'products',
-        class: "grid grid-cols-1 gap-6 my-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center mx-auto w-full container" do
-    %>
-        <!-- Filter -->
-        <%= render 'filter', path: user_products_path(@user)%>
-        <!-- Products -->
-        <% if @products.present? %>
-            <%= render partial: 'contents/products/product', collection: @products%>
-        <% else %>
-            <%= tag.div (render 'contents/shared/unavailable', model: t('product.products')), class: 'lg:col-span-2 xl:col-span-3'%>
-        <% end %>
-    <% end %>
-    <!-- Pagy -->
-    <%== pagy_nav(@pagy) if @products_count > 11%>
+        <div class="marketplace-page__pagination">
+            <%== pagy_nav(@pagy) if @products_count > 11 %>
+        </div>
+    </section>
 <% end %>

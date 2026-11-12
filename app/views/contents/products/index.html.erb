@@ -1,23 +1,31 @@
 <% currently_at t('pages.market') %>
 <% provide :page_title, t('pages.market') %>
 
+<section class="marketplace-page">
+    <header class="marketplace-page__hero">
+        <div class="marketplace-page__hero-copy">
+            <span class="marketplace-page__eyebrow"><%= t('product.all_products') %></span>
+            <%= tag.h1 t('pages.market'), class: 'marketplace-page__title' %>
+            <%= tag.p t('home_page.redesign.market_description'), class: 'marketplace-page__description' %>
+        </div>
+        <div class="marketplace-page__hero-art" aria-hidden="true">
+            <%= heroicon 'shopping-bag', class: 'w-16 h-16' %>
+        </div>
+    </header>
 
-<%= tag.section class: "grid grid-flow-row auto-rows-max w-full px-2" do %>
-    <!-- Title -->
-    <%= tag.h1 t('pages.market'), class: 'text-3xl font-semibold text-gray-800  my-6 text-center'%>
-    <!-- Content -->
     <%= turbo_frame_tag 'products',
-        class: "grid grid-cols-1 gap-y-6 sm:gap-6 my-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center mx-auto w-full container" do
+        class: "marketplace-page__grid grid grid-cols-1 gap-y-6 sm:gap-6 my-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center mx-auto w-full container" do
     %>
-        <!-- Filter -->
-        <%= render 'filter', path: products_path%>
-        <!-- Products -->
+        <%= render 'filter', path: products_path %>
         <% if @products.present? %>
-            <%= render partial: 'contents/products/product', collection: @products%>
+            <%= render partial: 'contents/products/product', collection: @products %>
         <% else %>
-            <%= tag.div (render 'contents/shared/unavailable', model: t('product.products')), class: 'lg:col-span-2 xl:col-span-3'%>
+            <%= tag.div (render 'contents/shared/unavailable', model: t('product.products')),
+                class: 'marketplace-page__empty lg:col-span-2 xl:col-span-3' %>
         <% end %>
     <% end %>
-    <!-- Pagy -->
-    <%== pagy_nav(@pagy) if @products_count > 11%>
-<% end %>
+
+    <div class="marketplace-page__pagination">
+        <%== pagy_nav(@pagy) if @products_count > 11 %>
+    </div>
+</section>

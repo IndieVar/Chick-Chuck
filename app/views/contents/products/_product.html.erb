@@ -1,93 +1,111 @@
-<%= turbo_frame_tag product do %>
-    <div class="<%= current_page?(root_path) ? 'w-full homepage-market-product' : (['index', 'main'].eql?([action_name, controller_name]) ? 'w-[22rem] sm:w-[20rem]' : 'w-full') %>
-            flex-shrink-0 bg-white rounded-lg border border-gray-200 shadow-md hover:shadow-xl">
-        <!-- Images -->
-        <%= render 'carrierwave/images/carousel', object: product %>
-        <%= tag.div class: "p-5 grid #{'sm:grid-cols-2' if ['show', 'products'].eql?([action_name, controller_name])}" do %>
+<% is_homepage = current_page?(root_path) %>
+<% is_product_details = ['show', 'products'].eql?([action_name, controller_name]) %>
+<% product_card_classes = ['market-product-card'] %>
+<% product_card_classes << 'market-product-card--home' if is_homepage %>
+<% product_card_classes << 'homepage-market-product' if is_homepage %>
+<% product_card_classes << 'market-product-card--detail' if is_product_details %>
+<% product_card_classes << 'market-product-card--listing' unless is_homepage || is_product_details %>
+
+<%= turbo_frame_tag product, class: 'market-product-frame' do %>
+    <%= tag.div class: product_card_classes.join(' ') do %>
+        <div class="market-product-card__media">
+            <%= render 'carrierwave/images/carousel', object: product %>
+        </div>
+        <%= tag.div class: "market-product-card__content p-5 grid #{'sm:grid-cols-2' if is_product_details}" do %>
             <!-- Header -->
-            <div class="col-span-full flex items-center justify-between mb-3 space-x-3">
+            <div class="market-product-card__header col-span-full flex items-center justify-between mb-3 space-x-3">
                 <!-- Title -->
                 <% if action_name == 'show' %>
-                    <%= tag.h1 product.title, class: "text-2xl font-bold tracking-tight text-gray-600" %>
-                <% elsif current_page?(root_path)%>
-                    <%= tag.p product.title, class: "text-2xl font-bold tracking-tight text-gray-600" %>
+                    <%= tag.h1 product.title, class: "market-product-card__title text-2xl font-bold tracking-tight text-gray-600" %>
+                <% elsif is_homepage %>
+                    <%= tag.p product.title, class: "market-product-card__title text-2xl font-bold tracking-tight text-gray-600" %>
                 <% else %>
-                    <%= tag.h2 product.title, class: "text-2xl font-bold tracking-tight text-gray-600" %>
+                    <%= tag.h2 product.title, class: "market-product-card__title text-2xl font-bold tracking-tight text-gray-600" %>
                 <% end %>
                 <!-- Icons -->
-                <%= tag.div class: "flex justify-center items-center relative -my-1" do %>
+                <%= tag.div class: "market-product-card__actions flex justify-center items-center relative -my-1" do %>
                     <!-- Product by carrier -->
-                    <%= render 'shared/buttons/popover', text: t('product.product_by'), 
-                        icon: 'icons/icons8-in-transit-50.png' if product.user.type == Company.name%>
+                    <%= render 'shared/buttons/popover', text: t('product.product_by'),
+                        icon: 'icons/icons8-in-transit-50.png' if product.user.type == Company.name %>
                     <!-- Favorite form -->
-                    <%= render 'users/favorites/form', object: product%>
+                    <%= render 'users/favorites/form', object: product %>
                 <% end %>
             </div>
-            <!-- Body -->
-            <% if ['show', 'products'].eql?([action_name, controller_name]) %>
+
+            <% if is_product_details %>
                 <div>
                     <!-- Category -->
-                    <%= tag.h2 "#{Product.human_attribute_name('category')}: #{product.category_name}", 
-                        class: "mb-3 font-normal text-gray-500"%>
+                    <%= tag.h2 "#{Product.human_attribute_name('category')}: #{product.category_name}",
+                        class: "market-product-card__detail mb-3 font-normal text-gray-500" %>
                     <!-- Type -->
                     <%= tag.h3 "#{Product.human_attribute_name('things')}: #{product.thing_name}",
-                        class: "mb-3 font-normal text-gray-500"%>
+                        class: "market-product-card__detail mb-3 font-normal text-gray-500" %>
                 </div>
                 <div>
                     <!-- Condition -->
-                    <%= tag.p "#{Product.human_attribute_name('condition')}: #{product.condition_name}", 
-                        class: "mb-3 font-normal text-gray-500"%>
+                    <%= tag.p "#{Product.human_attribute_name('condition')}: #{product.condition_name}",
+                        class: "market-product-card__detail mb-3 font-normal text-gray-500" %>
                     <!-- Delivery -->
-                    <%= tag.p class: "mb-3 font-normal text-gray-500 flex items-center" do %>
+                    <%= tag.p class: "market-product-card__detail mb-3 font-normal text-gray-500 flex items-center" do %>
                         <%= Product.human_attribute_name('delivery') + ': ' %>
                         <%= product.delivery_name %>
                     <% end %>
                 </div>
                 <!-- Description -->
-                <%= tag.p "#{Product.human_attribute_name('description')}: #{product.description}", 
-                    class: "mb-3 font-normal text-gray-500 col-span-full" if product.description.present?%>
+                <%= tag.p "#{Product.human_attribute_name('description')}: #{product.description}",
+                    class: "market-product-card__description mb-3 font-normal text-gray-500 col-span-full" if product.description.present? %>
+            <% else %>
+                <div class="market-product-card__tags col-span-full">
+                    <span><%= product.category_name %></span>
+                    <span><%= product.condition_name %></span>
+                </div>
             <% end %>
-            <div class="col-span-full text-center mt-3">
-                <!-- City -->
+
+            <!-- City -->
+            <%= tag.div class: "market-product-card__location col-span-full" do %>
+                <%= heroicon 'map-pin', class: 'w-4 h-4', alt: 'location' %>
                 <%= tag.h4 "#{product.district_name}, #{product.city_name}",
-                    class: "text-sm text-gray-500" if product.city.present?%>
-            </div>
+                    class: "text-sm text-gray-500" %>
+            <% end if product.city.present? %>
+
             <!-- Card Footer -->
-            <div class="flex items-center justify-between mt-4 col-span-full">
-                <!-- Created at -->
-                <%= tag.p product.created_at, class: "text-sm text-gray-500"%>
-                <!-- Price -->
-                <%= tag.label class: "mb-2 text-xl text-end font-medium text-gray-600 flex items-center" do %>
-                    <%= render 'shared/buttons/popover', text: t('product.delivery.price_popover'), icon: 'icons/icons8-info-50.png' %>
-                    <%= "#{Product.human_attribute_name('price')}: #{product.price} ₪" %>
-                <% end if ['show', 'products'].eql?([action_name, controller_name]) %>
-                <!-- View more button -->
-                <%= render 'shared/buttons/view_more', path: product_path(product), link_title: product.title unless ['show', 'products'].eql?([action_name, controller_name]) %>
+            <div class="market-product-card__footer col-span-full">
+                <%= tag.p product.created_at, class: "market-product-card__date text-sm text-gray-500" %>
+                <%= tag.div class: 'market-product-card__price' do %>
+                    <%= tag.span Product.human_attribute_name('price'), class: 'market-product-card__price-label' %>
+                    <%= tag.strong class: 'market-product-card__price-value' do %>
+                        <bdi dir="ltr"><%= number_with_delimiter(product.price) %> ₪</bdi>
+                    <% end %>
+                    <%= render 'shared/buttons/popover', text: t('product.delivery.price_popover'),
+                        icon: 'icons/icons8-info-50.png' if is_product_details %>
+                <% end %>
+                <%= render 'shared/buttons/view_more', path: product_path(product), link_title: product.title unless is_product_details %>
             </div>
+
             <!-- Views -->
-            <%= tag.div class: "col-span-full flex justify-center items-center relative mt-3 text-gray-500 text-sm" do %>
+            <%= tag.div class: "market-product-card__views col-span-full flex justify-center items-center relative mt-3 text-gray-500 text-sm" do %>
                 <%= render 'shared/buttons/views', object: product, popover_target: product.title %>
             <% end %>
         <% end %>
-        
+
         <!-- Control buttons -->
         <% if current_user == product.user %>
             <hr>
             <!-- Mark as sold -->
             <div class="flex justify-center w-full py-3">
-                <% if product.sold == true%>
+                <% if product.sold == true %>
                     <%= link_to users_product_mark_as_sold_path(product), class: "flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800", data: { turbo_method: :post, turbo_confirm: t('global.are_you_sure') } do %>
                         <%= Product.human_attribute_name('sold') %>
-                        <%= image_tag('icons/icons8-done-40.png', class: 'ml-2 w-5 h-5', alt: "icons-8-done-40")%>
-                    <% end%>
-                <% else%>
+                        <%= image_tag('icons/icons8-done-40.png', class: 'ml-2 w-5 h-5', alt: "icons-8-done-40") %>
+                    <% end %>
+                <% else %>
                     <%= link_to users_product_mark_as_sold_path(product), class: "flex items-center py-2 px-3 text-sm font-medium text-center text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200", data: { turbo_method: :post, turbo_confirm: t('global.are_you_sure') } do %>
                         <%= t('product.mark_as_sold') %>
                     <% end %>
                 <% end %>
             </div>
-            <%= render 'shared/buttons/control_buttons', model: product, 
-                edit_path: [:edit, :users, product], publish_path: [:users, product, :publish], del_path: [:users, product]%>
+            <%= render 'shared/buttons/control_buttons', model: product,
+                edit_path: [:edit, :users, product], publish_path: [:users, product, :publish], del_path: [:users, product] %>
         <% end %>
-    </div>
+    <% end %>
 <% end %>

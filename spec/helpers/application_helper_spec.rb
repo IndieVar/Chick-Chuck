@@ -16,4 +16,13 @@ RSpec.describe ApplicationHelper do
       expect(helper.html_language_attributes).to eq('lang="ru" dir="ltr"')
     end
   end
+
+  describe '#sort_alphabetically' do
+    it 'sorts records case-insensitively by their displayed title' do
+      zulu = Struct.new(:title).new('Zulu')
+      alpha = Struct.new(:title).new('alpha')
+
+      expect(helper.sort_alphabetically([zulu, alpha])).to eq([alpha, zulu])
+    end
+  end
 end

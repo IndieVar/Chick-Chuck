@@ -6,7 +6,7 @@
             <%= heroicon 'list-bullet', class: 'w-6 h-6 rtl:ml-1.5 ltr:mr-1.5', alt: "category"%>
             <%= render 'shared/searchable_select',
                 aria_label: Product.human_attribute_name('category'),
-                select: f.collection_select(:category_id, @categories, :id, :title,
+                select: f.collection_select(:category_id, sort_alphabetically(@categories), :id, :title,
                     { include_blank: Product.human_attribute_name('category'), selected: params[:category_id]},
                     { onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 rtl:bg-left", data: { dependent_select_target: "category", action: "change->dependent-select#filterThings" } }) %>
         </div>
@@ -16,7 +16,7 @@
             <%= render 'shared/searchable_select',
                 aria_label: Product.human_attribute_name('thing'),
                 select: f.select(:thing_id,
-                    options_for_select(Thing.all.decorate.map { |thing| [thing.title, thing.id, { data: { category_id: thing.category_id } }] }, params[:thing_id]),
+                    options_for_select(sort_alphabetically(Thing.all.decorate).map { |thing| [thing.title, thing.id, { data: { category_id: thing.category_id } }] }, params[:thing_id]),
                     { include_blank: Product.human_attribute_name('thing') },
                     { class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 rtl:bg-left", data: { dependent_select_target: "thing", action: "change->dependent-select#selectThing" } }) %>
         </div>
@@ -35,7 +35,7 @@
             <%= render 'shared/searchable_select',
                 aria_label: Product.human_attribute_name('city'),
                 select: f.select(:city_id,
-                    options_for_select(City.all.decorate.map { |city| [city.title, city.id, { data: { district_id: city.district_id } }] }, params[:city_id]),
+                    options_for_select(sort_alphabetically(City.all.decorate).map { |city| [city.title, city.id, { data: { district_id: city.district_id } }] }, params[:city_id]),
                     { include_blank: Product.human_attribute_name('city') },
                     { class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 rtl:bg-left", data: { dependent_select_target: "city", action: "change->dependent-select#selectCity" } }) %>
         </div>

@@ -23,6 +23,10 @@ module ApplicationHelper
     tag.attributes(lang: language, dir: language == 'he' ? 'rtl' : 'ltr')
   end
 
+  def sort_alphabetically(records)
+    records.sort_by { |record| record.title.to_s.downcase }
+  end
+
   def phone_country_options
     Phonelib.phone_data.sort_by { |country, _| [country == Phonelib.default_country ? 0 : 1, country] }
             .map { |country, data| ["#{country} (+#{data[:country_code]})", country] }

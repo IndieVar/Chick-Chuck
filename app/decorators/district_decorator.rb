@@ -11,4 +11,8 @@ class DistrictDecorator < ApplicationDecorator
     when :he then district.he
     end
   end
+
+  def cities
+    district.cities.decorate.sort_by { |city| city.title.to_s.downcase }
+  end
 end

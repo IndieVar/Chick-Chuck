@@ -1,14 +1,16 @@
 <%= provide :footer do %>
     <footer class="redesign-footer">
-        <%= link_to '#top', class: 'redesign-footer__top', data: { controller: 'scroll-to', 'scroll-to-offset-value' => '150' } do %>
-            <%= image_tag 'icons/icons8-up-2-50.png', class: 'w-8 h-8', alt: t('global.back_to_top') %>
+        <%= link_to '#top', class: 'redesign-footer__top',
+            aria: { label: t('global.back_to_top') },
+            data: { controller: 'scroll-to', 'scroll-to-offset-value' => '150' } do %>
+            <%= heroicon 'arrow-up', class: 'redesign-footer__top-icon' %>
         <% end unless controller_name == 'errors' %>
 
         <div class="redesign-footer__inner">
             <div class="redesign-footer__grid">
                 <div class="redesign-footer__about">
                     <%= link_to root_path, class: 'redesign-footer__brand' do %>
-                        <%= image_tag 'logo/relomio-logo.svg', alt: 'Relomio', class: 'h-10 w-auto' %>
+                        <%= image_tag 'logo/relomio-logo.svg', alt: 'Relomio', class: 'redesign-footer__logo' %>
                     <% end %>
                     <%= tag.p t('home_page.redesign.footer_description') %>
                 </div>

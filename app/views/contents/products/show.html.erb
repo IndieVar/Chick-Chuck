@@ -1,16 +1,46 @@
 <% currently_at @product.title %>
 <% provide :page_title, @product.title %>
+<% company_seller = @product.user.class.name == Company.name %>
 
-<!-- Show truck-->
-<div class="grid grid-cols-1 md:grid-cols-6 gap-6 w-full my-6 px-2 lg:px-6 mx-auto justify-center">
-    <!-- Truck card -->
-    <%= tag.section (render @product), class: "col-span-1 md:col-span-3"%>
-    <!-- About Seller -->
-    <%= tag.section class: "px-2 sm:px-10 relative w-full h-auto block bg-white rounded-lg shadow-md col-span-1 md:col-span-3 hover:shadow-xl py-3" do %>
-        <% if @product.user.class.name == Company.name %>
-            <%= render 'companies/shared/company_card', company_card: @user %>
-        <% else %>
-            <%= render 'clients/shared/about_client', client: @user%>
+<section class="market-product-page">
+    <nav class="market-product-page__breadcrumbs" aria-label="<%= t('pages.market') %>">
+        <%= link_to products_path, data: { turbo_frame: '_top' } do %>
+            <%= heroicon I18n.locale == :he ? 'arrow-right' : 'arrow-left', class: 'w-4 h-4' %>
+            <%= t('pages.market') %>
         <% end %>
-    <% end %>
-</div>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page"><%= @product.title %></span>
+    </nav>
+
+    <div class="market-product-page__layout">
+        <section class="market-product-page__listing">
+            <%= render @product %>
+        </section>
+
+        <aside class="market-product-page__seller <%= company_seller ? 'market-product-page__seller--company' : 'market-product-page__seller--client' %>">
+            <div class="market-product-page__seller-heading">
+                <%= heroicon 'user-circle', class: 'w-5 h-5' %>
+                <span><%= t('product.seller.title') %></span>
+                <span class="market-product-page__seller-type">
+                    <%= t(company_seller ? 'product.seller.company' : 'product.seller.client') %>
+                </span>
+            </div>
+            <div class="market-product-page__seller-content">
+                <% if company_seller %>
+                    <%= render 'companies/shared/company_card', company_card: @user %>
+                    <div class="market-product-page__seller-actions">
+                        <%= render 'feedbacks/rooms/form', recipient: @user %>
+                        <%= link_to user_contacts_path(@user), data: { turbo_frame: 'modal' },
+                            class: 'market-product-page__seller-contact' do %>
+                            <%= heroicon 'phone', class: 'w-5 h-5' %>
+                            <%= t('contacts') %>
+                        <% end %>
+                    </div>
+                <% else %>
+                    <%= render 'clients/shared/about_client', client: @user,
+                        contacts_label: t('contacts'), contacts_icon: true %>
+                <% end %>
+            </div>
+        </aside>
+    </div>
+</section>

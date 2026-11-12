@@ -29,7 +29,8 @@
     <% end %>
     
     <!-- Contacts -->
-    <%= render 'users/users/contacts_section', user: client%>
+    <%= render 'users/users/contacts_section', user: client,
+        button_text: local_assigns[:contacts_label], button_icon: local_assigns[:contacts_icon] %>
     <!-- Created_at -->
     <!-- <div class="flex justify-center text-center">
         <%= tag.span client.decorate.created_at, class: 'text-sm text-gray-500'%>

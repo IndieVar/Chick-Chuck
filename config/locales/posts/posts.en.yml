@@ -1,14 +1,14 @@
 en:
     activerecord:
         models:
-            news:         'New'
+            news:         'News'
         attributes:
             news:
                 title:            'Title'
                 description:      'Description'
                 content:          'Content'
-                images:           'images'
+                images:           'Images'
     news:
         all_news:         'News'
         add_btn:          'Add news'
-        edit_btn:         'Edit new'
+        edit_btn:         'Edit news item'

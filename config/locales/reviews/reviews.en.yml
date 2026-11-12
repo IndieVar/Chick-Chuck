@@ -8,13 +8,13 @@ en:
                 price:    'Price'
     review:
         reviews:                     "Reviews"
-        add:                         "Leave feedback"
-        edit:                        "Edit feedback"
-        total_ratings_count:         "Global ratings: %{count}"
-        total_ratings_count_html:    "Global ratings: <span itemprop='ratingCount'>%{count}</span>"
+        add:                         "Leave a review"
+        edit:                        "Edit review"
+        total_ratings_count:         "Overall ratings: %{count}"
+        total_ratings_count_html:    "Overall ratings: <span itemprop='ratingCount'>%{count}</span>"
         out_of:                      "%{count} out of 5"
         out_of_html:                 "<span itemprop='ratingValue'>%{count}</span> out of <span itemprop='bestRating'>5</span>"
-        no_feedback:                 "No feedback"
+        no_feedback:                 "No reviews"
         form:
             title:                  "Your opinion matters"
             rating_desc:            "How would you rate the services of the carrier?"

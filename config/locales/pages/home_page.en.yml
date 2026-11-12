@@ -1,29 +1,29 @@
 # Home page
 en:
     home_page: 
-        h1:           "Carriers and used items market throughout Israel"
+        h1:           "Carriers and a used-goods marketplace across Israel"
         # h1:           'Easy way to find the right carrier'
-        h2_html:      "Our site offers convenient search of carriers and used goods throughout Israel. You can find reliable and experienced carriers who will help you deliver the cargo or move things anywhere in the country. In addition, our store allows you to place an announcement about the sale of goods. This is a great opportunity to find the things you need at a bargain price or earn on unnecessary items. We strive to provide a convenient and reliable service for all Israelis."
-        calculate:    'Calculate the cost of moving'
+        h2_html:      "Our site makes it easy to find carriers and used goods throughout Israel. You can find reliable, experienced carriers who can deliver cargo or move your belongings anywhere in the country. In addition, our marketplace lets you post ads to sell items. This is a great way to find what you need at a great price or earn money by selling things you no longer need. We strive to provide a convenient and reliable service for everyone in Israel."
+        calculate:    'Estimate the cost of your move'
         top_features:
             title:        'What do we offer?'
-            combining:    'Combining multiple carriers in one place'
+            combining:    'Many carriers in one place'
             reviews:      'Real reviews and comments'
-            market:       'Used items listings'
+            market:       'Listings for used items'
             calculator:   'Moving cost calculator'
-            use:          'Simplicity and ease of use'
+            use:          'Simple and convenient to use'
             improvement:  'Continuous development and improvement'
         top_trucks:   'Top trucks'
         main_features:
-            title_html:       'Explore our <br> awesome features'
-            combining_desc:   'No more need to search all over the internet or ask friends. Many carriers in one place, just choose the right one for you!'
-            reviews_desc:     'Leave your real review of carrier services to help other people choose the right and professional carrier.'
-            calculator_desc:  'Calculate the approximate cost of transportation to estimate your upcoming costs and choose the suitable carrier for you.'
-            market_desc:      'You can buy used items directly from the carrier and do not bother delivering them.'
-        latest_trucks: 'Latest trucks'
-        market:        'Market'
+            title_html:       'Discover our <br> great features'
+            combining_desc:   "No need to search all over the internet or ask friends. Find many carriers in one place—just choose the one that's right for you!"
+            reviews_desc:     "Leave an honest review of a carrier's services to help others choose a reliable professional."
+            calculator_desc:  'Estimate your moving costs and choose the right carrier for you.'
+            market_desc:      "Buy used items directly from a carrier and don't worry about arranging delivery."
+        latest_trucks: 'All trucks'
+        market:        'Marketplace'
         newslatter:
             title:     'Want to follow our updates?'
-            desc:      'Subscribe to our news to keep up to date on our development and receive only current information!'
+            desc:      'Subscribe to our newsletter to follow our progress and get the latest news!'
             subscribe: 'Subscribe'
     

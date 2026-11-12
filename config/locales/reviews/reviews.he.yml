@@ -1,23 +1,23 @@
 he:
     activerecord:
         models:
-            review:       "תגובה"
+            review:       "חוות דעת"
         attributes:
             review:
                 rating:   "דירוג"
                 price:    "מחיר"
     review:
-        reviews:                     "תגובות"
-        add:                         "להשאיר תגובה"
-        edit:                        "שנה ביקורת"
-        total_ratings_count:         "דירוג כולל: %{count}"
-        total_ratings_count_html:    "דירוג כולל: <span itemprop='ratingCount'>%{count}</span>"
-        out_of:                      "מתוך 5 {count}"
-        out_of_html:                 "<span itemprop='bestRating'>5</span> מתוך <span itemprop='ratingValue'>%{count}</span>"
-        no_feedback:                 "אין משוב"
+        reviews:                     "חוות דעת"
+        add:                         "השארת חוות דעת"
+        edit:                        "עריכת חוות דעת"
+        total_ratings_count:         "מספר הדירוגים הכולל: %{count}"
+        total_ratings_count_html:    "מספר הדירוגים הכולל: <span itemprop='ratingCount'>%{count}</span>"
+        out_of:                      "%{count} מתוך 5"
+        out_of_html:                 "<span itemprop='ratingValue'>%{count}</span> מתוך <span itemprop='bestRating'>5</span>"
+        no_feedback:                 "אין חוות דעת"
         form:
-            title:                  "דעתך חשובה מאוד"
-            rating_desc:            "איך היית מדרג את שירותיו של המוביל?"
-            price_desc:             "איך אתה מעריך את העלות של שירותי המוביל?"
+            title:                  "חוות דעתכם חשובה לנו"
+            rating_desc:            "איך הייתם מדרגים את שירותי המוביל?"
+            price_desc:             "איך אתם מעריכים את עלות שירותי המוביל?"
             title_placeholder:      "כותרת"
-            comment_placeholder:    "התגובה שלך"
+            comment_placeholder:    "התגובה שלכם"

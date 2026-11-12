@@ -25,7 +25,7 @@ ru:
         edit_btn:         'Изменить товар'
         my_products:      'Мои товары'
         title:            'Название'
-        mark_as_sold:     'Отметить как продано'
+        mark_as_sold:     'Отметить как проданный'
         product_by:       'Товар от перевозчика'
         products:         'товары'
         user_products:    'Товары %{user_name}'

@@ -5,6 +5,6 @@ he:
             
         errors:
               messages:
-                  in:         "%{value} אינו חוקי, הזן ערך בטווח %{count}"
+                  in:         "הערך %{value} אינו תקין. יש להזין ערך בטווח %{count}."
         attributes:
             

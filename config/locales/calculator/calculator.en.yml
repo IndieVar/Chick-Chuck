@@ -5,18 +5,18 @@ en:
         attributes:
             calculator:
                 distance:             'Distance'
-                floor_down:           'Floor down'
-                floor_down_elevator:  'Floor down(elevator)'
-                floor_up:             'Floor up'
-                floor_up_elevator:    'Floor down(elevator)'
+                floor_down:           'Floors down'
+                floor_down_elevator:  'Floors down (with elevator)'
+                floor_up:             'Floors up'
+                floor_up_elevator:    'Floors up (with elevator)'
     calculator:
-        title:            'Cost сalculator'
+        title:            'Moving cost calculator'
         btn:              'Calculate'
-        km_span:          '₪ per 1 km'
-        floor_span:       '% per 1 floor'
+        km_span:          '₪ per km'
+        floor_span:       '% per floor'
         options:          'Options'
         price:            'Price per unit'
         elevator:         'elevator'
-        note_html:        "Note: This calculator allows you to calculate a preliminary moving cost, which is approximate. <br> The exact cost is agreed with the carrier."
-        company_calculator_html: "Note: Specify the cost of your services so that the customer can calculate the approximate cost of moving. <br> The exact cost is agreed with the carrier."
+        note_html:        "Note: This calculator provides an approximate estimate of your moving costs. <br>Agree on the final price directly with the carrier."
+        company_calculator_html: "Note: Enter the prices for your services so customers can estimate their moving costs. <br>Agree on the final price directly with the carrier."
     

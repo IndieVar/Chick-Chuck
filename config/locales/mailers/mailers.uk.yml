@@ -1,5 +1,5 @@
 uk:
     mailer:
-        greeting:   "Здрастуйте, %{recipient}!"
+        greeting:   "Вітаємо, %{recipient}!"
         notification:
-            message:    "%{user} надіслав вам нове повідомлення"
+            message:    "Нове повідомлення від %{user}"

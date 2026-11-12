@@ -2,4 +2,4 @@ he:
     mailer:
         greeting:   "שלום, %{recipient}!"
         notification:
-            message:    "%{user} שלח לך הודעה חדשה"
+            message:    "%{user} שלח/ה לך הודעה חדשה"

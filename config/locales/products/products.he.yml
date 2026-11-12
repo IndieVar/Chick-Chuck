@@ -9,7 +9,7 @@ he:
             product:
                 category:         "קטגוריה"
                 things:           "סוג"
-                thing:            "סוג"
+                thing:            "פריט"
                 title:            "כותרת"
                 description:      "תיאור"
                 price:            "מחיר"
@@ -20,36 +20,36 @@ he:
                 district:         "אזור"
                 city:             "עיר"
     product:
-        to_advertise:     "לפרסם מודעה"
-        add_btn:          "הוסף מוצר"
-        edit_btn:         "שנה פריט"
-        my_products:      "הסחורה שלי"
-        title:            "שם"
-        mark_as_sold:     "מארק נמכר"
-        product_by:       "מוצרים של המוביל"
+        to_advertise:     "פרסום מודעה"
+        add_btn:          "הוספת מוצר"
+        edit_btn:         "עריכת מוצר"
+        my_products:      "המוצרים שלי"
+        title:            "שם המוצר"
+        mark_as_sold:     "סימון כנמכר"
+        product_by:       "מוצר מהמוביל"
         products:         "מוצרים"
         user_products:    "מוצרים %{user_name}"
         all_products:     "כל המוצרים"
         total_products:   "סך הכל"
         condition:
-            any:              "בכל"
-            second_hand:      "שימוש לשעבר"
+            any:              "כל המצבים"
+            second_hand:      "יד שנייה"
             new:              "חדש"
         delivery: 
             pickup:           "איסוף עצמי"
             price_popover:    "מחיר לא כולל משלוח"
         seller:          
-            title:            "מוכר"
+            title:            "המוכר"
             client:           "אדם פרטי"
             company:          "המוביל"
         price:
-            min:              "של"
-            max:              "ועד"
+            min:              "מ־"
+            max:              "עד"
     category:
-        add_btn:          "הוסף קטגוריה"
-        edit_btn:         "שנה קטגוריה"
+        add_btn:          "הוספת קטגוריה"
+        edit_btn:         "עריכת קטגוריה"
     thing:
-        add_btn:          "תוסיף משהו"
+        add_btn:          "הוספת פריט"
     price:
         title:            "שם"
     

@@ -1,15 +1,15 @@
 uk:
     activerecord:
         models:
-            comment:      'Коментування'
+            comment:      'Коментар'
     comment:
         comments:         'Коментарі'
         reply:            'Відповісти'
         edit:             'Змінити'
         delete:           'Видалити'
-        delete_as_admin:  'Удалить как админ'
+        delete_as_admin:  'Видалити як адміністратор'
         placeholder:      'Ваш коментар...'
         updated:          'Змінено'
-        need_to_signin:   'Для того щоб залишити коментар, необхідно '
-        about_page_title: "Залиште свої відгуки для кращого обслуговування"
+        need_to_signin:   'Щоб залишити коментар, потрібно '
+        about_page_title: "Залиште відгук, щоб допомогти нам покращити сервіс"
     

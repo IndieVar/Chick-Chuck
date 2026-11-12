@@ -7,17 +7,17 @@ uk:
                 rating:   'Рейтинг'
                 price:    'Ціна'
     review:
-        reviews:                     "Огляд"
+        reviews:                     "Відгуки"
         add:                         "Залишити відгук"
         edit:                        "Змінити відгук"
-        total_ratings_count:         "Загальний рейтинг: %{count}"
-        total_ratings_count_html:    "Загальний рейтинг: <span itemprop='ratingCount'>%{count}</span>"
+        total_ratings_count:         "Усього оцінок: %{count}"
+        total_ratings_count_html:    "Усього оцінок: <span itemprop='ratingCount'>%{count}</span>"
         out_of:                      "%{count} з 5"
         out_of_html:                 "<span itemprop='ratingValue'>%{count}</span> з <span itemprop='bestRating'>5</span>"
-        no_feedback:                 "Немає відгуків"
+        no_feedback:                 "Відгуків немає"
         form:
             title:                  "Ваша думка дуже важлива"
             rating_desc:            "Як би ви оцінили послуги перевізника?"
             price_desc:             "Як ви оцінюєте вартість послуг перевізника?"
-            title_placeholder:      "Назва"
+            title_placeholder:      "Заголовок"
             comment_placeholder:    "Ваш коментар"

@@ -1,7 +1,7 @@
 he:
     activerecord:
         models:
-            news:         "חדש"
+            news:         "ידיעה"
         attributes:
             news:
                 title:            "כותרת"
@@ -10,5 +10,5 @@ he:
                 images:           "תמונות"
     news:
         all_news:             "חדשות"
-        add_btn:              "הוסף חדשות"
-        edit_btn:             "ערוך חדשות"
+        add_btn:              "הוספת ידיעה"
+        edit_btn:             "עריכת ידיעה"

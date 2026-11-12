@@ -1,38 +1,38 @@
 en:
     meta:
         home_page:
-            title:  "Moving | Market | Israel"
-            desc:   "Our site offers convenient search of carriers and used goods throughout Israel. You can find reliable and experienced carriers who will help you deliver the cargo or move things anywhere in the country. And also find the things you need at a bargain price or earn on unnecessary items."
+            title:  "Moving Services | Marketplace | Israel"
+            desc:   "Our site makes it easy to find carriers and used goods throughout Israel. Find reliable, experienced carriers who can deliver cargo or move your belongings anywhere in the country. You can also find what you need at a great price or earn money by selling items you no longer need."
         moving_preparation:
             title:  "How to prepare for the move | Israel"
-            desc:   "Moving into a new home means starting a new life. We tell you how to prepare for independent moving and do not miss anything."
+            desc:   "Moving into a new home means starting a new life. Here's how to prepare for a move on your own and make sure you don't miss a thing."
         carriers:
-            title:  "Israel Carrier Search"
-            desc:   "Choose a suitable carrier for you based on the region and real reviews about the company."
+            title:  "Find a Carrier in Israel"
+            desc:   "Choose the right carrier based on your region and genuine reviews of the company."
         calculator:
-            title:  "Calculate the cost of moving | Israel"  
-            desc:   "Price calculator allows the client to know the preliminary cost of moving among the companies registered in our service."
+            title:  "Estimate Moving Costs | Israel"
+            desc:   "Our moving cost calculator lets you estimate prices from companies registered with our service."
         market:
-            title:  "Buy/sell used things | Israel"
-            desc:   "Any registered user can submit an advertisement for the sale of second-hand items, indicating the region of the location and the category of the item."
+            title:  "Buy and Sell Used Items | Israel"
+            desc:   "Any registered user can post an ad to sell used items, specifying the item's region and category."
         about:
             title:  "More about the service"
-            desc:   "I am talking about the idea of creating a service and its features. Leave your feedback or suggestion to improve the service."
+            desc:   "I explain the idea behind the service and its features. Leave a review or suggest ways to improve the service."
         feedbacks:
-            title:  "Feedbacks"
-            desc:   "Here you can leave your review or offer to improve the service. Together we will make this service better!"
+            title:  "Feedback"
+            desc:   "Leave a review or suggest ways to improve the service. Together, we can make it better!"
         company:
             sign_up:
-                title:  "Become a carrier | Company Registration"
-                desc:   "Register your company to receive free advertising and attract even more customers for your business!"
+                title:  "Become a Carrier | Company Registration"
+                desc:   "Register your company for free advertising and attract even more customers!"
             sign_in:
-                title:  "Log in as company"
-                desc:   "Entrance to the carrier’s private office."
+                title:  "Log in as a Carrier"
+                desc:   "Sign in to your carrier account."
         client:
             sign_up:
                 title:  "User registration"
-                desc:   "Create an account to evaluate carriers and advertise for the sale of your belongings."
+                desc:   "Create an account to rate carriers and post listings to sell your belongings."
             sign_in:
-                title:  "Lig in"
-                desc:   "Entrance to your private office."
+                title:  "Log In"
+                desc:   "Sign in to your account."
                 

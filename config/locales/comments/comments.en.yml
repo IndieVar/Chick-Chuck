@@ -8,8 +8,8 @@ en:
         edit:             'Edit'
         delete:           'Delete'
         delete_as_admin:  'Delete as admin'
-        placeholder:      'Your message...'
+        placeholder:      'Your comment...'
         updated:          'Edited'
-        need_to_signin:   'To add a comment you need to '
-        about_page_title: "Leave your feedback"
+        need_to_signin:   'To leave a comment, you need to '
+        about_page_title: "Leave a review to help us improve the service"
         

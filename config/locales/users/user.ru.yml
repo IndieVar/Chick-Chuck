@@ -23,7 +23,7 @@ ru:
                 female:           'Женский'
                 birthday:         'День рождения'
                 avatar:           'аватар'
-                password_popover: "%{length} значений минимум."
+                password_popover: "Минимум %{length} символов."
                 current_popover:  'Нам нужен ваш текущий пароль, чтобы подтвердить внесенные изменения.'
                 delete_account:   'Удалить аккаунт'
                 created_at:       'Дата регистрации'
@@ -50,7 +50,7 @@ ru:
         title:            'Вход'
         title_as_company: 'Вход для компании'
         as_company:       'Чтобы войти как компания'
-        click_here:       'Нажми здесь'
+        click_here:       'Нажмите здесь'
         login_place:      'Введите email или номер телефона'
         password_place:   'Введите пароль'
         remember_me:      'Запомнить меня'
@@ -69,17 +69,17 @@ ru:
         title:            'Регистрация'
         btn:              'Создать аккаунт'
     contacts:       'Контакты'
-    contacts_desc_html:   "Пожалуйста, сообщите перевозчику, что вы нашли его на сайте chick-chuck.com и не забывайте оставить свой отзыв после переезда. <br> Ваше мнение очень важно."
+    contacts_desc_html:   "Пожалуйста, сообщите перевозчику, что вы нашли его на сайте chick-chuck.com, и не забывайте оставить отзыв после переезда. <br>Ваше мнение очень важно."
     write_message:  "Написать"
-    show_contacts:  "Показать Контакты"
+    show_contacts:  "Показать контакты"
     telegram:
-        telegram_popover: 'Ваш telegram username как он есть'
+        telegram_popover: 'Укажите свое имя пользователя в Telegram без изменений'
     facebook:
-        facebook_popover: 'Скопируйте и вставьте ссылку на ваш Facebook'
+        facebook_popover: 'Скопируйте и вставьте ссылку на свой профиль в Facebook'
     sure_to_del_account:  'Вы уверены, что хотите удалить ваш аккаунт?'
     did_not_get_email:  "Не получили письмо?"
     chat:
-        search:           'Поиска чата'
+        search:           'Поиск чатов'
     language:
         language_select:  'Выберите языки, на которых вы говорите'
     message:

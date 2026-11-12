@@ -3,11 +3,11 @@ en:
         models:
             notification: "Notification"
     notification:
-        no_notice:        "No notice"
-        comment:          "Commented on the"
-        reply:            "Responded to your comment in "
-        rating:           "Appreciated your company"
-        review:           "Left a review of your company"
-        feedback:         "Left a new review of the service"
+        no_notice:        "No notifications"
+        comment:          "Commented on"
+        reply:            "Replied to your comment on"
+        rating:           "Rated your company"
+        review:           "Reviewed your company"
+        feedback:         "Left new feedback about the service"
         
     

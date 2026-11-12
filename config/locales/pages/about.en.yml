@@ -1,21 +1,21 @@
 en:
     about:
         header:
-            title:            "Idea of creating a service"
-            desc:             "Hello, my name is Alexander. I am the founder and creator of the service Chick-Chuck.com. With the move to Israel, on the personal experience and experience of people around me, I faced the challenge of constantly moving within the country. I noticed how many carriers in Israel and how much it is in demand. Then I realized that it would be convenient to take and combine all carriers on one site to facilitate the search for a carrier, based on the criteria required by the client, and most importantly the real ratings and reviews from customers, to not run into an unscrupulous carrier and be happy with your move. Those who do not have their own housing and have to constantly move from one rental apartment to another, understand what I mean. Below I’ll tell you a little about my service."
+            title:            "The Idea Behind the Service"
+            desc:             "Hello, my name is Alexander. I am the founder and creator of Chick-Chuck.com. After moving to Israel, I experienced firsthand—and through the people around me—the need to move frequently within the country. I noticed how many carriers there are in Israel and how much demand there is for their services. I realized it would be useful to bring carriers together on one site, making it easier for customers to find one based on their needs and, most importantly, genuine ratings and reviews. This would help people avoid unscrupulous carriers and make their move more pleasant. Those without a home of their own who have to move from one rented apartment to another understand what I mean. Below, I’ll tell you a little about my service."
             founder_name:     "Aleksandr Varlamov"
             founder_title:    "Founder of Chick-Chuck.com"
         calculator:
-            title:            "Preliminary calculation of moving costs"
-            desc_html:        "No one underestimates the hard physical work of the loaders and the cost of fuel when transporting your belongings, so the service allows the carrier to indicate the cost of the overhaul distance and transportation of certain items of different categories for each overhauled floor down and up. <br> Moving is not easy and very expensive, the price calculator allows the client to know the preliminary cost of moving among the companies registered in our service. It is impossible to calculate all the nuances at the move without personal participation, so the preliminary cost is approximate, the exact cost of the move is agreed directly with the carrier."
+            title:            "Preliminary Moving Cost Estimate"
+            desc_html:        "The physical work loaders do and the fuel required to transport your belongings should not be underestimated. That is why our service lets carriers set their rates for distance traveled and for carrying items up or down stairs, with rates varying by item category and floor. <br>Moving is difficult and expensive. Our calculator lets customers estimate moving costs from companies registered with our service. Not all details can be accounted for without an in-person assessment, so the estimate is approximate; agree on the final price directly with the carrier."
         carriers:
             title:            "Real ratings and reviews"
-            desc_html:        "The opportunity to choose a carrier in the region based on real reviews about the company, as well as to evaluate the services of the carrier based on your experience."
+            desc_html:        "Choose a carrier in your region based on genuine reviews of the company, and rate the carrier's services based on your own experience."
         market:
-            title:            "Opportunity to buy/sell supported items"
-            desc_html:        "Any registered user can submit an advertisement for the sale of supported items, indicating the region of the location, status and category of the item. <br> You can also buy supported items directly from the carrier, which is very convenient, because carriers know the sense of supported things and with them you can directly agree on delivery." 
+            title:            "Buy and Sell Used Items"
+            desc_html:        "Any registered user can post an ad to sell used items, specifying the item's region and category. <br>You can also buy used items directly from a carrier. This is convenient because carriers know their way around used goods, and you can arrange delivery directly with them."
         moving_preparation:
             title:            "Preparation for relocation"
-            desc_html:        "If you have not previously faced moving to another apartment or have insufficient experience in this not simple business, you can read our article on preparation for the move to plan your move more carefully and feel confident."
+            desc_html:        "If you have never moved to another apartment or have little experience with this challenging task, read our article on preparing for a move. It will help you plan carefully and feel more confident."
     
     

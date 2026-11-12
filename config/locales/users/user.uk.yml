@@ -12,9 +12,9 @@ uk:
                 login:            'Логін'
                 password:         'Пароль'
                 new_password:     'Новий пароль'
-                current_password: 'Ваш пароль'
+                current_password: 'Ваш поточний пароль'
                 phone:            'Телефон'
-                password_confirmation: 'Подтвердження пароля'
+                password_confirmation: 'Підтвердження пароля'
                 first_name:       'Імʼя'
                 last_name:        'Прізвище'
                 city:             'Місто'
@@ -23,11 +23,11 @@ uk:
                 female:           'Жіноча'
                 birthday:         'День народження'
                 avatar:           'аватар'
-                password_popover: "%{length} значень мінімум."
-                current_popover:  'Нам потрібен ваш поточний пароль, для того щоб підтвердити внесені зміни.'
-                delete_account:   'Видалити акаунт'
+                password_popover: "Щонайменше %{length} символів."
+                current_popover:  'Нам потрібен ваш поточний пароль, щоб підтвердити внесені зміни.'
+                delete_account:   'Видалити обліковий запис'
                 created_at:       'Дата реєстрації'
-                remove_avatar:    'Вилучити аватар'
+                remove_avatar:    'Видалити аватар'
                 contacts:         "Контакти"
                 additional_phone: "Телефон зв'язку"
                 locale:           "Мова за замовчуванням"
@@ -35,12 +35,12 @@ uk:
                 title:            'Заголовок'
     user_menu:   
         sign_in:          'Увійти'
-        sign_in_company:  'Приходьте перевізником'
+        sign_in_company:  'Увійти як перевізник'
         sign_up:          'Зареєструватися'
-        sign_out:         'Увійти'
+        sign_out:         'Вийти'
         dashboard:        'Панель управління'
         chats:            'Чати'
-        saved:            'Збережено'
+        saved:            'Збережене'
         profile:          'Профіль'
         credential:       'Безпека'
     admin_menu:
@@ -50,7 +50,7 @@ uk:
         title:            'Вхід'
         title_as_company: 'Вхід для компанії'
         as_company:       'Для того щоб увійти як компанія'
-        click_here:       'Натисни тут'
+        click_here:       'Натисніть тут'
         login_place:      'Введіть email або номер телефону'
         password_place:   'Введіть пароль'
         remember_me:      'Запамʼятати мене'
@@ -59,8 +59,8 @@ uk:
         facebook:         'Facebook'
         google:           'Google'
         btn:              'Увійти'
-        account:          'У вас немає акаунту?'
-        register:         'Створити акаунт'
+        account:          'У вас немає облікового запису?'
+        register:         'Створити обліковий запис'
     reset_password:
         title:            'Відновлення пароля'
         email_place:      'Введіть ваш email'
@@ -69,19 +69,19 @@ uk:
         title:            'Реєстрація'
         btn:              'Створити акаунт'
     contacts:         'Контакти'
-    contacts_desc_html:   "Будь ласка, повідомте перевізнику, що ви знайшли його на сайті chick-chuck.com і не забудьте залишити відгук після переїзду. <br> Ваша думка дуже важлива."
+    contacts_desc_html:   "Будь ласка, повідомте перевізника, що знайшли його на сайті chick-chuck.com, і не забудьте залишити відгук після переїзду. <br>Ваша думка дуже важлива."
     write_message:    "Написати"
-    show_contacts:    "Показати Контакти"
+    show_contacts:    "Показати контакти"
     telegram:
-        telegram_popover: 'Ваш telegram username як він є'
+        telegram_popover: 'Вкажіть своє ім’я користувача в Telegram без змін'
     facebook:
-        facebook_popover: 'Скопіюйте і вставте посилання на ваш Facebook'
-    sure_to_del_account:  'Ви впевнені, що хочете видалити ваш акаунт?'
+        facebook_popover: 'Скопіюйте й вставте посилання на свій профіль у Facebook'
+    sure_to_del_account:  'Ви впевнені, що хочете видалити свій обліковий запис?'
     did_not_get_email:  "Ви не отримали листа?"
     chat:
-        search:           'Пошук чату'
+        search:           'Пошук чатів'
     language:
-        language_select:  'Оберіть мови, на яких ви спілкуєтесь'
+        language_select:  'Оберіть мови, якими ви спілкуєтеся'
     message:
         placeholder:      'Ваше повідомлення...' 
     

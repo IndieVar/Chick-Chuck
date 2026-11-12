@@ -3,13 +3,13 @@ he:
         models:
             comment:      "תגובה"
     comment:
-        comments:         "הערות"
-        reply:            "להשיב"
-        edit:             "לשנות את"
-        delete:           "להסיר"
-        delete_as_admin:  'Delete as admin'
-        placeholder:      "ההערה שלך על ה..."
-        updated:          "שונה"
-        need_to_signin:   " כדי להשאיר תגובה, אתה חייב"
-        about_page_title: "השאירו את המשוב שלכם לשירות טוב יותר"
+        comments:         "תגובות"
+        reply:            "תגובה"
+        edit:             "עריכה"
+        delete:           "מחיקה"
+        delete_as_admin:  "מחיקה כמנהל"
+        placeholder:      "התגובה שלכם..."
+        updated:          "עודכן"
+        need_to_signin:   "כדי להשאיר תגובה, יש "
+        about_page_title: "השאירו משוב כדי לעזור לנו לשפר את השירות"
     

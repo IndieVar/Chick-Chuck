@@ -3,7 +3,7 @@ en:
         models:
             admin:        'Admin'
             client:       'User'
-            district:     'District'
+            district:     'Region'
             city:         'City'
             language:     'Language'
             message:      'Message'
@@ -21,11 +21,12 @@ en:
                 gender:           'Gender'
                 male:             'Male'
                 female:           'Female'
-                birthday:         'Birthday'
-                avatar:           'avatar'
+                birthday:         'Date of birth'
+                avatar:           'Avatar'
                 password_popover: "%{length} characters minimum."
                 current_popover:  'We need your current password to confirm your changes.'
                 created_at:       'Date of registration'
+                delete_account:   'Delete account'
                 remove_avatar:    'Remove avatar'
                 contacts:         "Contacts"
                 additional_phone: "Contact phone number"
@@ -41,14 +42,14 @@ en:
         chats:            'Chats'
         saved:            'Saved'
         profile:          'Profile'
-        credential:       'Credentials'
+        credential:       'Security'
     admin_menu:
-        lang_dist:        'Languages and districts'
+        lang_dist:        'Languages and regions'
         catalog:          'Catalog'
     sign_in:
         title:            'Log in'
-        title_as_company: 'Log in as company'
-        as_company:       'To log in as company'
+        title_as_company: 'Log in as a company'
+        as_company:       'To log in as a company'
         click_here:       'Click here'
         login_place:      'Enter your email or phone number'
         password_place:   'Enter password'
@@ -61,24 +62,24 @@ en:
         account:          "Don't have an account?"
         register:         'Register'
     reset_password:
-        title:            'Password recovery'
+        title:            'Password reset'
         email_place:      'Enter your email'
-        send_btn:         'Send me password reset instructions'
+        send_btn:         'Email me password reset instructions'
     sign_up:
         title:            'Sign up'
         btn:              'Create account'
     contacts:         'Contacts'
-    contacts_desc_html:   "Please inform the carrier that you found it on the site chick-chuck.com and don’t forget to leave your feedback after moving. <br> Your opinion is very important."
-    write_message:    "Write"
+    contacts_desc_html:   "Please let the carrier know you found them on chick-chuck.com, and remember to leave a review after your move. <br>Your feedback is very important."
+    write_message:    "Send a message"
     show_contacts:    "Show contacts"
     telegram:
-        telegram_popover: 'Your telegram username as it is'
+        telegram_popover: 'Enter your Telegram username exactly as it appears'
     facebook:
-        facebook_popover: 'Copy and past your Facebook link'
+        facebook_popover: 'Copy and paste the link to your Facebook profile'
     sure_to_del_account:  'Are you sure you want to delete your account?'
-    did_not_get_email:  "You didn’t get the letter?"
+    did_not_get_email:  "Didn't receive the email?"
     chat:
-        search:           'Search chat'
+        search:           'Search chats'
     language:
         language_select:  'Select the languages you speak'
     message:

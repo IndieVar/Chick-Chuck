@@ -4,7 +4,7 @@ module MetaTagsHelper
   def default_meta_tags
     {
       charset: 'utf-8',
-      site: 'Chick-Chuck.com',
+      site: 'Relomio',
       reverse: true,
       separator: '|',
       keywords: "#{t('company.carriers')}, #{t('moving_preparation.title')}, #{t('moving')}, #{t('pages.market')},  #{Service.all.decorate.map(&:title).join(', ').sub(
@@ -15,11 +15,11 @@ module MetaTagsHelper
       manifest: '/manifest.webmanifest',
       og: {
         title: :title,
-        site_name: 'Chick-Chuck.com',
+        site_name: 'Relomio',
         description: :description,
         type: 'website',
         url: request.original_url,
-        image: [image_url('logo/og-chick-chuck.png'), image_url('logo/og-chick-chuck-sm.png')]
+        image: image_url('logo/relomio-og.png')
       },
       fb: {
         app_id: '2318377664996656'

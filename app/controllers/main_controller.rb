@@ -2,19 +2,8 @@
 
 class MainController < ApplicationController
   def index
-    set_meta_tags(
-      title: [params[:locale]&.capitalize, t('meta.home_page.title')],
-      description: t('meta.home_page.desc'),
-      alternate: {
-        'x-default' => root_url(locale: nil),
-        'en' => root_url(locale: :en),
-        'ru' => root_url(locale: :ru),
-        'uk' => root_url(locale: :uk)
-      }
-    )
-    @companies = Company.confirmed.with_directory_details.take(3)
-    @products = Product.published.decorate.take(6)
-    # @news = News.all.decorate.last(3)
+    set_meta_tags(homepage_meta_tags)
+    load_homepage_content
   end
 
   def sitemap
@@ -42,5 +31,39 @@ class MainController < ApplicationController
         session[:cookies_accepted] = params[:cookies].presence
       end
     end
+  end
+
+  private
+
+  def homepage_meta_tags
+    {
+      title: [params[:locale]&.capitalize, t('meta.home_page.title')],
+      description: t('meta.home_page.desc'),
+      alternate: {
+        'x-default' => root_url(locale: nil),
+        'en' => root_url(locale: :en),
+        'ru' => root_url(locale: :ru),
+        'uk' => root_url(locale: :uk)
+      }
+    }
+  end
+
+  def load_homepage_content
+    load_carrier_summary
+    load_market_summary
+    @news = News.all.decorate.last(3)
+  end
+
+  def load_carrier_summary
+    companies = Company.confirmed
+    @companies = companies.with_directory_details.take(3)
+    @companies_count = companies.count
+    @average_rating = companies.where('rating > 0').average(:rating)&.round(1)
+  end
+
+  def load_market_summary
+    products = Product.published
+    @products_count = products.count
+    @products = products.decorate.take(4)
   end
 end

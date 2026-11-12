@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title">
+  <title id="title">Relomio</title>
+  <rect width="1200" height="630" fill="#F7FAFC"/>
+  <g transform="translate(265 250) scale(2.3)">
+    <path d="M8 52h6c5.4 0 8.2-2.9 8.2-6.3 0-4.5-6.8-5.2-6.8-10.2 0-4.3 3.6-7.5 8.5-7.5h15.2" fill="none" stroke="#18B9B0" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+    <circle cx="8" cy="52" r="5.5" fill="#18B9B0"/>
+    <path d="M28.5 51V21.5a7 7 0 0 1 7-7H52v36.5" fill="none" stroke="#142B4A" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"/>
+    <path d="m42 18.5 11-5.7v37.7L42 46.2z" fill="#142B4A"/>
+    <circle cx="46.2" cy="32.4" r="1.5" fill="#fff"/>
+    <text x="74" y="48" fill="#142B4A" font-family="Inter, 'Avenir Next', Arial, sans-serif" font-size="42" font-weight="700" letter-spacing="-1.5">Relomio</text>
+  </g>
+</svg>

@@ -1,34 +1,42 @@
 <!-- Trucks filter -->
 <%= form_with url: path, method: :get, data: {turbo_frame: frame, controller: 'checkbox-select-all'} do |f| %>
-    <% tag.div class: "w-full absolute #{[action_name, controller_name].eql?(['index', 'main']) ? 'bottom-0' : 'top-0'} items-center z-10 grid grid-cols-1 sm:grid-cols-4 border-gray-700 bg-gray-700 border bg-opacity-90 rounded-tl-3xl rounded-br-3xl sm:mx-auto", data: { controller: "reveal" } do %>
+    <% home_page = controller_name == 'main' %>
+    <% filter_class = home_page ? 'home-filter grid grid-cols-1 sm:grid-cols-4' : "w-full absolute #{[action_name, controller_name].eql?(['index', 'main']) ? 'bottom-0' : 'top-0'} items-center z-10 grid grid-cols-1 sm:grid-cols-4 border-gray-700 bg-gray-700 border bg-opacity-90 rounded-tl-3xl rounded-br-3xl sm:mx-auto" %>
+    <%= tag.div class: filter_class, data: { controller: 'reveal' } do %>
         <!-- District -->
-        <div class="w-full h-14 items-center flex bg-opacity-90 font-medium rtl:pr-3 ltr:pl-3 rounded-tl-3xl rtl:sm:rounded-none hidden sm:flex"
+        <div class="w-full h-14 items-center flex bg-opacity-90 font-medium rtl:pr-3 ltr:pl-3 rounded-tl-3xl rtl:sm:rounded-none <%= home_page ? 'home-filter__field' : 'hidden sm:flex' %>"
              data-reveal-target="item"
         >
-            <%= heroicon 'map', class: 'w-6 h-6 mr-1 text-gray-400' %>
+            <%= tag.label District.model_name.human, for: 'district_id', class: 'home-filter__label' if home_page %>
+            <%= heroicon 'map', class: 'w-6 h-6 mr-1 text-gray-400' unless home_page %>
             <%= f.collection_select(:district_id, District.all.decorate, :id, :title, 
             { include_blank: District.model_name.human, selected: params[:district_id]}, 
             {class: "h-full text-base md:rounded-l-xl block w-full p-2.5 placeholder-gray-400 text-gray-300 hover:text-gray-100 focus:ring-0 focus:border-gray-100 focus:text-gray-100 border-0 rounded-tl-3xl rtl:bg-left rtl:ml-3 sm:ml-0 bg-opacity-90 #{controller_name == 'main' ? 'bg-gray-700/0' : 'bg-gray-600'}"})%>
         </div>
         <!-- Language -->
-        <div class="w-full h-14 items-center flex relative bg-opacity-90 font-medium rtl:pr-3 rtl:rounded-tl-3xl ltr:pl-3 hidden sm:flex"
+        <div class="w-full h-14 items-center flex relative bg-opacity-90 font-medium rtl:pr-3 rtl:rounded-tl-3xl ltr:pl-3 <%= home_page ? 'home-filter__field' : 'hidden sm:flex' %>"
             data-reveal-target="item"
         >
-            <%= heroicon 'language', class: 'w-6 h-6 mr-1 text-gray-400' %>
+            <%= tag.label Language.model_name.human, for: 'language_id', class: 'home-filter__label' if home_page %>
+            <%= heroicon 'language', class: 'w-6 h-6 mr-1 text-gray-400' unless home_page %>
             <%= f.collection_select(:language_id, Language.all, :id, :title, {include_blank: Language.model_name.human, selected: params[:language_id]}, {class: "h-full text-base block w-full p-2.5  placeholder-gray-400 text-gray-300 hover:text-gray-100 focus:ring-0 focus:border-gray-100 focus:text-gray-100 border-0 rtl:rounded-tl-3xl rtl:bg-left rtl:ml-3 bg-opacity-90 #{controller_name == 'main' ? 'bg-gray-700/0' : 'bg-gray-600'}"})%>
         </div>
         <!-- Services -->
-        <div class="w-full h-14 items-center flex justify-center border-0  relative bg-opacity-90 hidden sm:flex"
+        <div class="w-full h-14 items-center flex justify-center border-0 relative bg-opacity-90 <%= home_page ? 'home-filter__field' : 'hidden sm:flex' %>"
             data-reveal-target="item"
         >
+            <% if home_page %>
+                <%= tag.span Company.human_attribute_name('services'), class: 'home-filter__label' %>
+            <% end %>
             <!-- Button -->
-            <button id="dropdownServicesButton" data-dropdown-toggle="dropdownServices" class="inline-flex items-center w-full text-base font-medium text-center text-gray-300 hover:text-gray-100" type="button">
-                <%= heroicon 'list-bullet', class: 'w-6 h-6 mx-3 text-gray-400' %>
-                <%= Company.human_attribute_name('services')%>
+            <button id="dropdownServicesButton" data-dropdown-toggle="dropdownServices" class="inline-flex items-center w-full text-base font-medium text-center text-gray-300 hover:text-gray-100 <%= 'home-filter__services-button' if home_page %>" type="button">
+                <%= heroicon 'list-bullet', class: 'w-6 h-6 mx-3 text-gray-400' unless home_page %>
+                <%= home_page ? t('home_page.redesign.any_service') : Company.human_attribute_name('services') %>
+                <%= heroicon 'chevron-down', class: 'w-4 h-4 ml-auto text-gray-400' if home_page %>
             </button>
             <!-- Services dropdown menu -->
-            <div id="dropdownServices" class="z-10 hidden rounded-lg shadow bg-gray-700 min-w-full">
-                <ul class="h-72 px-3 pb-3 overflow-y-auto rounded-lg bg-gray-700 min-w-full text-start" aria-labelledby="dropdownServicesButton">
+            <div id="dropdownServices" class="z-10 hidden rounded-lg shadow bg-gray-700 min-w-full <%= 'home-filter__services-menu' if home_page %>">
+                <ul class="h-72 px-3 pb-3 overflow-y-auto rounded-lg bg-gray-700 min-w-full text-start <%= 'home-filter__services-list' if home_page %>" aria-labelledby="dropdownServicesButton">
                     <!-- Select All / Deselect All -->
                     <li class="flex items-center p-2 rounded-lg">
                         <label class="text-base  block w-full p-2 font-normal text-gray-300 hover:text-gray-100 bg-clip-padding rounded-lg border border-solid border-gray-500">
@@ -49,12 +57,12 @@
             </div>
         </div>
         <!-- Search button -->
-        <div class=" w-full h-auto p-3 flex justify-center items-center space-x-2 rtl:space-x-reverse">
-            <button data-action="click->reveal#toggle" type="button" class="btn sm:hidden" title="filter-params">
+        <div class="w-full h-auto p-3 flex justify-center items-center space-x-2 rtl:space-x-reverse <%= 'home-filter__submit' if home_page %>">
+            <button data-action="click->reveal#toggle" type="button" class="btn sm:hidden <%= 'hidden' if home_page %>" title="filter-params">
                 <%= heroicon 'adjustments-horizontal', class: 'w-7 h-7 text-gray-300'%>
             </button>
             
-            <%= button_tag t('company.find_carrier'), class: "flex items-center justify-center w-full px-2 py-2 h-full text-base font-medium rounded-lg border bg-opacity-90 focus:ring-1 focus:outline-none focus:ring-gray-300 #{controller_name == 'main' ? 'bg-orange-700 border-orange-700 hover:bg-orange-800 text-gray-300' : 'bg-blue-600 border-blue-600 hover:bg-blue-700 text-gray-100'}", name: "find carrier" %>
+            <%= button_tag t('company.find_carrier'), class: "flex items-center justify-center w-full px-2 py-2 h-full text-base font-medium rounded-lg border bg-opacity-90 focus:ring-1 focus:outline-none focus:ring-gray-300 #{home_page ? 'home-filter__button' : 'bg-blue-600 border-blue-600 hover:bg-blue-700 text-gray-100'}", name: 'find carrier' %>
         </div>
     <% end %>
 <% end %>

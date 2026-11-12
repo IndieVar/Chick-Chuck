@@ -1,31 +1,20 @@
-<!-- Market section-->
-<section class="py-10">
-    <!-- Title -->
-    <%= tag.h3 t('pages.market'), class: 'text-3xl font-semibold text-gray-800 text-center'%>
-    <!-- Products list -->
-    <%= turbo_frame_tag 'products', class: "flex overflow-x-scroll w-[22rem] sm:w-screen container mx-auto py-8 space-x-6 rtl:space-x-reverse" do %>
-        <% if @products.present?%>
-            <!-- Products -->
-            <%= render partial: 'contents/products/product', collection: @products %>
-            <!-- View all -->
-            <div class="flex-shrink-0 justify-center items-center text-center h-auto w-[300px] m-auto">
-                <%= link_to products_path, class: "flex text-base font-medium justify-center items-center text-center text-gray-500 hover:text-gray-700 hover:underline", data: {turbo_frame: '_top'} do %>
-                    <%= t('global.view_all')%>
-                    <%= heroicon I18n.locale == :he ? 'arrow-small-left' : 'arrow-small-right', 
-                        class: "w-5 h-5 ltr:ml-2 rtl:mr-2"%>
-                <% end %>
-            </div>
-        <% else %>
-            <!-- Unavailable -->
-            <%= render 'contents/shared/unavailable', model: t('product.products')%>
-        <% end %>
-    <% end %>
-    <!-- View all -->
-    <div class="flex justify-center items-center text-center h-auto">
-        <%= link_to products_path, class: "flex text-base font-medium justify-center items-center text-center text-gray-500 hover:text-gray-700 hover:underline", data: {turbo_frame: '_top'} do %>
-            <%= t('global.view_all')%>
-            <%= heroicon I18n.locale == :he ? 'arrow-small-left' : 'arrow-small-right', 
-                class: "w-5 h-5 ltr:ml-2 rtl:mr-2"%>
+<section class="home-section home-market">
+    <div class="home-section__heading">
+        <div>
+            <%= tag.h2 t('home_page.redesign.market_title'), class: 'home-section__title' %>
+            <%= tag.p t('home_page.redesign.market_description'), class: 'home-section__description' %>
+        </div>
+        <%= link_to products_path, class: 'home-text-link', data: { turbo_frame: '_top' } do %>
+            <%= t('global.view_all') %>
+            <%= heroicon I18n.locale == :he ? 'arrow-small-left' : 'arrow-small-right', class: 'w-5 h-5' %>
         <% end %>
     </div>
+
+    <%= turbo_frame_tag 'products', class: 'home-market-grid' do %>
+        <% if @products.present? %>
+            <%= render partial: 'contents/products/product', collection: @products %>
+        <% else %>
+            <%= tag.div (render 'contents/shared/unavailable', model: t('product.products')), class: 'col-span-full' %>
+        <% end %>
+    <% end %>
 </section>

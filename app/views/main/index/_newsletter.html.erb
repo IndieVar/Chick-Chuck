@@ -1,12 +1,11 @@
-<!-- Newslatter -->
-<section class="bg-gray-50" id="newsletter">
-    <div class="max-w-3xl px-6 py-16 mx-auto text-center">
-        <!-- Title -->
-        <%= tag.h6 t('home_page.newslatter.title'), class: "text-3xl font-semibold text-gray-800"%>
-        <!-- Description -->
-        <%= tag.p t('home_page.newslatter.desc'), class: "max-w-md mx-auto mt-5 text-gray-500"%>
-        <!-- Form -->
+<section class="home-newsletter" id="newsletter">
+    <div class="home-newsletter__copy">
+        <%= tag.h2 t('home_page.redesign.newsletter_title'), class: 'home-newsletter__title' %>
+        <%= tag.p t('home_page.redesign.newsletter_description'), class: 'home-newsletter__description' %>
+    </div>
+    <div class="home-newsletter__form">
         <%= render 'users/mailers/form'%>
+        <small><%= t('home_page.redesign.newsletter_note') %></small>
     </div>
 </section>
 

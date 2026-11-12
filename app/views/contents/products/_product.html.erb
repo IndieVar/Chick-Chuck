@@ -1,5 +1,5 @@
 <%= turbo_frame_tag product do %>
-    <div class="<%= ['index', 'main'].eql?([action_name, controller_name]) ? 'w-[22rem] sm:w-[20rem]' : 'w-full'%>
+    <div class="<%= current_page?(root_path) ? 'w-full homepage-market-product' : (['index', 'main'].eql?([action_name, controller_name]) ? 'w-[22rem] sm:w-[20rem]' : 'w-full') %>
             flex-shrink-0 bg-white rounded-lg border border-gray-200 shadow-md hover:shadow-xl">
         <!-- Images -->
         <%= render 'carrierwave/images/carousel', object: product %>

@@ -43,6 +43,8 @@ Subscribe to our news to monitor our progress."
       reject:           "Reject"
       hide:             "Hide"
       accept:           "Accept"
+      back_to_top:      "Back to top"
+      all_rights_reserved: "All rights reserved."
   cookies:
       desc:             "We use cookies on this site to improve our performance. By clicking the «Accept» button, you agree to store cookies on your device to improve navigation and to analyze the use of the site."
   moving:       "Moving"

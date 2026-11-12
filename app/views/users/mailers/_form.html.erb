@@ -2,7 +2,7 @@
 <%= turbo_frame_tag Subscriber.new do %>
     <%= form_with model: Subscriber.new, url: users_mailers_path, remote: true, data: {turbo_frame: '_top'}, class: "flex flex-col mt-8 space-y-3 sm:space-y-0 sm:flex-row sm:justify-center sm:-mx-2" do |f| %>
          <%= render 'shared/error_messages', resource: Subscriber.new %>
-        <%= f.email_field :email, class:"px-4 py-2 text-gray-700 bg-white border rounded-md sm:mx-2 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40", type: 'Email', placeholder: "Email Address", required: true%>
+        <%= f.email_field :email, class:"px-4 py-2 text-gray-700 bg-white border rounded-md sm:mx-2 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40", placeholder: t('home_page.redesign.email_placeholder'), required: true%>
 
         <%= f.submit t('home_page.newslatter.subscribe'), class:"px-4 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-700 rounded-md sm:mx-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600 cursor-pointer" %>
     <% end %>

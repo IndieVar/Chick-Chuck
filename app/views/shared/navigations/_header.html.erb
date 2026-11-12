@@ -1,17 +1,17 @@
 <%= provide :navbar do %>
-    <header class="bg-white bg-opacity-90 fixed top-0 z-50 w-full">
+    <header class="site-header bg-white/95 backdrop-blur-md fixed top-0 z-50 w-full shadow-sm">
         <div class="relative" data-controller="dropdown">
-          <div class="w-full mx-auto px-4 sm:px-6">
+          <div class="w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center border-b-2 border-gray-100 py-4">
               <!-- Logotype -->
               <div class="flex justify-start w-auto flex-auto">
                   <%= link_to root_path, class: 'flex items-center', data: {turbo_frame: '_top'} do %>
-                      <!-- Chick-Chuck logotype mobile -->
-                      <%= image_tag('logo/chick-chuck-mobile-logo.webp', 
-                        class: "sm:hidden h-10 w-10 object-cover object-center", alt: 'chick-chuck-logotype') %>
-                      <!-- Chick-Chuck logotype -->
-                      <%= image_tag('logo/chick-chuck-logo.webp', 
-                        class: "hidden sm:block h-10 w-56 object-cover", alt: 'chick-chuck-logotype')%>
+                      <!-- Relomio logotype mobile -->
+                      <%= image_tag('logo/relomio-mark.svg',
+                        class: "sm:hidden h-10 w-10 object-contain", alt: 'Relomio') %>
+                      <!-- Relomio logotype -->
+                      <%= image_tag('logo/relomio-logo.svg',
+                        class: "hidden sm:block h-10 w-48 object-contain", alt: 'Relomio')%>
                   <% end %>
               </div>
               <!-- Mobile menu button -->
@@ -27,9 +27,9 @@
                 </button>
               </div>
               <!-- Navigations -->
-              <nav class="hidden lg:flex space-x-6 rtl:space-x-reverse">
+              <nav class="hidden lg:flex items-center gap-5">
                   <%= render 'shared/navigations/content_links_list', 
-                      link_class: "text-base font-medium hover:text-gray-900",
+                      link_class: "text-sm font-semibold text-gray-600 hover:text-blue-700 whitespace-nowrap",
                       current_page: current_page %>
               </nav>
               <!-- User menu -->

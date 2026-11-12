@@ -8,6 +8,7 @@ export default class extends Controller {
   hideModal() {
     const frame = this.element.parentElement
     frame.querySelector(".contacts-modal__backdrop")?.remove()
+    frame.querySelector(".auth-login-modal__backdrop")?.remove()
     frame.removeAttribute("src")
     // Remove src reference from parent frame element
     // Without this, turbo won't re-open the modal on subsequent click

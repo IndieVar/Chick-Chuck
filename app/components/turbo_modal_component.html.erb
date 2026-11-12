@@ -1,20 +1,32 @@
 <%= turbo_frame_tag "modal" do %>
+  <%= tag.div class: "auth-login-modal__backdrop", aria: { hidden: true } if auth_modal? %>
   <%= tag.div data: { 
       controller: "turbo-modal", 
       action: "turbo:submit-end->turbo-modal#submitEnd keyup@window->turbo-modal#closeWithKeyboard click@window->turbo-modal#closeBackground",
       turbo_modal_target: "modal"},
       class: "overflow-y-auto overflow-x-hidden h-modal h-auto max-h-screen justify-center items-center shadow-md hover:shadow-xl rounded-lg
-              fixed w-4/5 sm:w-2/3 md:w-auto top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 mx-auto" do 
+              fixed w-4/5 sm:w-2/3 md:w-auto top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 mx-auto
+              #{'auth-login-modal' if auth_modal?}",
+      role: ('dialog' if auth_modal?),
+      aria: ({ modal: true, labelledby: 'auth-login-modal-title' } if auth_modal?) do
   %>
-      <div class="relative p-6 w-full md:min-w-[30rem] h-full sm:h-auto bg-gray-900 bg-opacity-95">
-        <div class="text-center mb-4 mx-2 h-auto">
+      <div class="relative p-6 w-full md:min-w-[30rem] h-full sm:h-auto bg-gray-900 bg-opacity-95 <%= 'auth-login-modal__panel' if auth_modal? %>">
+        <div class="text-center mb-4 mx-2 h-auto auth-login-modal__header">
+            <% if auth_modal? %>
+              <span class="auth-login-modal__mark" aria-hidden="true">
+                <%= heroicon 'lock-closed', class: 'w-5 h-5' %>
+              </span>
+            <% end %>
             <!-- Title -->
-            <%= tag.h1 @title, class: "text-3xl -mt-1 tracking-tight leading-none text-gray-100"%>
+            <%= tag.h1 @title, id: (auth_modal? ? 'auth-login-modal-title' : nil),
+                class: "text-3xl -mt-1 tracking-tight leading-none text-gray-100 auth-login-modal__title" %>
             <!-- Close button -->
             <%= render 'shared/buttons/close'%>
         </div>
         <!-- Content -->
-        <%= content %>
+        <div class="auth-login-modal__content">
+          <%= content %>
+        </div>
       </div>
   <% end %>
 <% end %>

@@ -3953,3 +3953,91 @@ html[dir="rtl"] .site-header__notification-actions .absolute.left-0.top-0 {
   .client-registration__field-grid { grid-template-columns: minmax(0, 1fr); gap: 13px; }
 }
 
+.auth-login-modal__backdrop { position: fixed; z-index: 49; inset: 0; background: rgba(15, 23, 42, .56); backdrop-filter: blur(4px); }
+.auth-login-modal {
+  z-index: 50 !important;
+  width: 94vw !important;
+  max-width: 460px !important;
+  height: auto !important;
+  max-height: 90vh !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  border-radius: 24px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  scrollbar-width: thin;
+}
+
+.auth-login-modal__panel {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  padding: 23px 24px 21px !important;
+  border: 1px solid #e6eaf1;
+  border-radius: 24px;
+  background: #fff !important;
+  color: #17243b;
+  box-shadow: 0 24px 70px rgba(9, 20, 42, .28);
+}
+
+.auth-login-modal__header {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  margin: 0 0 14px !important;
+  padding: 1px 32px 16px;
+  border-bottom: 1px solid #edf0f5;
+}
+
+.auth-login-modal__mark { display: grid; width: 40px; height: 40px; place-items: center; border-radius: 13px; background: #e8f7f5; color: #168d84; }
+.auth-login-modal__title { margin: 0 !important; color: #202d43 !important; font-size: 23px !important; font-weight: 800; letter-spacing: -.025em; line-height: 1.2 !important; }
+.auth-login-modal__content { color: #526078; }
+.auth-login-modal__content > p { margin: 0 0 15px !important; padding: 11px 13px; border: 1px solid #e5ebf5; border-radius: 12px; background: #f7f9fc; color: #59677d !important; font-size: 12px !important; line-height: 1.55; }
+.auth-login-modal__content > p a { color: #2857d9 !important; font-weight: 750; text-decoration: none; }
+.auth-login-modal__content > p a:hover { color: #173da7 !important; text-decoration: underline; }
+.auth-login-modal__content > .flex.items-center p { color: #64748b !important; }
+.auth-login-modal__content .button_to { min-width: 0; }
+.auth-login-modal__content .button_to button { min-height: 42px; justify-content: center; border-radius: 11px; font-size: 12px; font-weight: 700; }
+.auth-login-modal__content form:not(.button_to) > div.mb-6 { margin-bottom: 15px !important; }
+.auth-login-modal__content form label { color: #48566c !important; font-size: 12px !important; font-weight: 650; }
+.auth-login-modal__content form input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
+  min-height: 44px;
+  border: 1px solid #e2e7f0 !important;
+  border-radius: 11px !important;
+  background: #fbfcfe !important;
+  color: #26344b !important;
+  font-size: 13px;
+  transition: border-color .16s ease, box-shadow .16s ease, background-color .16s ease;
+}
+
+.auth-login-modal__content form input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):focus {
+  border-color: #9ab0ed !important;
+  outline: 0;
+  background: #fff !important;
+  box-shadow: 0 0 0 3px rgba(40, 87, 217, .1);
+}
+
+.auth-login-modal__content form input[type="checkbox"] { width: 16px; height: 16px; accent-color: #2857d9; }
+.auth-login-modal__content form .flex.justify-between { flex-wrap: wrap; gap: 9px; margin-bottom: 16px !important; }
+.auth-login-modal__content form .flex.justify-between label { color: #66738a !important; font-size: 11px !important; }
+.auth-login-modal__content form .flex.justify-between a { color: #2857d9 !important; font-size: 11px; font-weight: 650; text-decoration: none; }
+.auth-login-modal__content form .flex.justify-between a:hover { text-decoration: underline; }
+.auth-login-modal__content form input[type="submit"] { width: 100%; min-height: 46px; border: 0; border-radius: 12px; background: linear-gradient(110deg, #18a99f, #2857d9); color: #fff; font-size: 14px; font-weight: 750; box-shadow: 0 8px 18px rgba(40, 87, 217, .19); cursor: pointer; transition: transform .18s ease, box-shadow .18s ease; }
+.auth-login-modal__content form input[type="submit"]:hover { transform: translateY(-1px); box-shadow: 0 11px 23px rgba(40, 87, 217, .24); }
+.auth-login-modal__content form > .text-center p { margin-top: 11px !important; color: #7b879a !important; font-size: 11px !important; line-height: 1.55; }
+.auth-login-modal__content form > .text-center p a { color: #2857d9 !important; font-weight: 750; text-decoration: none; }
+.auth-login-modal__content form > .text-center p a:hover { text-decoration: underline; }
+.auth-login-modal__content form em { color: #7b879a; font-size: 11px; }
+.auth-login-modal .absolute.top-3 { top: 14px !important; inset-inline-end: 14px !important; inset-inline-start: auto !important; display: grid; width: 32px; height: 32px; place-items: center; padding: 0 !important; border: 1px solid #e6eaf1; border-radius: 10px !important; background: #f7f9fc !important; color: #6d798d !important; }
+.auth-login-modal .absolute.top-3:hover { background: #edf2f8 !important; color: #26344b !important; }
+.auth-login-modal .absolute.top-3 svg { width: 17px; height: 17px; }
+.auth-login-modal [role="alert"] { margin: 0 0 14px !important; border-radius: 11px; font-size: 12px; }
+
+@media (max-width: 480px) {
+  .auth-login-modal { width: calc(100vw - 24px) !important; max-width: none !important; max-height: calc(100vh - 24px) !important; border-radius: 20px !important; }
+  .auth-login-modal__panel { padding: 20px 17px 17px !important; border-radius: 20px; }
+  .auth-login-modal__title { font-size: 21px !important; }
+  .auth-login-modal__content form > .flex.justify-between { align-items: flex-start; }
+}
+

@@ -2,6 +2,6 @@
 <% provide :page_title, 'Sign In' %>
 
 
-<%= render TurboModalComponent.new(title: t('sign_in.title')) do %>
+<%= render TurboModalComponent.new(title: t('sign_in.title'), variant: :auth) do %>
     <%= render 'form'%>
 <% end %>

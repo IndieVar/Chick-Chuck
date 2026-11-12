@@ -1,28 +1,74 @@
 <% currently_at t('company.carriers').capitalize %>
 <% provide :page_title, t('company.carriers').capitalize %>
 
+<main class="carrier-directory">
+    <section class="carrier-directory__hero">
+        <div class="carrier-directory__hero-inner">
+            <div class="carrier-directory__copy">
+                <div class="carrier-directory__eyebrow">
+                    <span class="carrier-directory__dot"></span>
+                    <%= t('company.directory.eyebrow') %>
+                </div>
+                <%= tag.h1 t('company.directory.title'), class: 'carrier-directory__title' %>
+                <%= tag.p t('company.directory.description'), class: 'carrier-directory__description' %>
+            </div>
 
-<!-- Filter -->
-<%= render 'shared/navigations/companies_filter', path: users_path, frame: 'companies', company: nil %>
-<!-- Best carriers -->
-<%= turbo_frame_tag 'best_companies', class: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full px-2 gap-4 sm:px-6 py-4 mt-16" do %>
-    <!-- Title -->
-    <%= tag.h1 t('company.top_carriers'), class: 'text-3xl font-semibold text-gray-800  text-center col-span-full my-6'%>
-    <% if @best_companies.present? %>
-        <!-- Top companies -->
-        <%= render partial: 'companies/shared/company_card', collection: @best_companies%>
-    <% else %>
-        <%= tag.div (render 'contents/shared/unavailable', model: t('company.carriers')), class: 'col-span-full'%>
-    <% end %>
-<% end %>
+            <div class="carrier-directory__art" aria-hidden="true">
+                <div class="carrier-directory__image-wrap">
+                    <%= image_tag asset_path("bg/bg-truck-1000#{'-rtl' if I18n.locale == :he}.webp"),
+                        alt: '', class: 'carrier-directory__truck' %>
+                </div>
+                <div class="carrier-directory__trust-card">
+                    <span class="carrier-directory__trust-icon"><%= heroicon 'shield-check', class: 'w-5 h-5' %></span>
+                    <span>
+                        <strong><%= t('company.directory.trust_title') %></strong>
+                        <small><%= t('company.directory.trust_description') %></small>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- Latest carriers -->
-<%= turbo_frame_tag 'latest_companies', class: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 w-full px-2 gap-4 sm:px-6 py-4" do %>
-    <!-- Title -->
-    <%= tag.h2 t('company.latest_carriers'), class: 'text-3xl font-semibold text-gray-800  text-center col-span-full my-6'%>
-    <!-- Latest companies -->
-    <%= render partial: 'companies/shared/company_card', collection: @latest_companies%>
-<% end if @latest_companies.present?%>
+    <section class="carrier-directory__search" aria-label="<%= t('company.directory.filter_title') %>">
+        <div class="carrier-directory__filter-panel">
+            <div class="carrier-directory__filter-heading">
+                <%= tag.h2 t('company.directory.filter_title') %>
+                <%= tag.p t('company.directory.filter_description') %>
+            </div>
+            <%= render 'shared/navigations/companies_filter', path: users_path, frame: '_top', company: nil %>
+        </div>
+    </section>
 
-<!-- Pagy -->
-<%== pagy_nav(@pagy_a) if @companies_count > 8 %>
+    <section class="carrier-directory__results">
+        <%= turbo_frame_tag 'best_companies', class: 'carrier-directory__featured-grid' do %>
+            <div class="carrier-directory__section-heading">
+                <div>
+                    <span class="carrier-directory__section-kicker"><%= t('company.directory.featured_kicker') %></span>
+                    <%= tag.h2 t('company.directory.featured_title') %>
+                    <%= tag.p t('company.directory.featured_description') %>
+                </div>
+                <span class="carrier-directory__section-mark"><%= heroicon 'sparkles', class: 'w-5 h-5' %></span>
+            </div>
+            <% if @best_companies.present? %>
+                <%= render partial: 'companies/shared/company_card', collection: @best_companies %>
+            <% else %>
+                <%= tag.div (render 'contents/shared/unavailable', model: t('company.carriers')), class: 'col-span-full' %>
+            <% end %>
+        <% end %>
+
+        <%= turbo_frame_tag 'latest_companies', class: 'carrier-directory__latest-grid' do %>
+            <div class="carrier-directory__section-heading">
+                <div>
+                    <span class="carrier-directory__section-kicker"><%= t('company.directory.latest_kicker') %></span>
+                    <%= tag.h2 t('company.latest_carriers') %>
+                    <%= tag.p t('company.directory.latest_description') %>
+                </div>
+            </div>
+            <%= render partial: 'companies/shared/company_card', collection: @latest_companies %>
+        <% end if @latest_companies.present? %>
+
+        <div class="carrier-directory__pagination">
+            <%== pagy_nav(@pagy_a) if @companies_count > 8 %>
+        </div>
+    </section>
+</main>

@@ -1,7 +1,8 @@
 <%= turbo_frame_tag company_card, 
     class: "w-full max-w-lg overflow-hidden bg-white rounded-lg shadow-md hover:shadow-xl dark:bg-gray-800 
         #{'border border-gray-200' unless controller_name == 'products'}
-        #{'homepage-carrier-card' if controller_name == 'main'}" do %>
+        #{'homepage-carrier-card' if controller_name == 'main'}
+        #{'carrier-directory-card' if controller_name == 'users' && action_name == 'index'}" do %>
     <% districts = company_card.decorate.districts_for_display %>
     <% languages = company_card.languages.to_a %>
     <!-- Avatar -->

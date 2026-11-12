@@ -13,6 +13,8 @@ he:
       news:             "חדשות"
       knowledge_base:   "בסיס ידע"
       about:            "על השירות"
+      open_menu:        "פתיחת התפריט"
+      close_menu:       "סגירת התפריט"
   # Global
   global:
       save_btn:         "לשמור"

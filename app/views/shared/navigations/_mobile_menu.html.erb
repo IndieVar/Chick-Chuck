@@ -1,16 +1,16 @@
 <!-- Dropdown mobile menu -->
 <div 
-  id="mobile-menu-button"
+  id="mobile-menu-panel"
   data-dropdown-target="menu"
   data-transition-enter-from="opacity-0 scale-95"
   data-transition-enter-to="opacity-100 scale-100"
   data-transition-leave-from="opacity-100 scale-100"
   data-transition-leave-to="opacity-0 scale-95"
-  class="hidden absolute z-50 top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden overflow-y-auto max-h-screen"
+  class="mobile-menu hidden absolute z-50 top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden overflow-y-auto max-h-screen"
 >
-    <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
+    <div class="mobile-menu__panel rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
       <!-- Dropdown menu header -->
-      <div class="pt-5 pb-6 px-5">
+      <div class="mobile-menu__header pt-5 pb-6 px-5">
         <div class="flex items-center justify-between">
           <div>
             <%= link_to root_path, class: 'flex items-center' do %>
@@ -20,7 +20,7 @@
           <div class="-mr-2">
             <button 
                 data-action="dropdown#toggle click@window->dropdown#hide" 
-                type="button" class="bg-white rounded-lg p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                type="button" aria-label="<%= t('pages.close_menu') %>" class="mobile-menu__close bg-white rounded-lg p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
             >
                 <%= heroicon 'x-mark', class: 'h-6 w-6'%>
             </button>
@@ -28,22 +28,22 @@
         </div>
       </div>
       <!-- Main navigations -->
-      <div class="py-6 px-5 space-y-6 text-center">
-        <div class="grid grid-cols-1 gap-y-3 gap-x-8">
+      <div class="mobile-menu__body py-6 px-5 space-y-6 text-center">
+        <nav class="mobile-menu__links grid grid-cols-1 gap-y-3 gap-x-8">
             <!-- Links list -->
             <%= render 'shared/navigations/content_links_list', 
-                link_class: "text-base font-medium text-gray-500 hover:text-gray-900 pb-3 border-b border-gray-200",
+                link_class: "mobile-menu__link",
                 current_page: current_page %>
+        </nav>
             <!-- Become a carrier -->
-            <%= tag.div class: "flex justify-center" do %>
-                <%= link_to new_company_registration_path, class: "relative inline-flex items-center justify-center p-0.5 overflow-hidden text-base font-medium rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800
+            <%= tag.div class: "mobile-menu__action flex justify-center" do %>
+                <%= link_to new_company_registration_path, class: "mobile-menu__cta relative inline-flex items-center justify-center p-0.5 overflow-hidden text-base font-medium rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800
                 #{current_page?(new_company_registration_path) ? 'text-gray-900' : 'text-gray-600'}" do %>
-                  <span class="relative px-4 py-1.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  <span class="mobile-menu__cta-label relative px-4 py-1.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                       <%= t('company.sign_up.link')%>
                   </span>
                 <% end %>
             <% end unless user_signed_in?%>
-        </div>
       </div>
     </div>
 </div>

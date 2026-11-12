@@ -13,6 +13,8 @@ en:
       news:             'News'  
       knowledge_base:   'Knowledge base' 
       about:            'About service'
+      open_menu:        'Open menu'
+      close_menu:       'Close menu'
   # Global
   global:
       save_btn:         "Save"

@@ -13,6 +13,8 @@ uk:
       news:             'Новини'
       knowledge_base:   'База знань'
       about:            'Про сервіс'
+      open_menu:        'Відкрити меню'
+      close_menu:       'Закрити меню'
   # Global
   global:
       save_btn:         "Зберегти"

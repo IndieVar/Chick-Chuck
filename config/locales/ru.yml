@@ -13,6 +13,8 @@ ru:
       news:             'Новости'
       knowledge_base:   'База знаний'
       about:            'О сервисе'
+      open_menu:        'Открыть меню'
+      close_menu:       'Закрыть меню'
   # Global
   global:
       save_btn:         "Сохранить"

@@ -1,8 +1,15 @@
 <!-- Comments section-->
-<section class="w-full flex flex-col my-6">
+<% profile_page = controller_name == 'users' && action_name == 'show' %>
+<section class="w-full flex flex-col my-6 <%= 'company-profile__reviews' if profile_page %>">
     <!-- Title -->
-    <%= tag.h3 "#{t('review.reviews')}: #{@reviews_count}", 
-        class: "my-5 text-2xl font-semibold text-gray-900 text-center col-span-full", id: 'reviews'%>
+    <%= tag.h3 class: "my-5 text-2xl font-semibold text-gray-900 text-center col-span-full #{'company-profile__reviews-title' if profile_page}", id: 'reviews' do %>
+        <% if profile_page %>
+            <%= tag.span t('review.reviews') %>
+            <%= tag.span @reviews_count, class: 'company-profile__reviews-count' %>
+        <% else %>
+            <%= "#{t('review.reviews')}: #{@reviews_count}" %>
+        <% end %>
+    <% end %>
     <!-- Reviews list -->
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="reviews_list">
         <%= render partial: 'feedbacks/reviews/review', collection: @reviews%>

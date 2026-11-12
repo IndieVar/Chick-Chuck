@@ -1,9 +1,10 @@
 
-<div class="flex items-center space-y-4 sm:space-y-0 flex-row flex-wrap">
+<% profile_page = controller_name == 'users' && action_name == 'show' %>
+<div class="flex items-center space-y-4 sm:space-y-0 flex-row flex-wrap <%= 'company-profile__header' if profile_page %>">
     <!-- Title -->
-    <%= tag.h1 class: "text-2xl font-semibold text-gray-800 flex flex-col ltr:mr-4 rtl:ml-4" do %>
+    <%= tag.h1 class: "text-2xl font-semibold text-gray-800 flex flex-col ltr:mr-4 rtl:ml-4 #{'company-profile__title' if profile_page}" do %>
            <%= tag.span page_title, class: 'text-sm text-gray-500'%>
-           <%= tag.span company.title, class: ' hover:underline' %>
+           <%= tag.span company.title, class: "hover:underline #{'company-profile__name' if profile_page}" %>
     <% end %>
     <!-- Message -->
     <%= form_with model: Room.new, remote: true, data: {turbo_frame: user_signed_in? ? '_top' : 'modal'},

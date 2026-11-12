@@ -1,6 +1,7 @@
+<% profile_page = controller_name == 'users' && action_name == 'show' %>
 <%= turbo_frame_tag image do %>
     <div
-        class="duration-700 ease-in-out absolute inset-0 transition-all text-center"
+        class="duration-700 ease-in-out absolute inset-0 transition-all text-center <%= 'company-profile__carousel-slide' if profile_page %>"
         data-carousel-target="slide"
     >
         <% if user_signed_in? && ['edit', 'update'].include?(action_name) %>
@@ -15,15 +16,15 @@
         
         <% if ['show', 'edit', 'update'].include?(action_name) %>
             <%= link_to carrierwave_image_path(image), data: {turbo_frame: 'modal'} do %>
-                <%= image_tag(action_name != 'index' ? image.file.large.url : image.file.medium.url, 
-                    class: "rounded-t-lg h-full w-full object-cover absolute block cursor-zoom-in", 
+                <%= image_tag(action_name != 'index' ? image.file.large.url : image.file.medium.url,
+                    class: "rounded-t-lg h-full w-full object-cover absolute block cursor-zoom-in #{'company-profile__carousel-image' if profile_page}",
                     alt: "#{object.title}")
                 %>
             <% end %>
         <% else %>
             <%= link_to object, data: {turbo_frame: '_top'} do %>
-                <%= image_tag(action_name != 'index' ? image.file.large.url : image.file.medium.url, 
-                    class: "rounded-t-lg h-full w-full object-cover absolute block ", 
+                <%= image_tag(action_name != 'index' ? image.file.large.url : image.file.medium.url,
+                    class: "rounded-t-lg h-full w-full object-cover absolute block #{'company-profile__carousel-image' if profile_page}",
                     alt: "#{object.title}")
                 %>
             <% end %>

@@ -1,25 +1,26 @@
+<% profile_page = controller_name == 'users' && action_name == 'show' %>
 <%= turbo_frame_tag review, itemprop: "review", itemscope: '', itemtype: "https://schema.org/Review", 
-    class: "border p-4 rounded-lg shadow-md hover:shadow-lg bg-gray-100" do%>
-    <article>
+    class: "border p-4 rounded-lg shadow-md hover:shadow-lg bg-gray-100 #{'company-profile__review' if profile_page}" do%>
+    <article class="#{'company-profile__review-content-wrap' if profile_page}">
         <!-- Author -->
-        <div class="flex items-center mb-4 space-x-4">
-            <%= image_tag(review.user.avatar_thumb, class: "w-10 h-10 rounded-full object-cover", alt: review.user.user_name) %>
-            <div class="space-y-1 font-medium dark:text-white">
+        <div class="flex items-center mb-4 space-x-4 #{'company-profile__review-header' if profile_page}">
+            <%= image_tag(review.user.avatar_thumb, class: "w-10 h-10 rounded-full object-cover #{'company-profile__review-avatar' if profile_page}", alt: review.user.user_name) %>
+            <div class="space-y-1 font-medium dark:text-white #{'company-profile__review-author' if profile_page}">
                 <p>
                     <%= tag.span review.user.user_name, itemprop: "author"%>
                     <%= tag.time review.user.decorate.created_at, datetime: review.user.decorate.created_at, 
-                        class: "block text-sm text-gray-500 dark:text-gray-400" %>
+                        class: "block text-sm text-gray-500 dark:text-gray-400 #{'company-profile__review-registration' if profile_page}" %>
                 </p>
             </div>
         </div>
         <!-- Stars -->
-        <%= tag.h3 review.title, class: "font-semibold text-gray-900 dark:text-white" %>
-        <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="flex items-center my-1">
+        <%= tag.h3 review.title, class: "font-semibold text-gray-900 dark:text-white #{'company-profile__review-title' if profile_page}" %>
+        <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="flex items-center my-1 #{'company-profile__review-rating' if profile_page}">
             <% 1.upto(5) do |i| %>
                 <%= heroicon 'star', variant: 'solid',
                     class: "w-5 h-5 #{review_star_color(review.rating, i)}" %>
             <% end %>
-            <%= tag.p t('review.out_of_html', count: review.rating), class: "ml-2 text-sm font-medium text-gray-500" %>
+            <%= tag.p t('review.out_of_html', count: review.rating), class: "ml-2 text-sm font-medium text-gray-500 #{'company-profile__review-score' if profile_page}" %>
         </div>
         <!-- Price -->
         <!-- <div class="flex items-center mb-1">
@@ -29,10 +30,10 @@
             <% end %>
         </div> -->
         <!-- Created_at -->
-        <footer class="mb-5 text-sm text-gray-500 dark:text-gray-400">
+        <footer class="mb-5 text-sm text-gray-500 dark:text-gray-400 #{'company-profile__review-date' if profile_page}">
             <p><time datetime="<%= review.decorate.created_at%>"><%= review.decorate.created_at%></time></p>
         </footer>
         <!-- Content -->
-        <%= tag.p review.content, itemprop: "description", class: "mb-2 text-gray-500 dark:text-gray-400" %>
+        <%= tag.p review.content, itemprop: "description", class: "mb-2 text-gray-500 dark:text-gray-400 #{'company-profile__review-text' if profile_page}" %>
     </article>
 <% end %>

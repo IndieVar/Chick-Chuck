@@ -40,5 +40,6 @@ en:
             slogan_length:    "%{length} characters maximum"
         gallery:          
             title:        "Gallery"
+            images_count: "Photos: %{count}"
             view_btn:     "View the gallery"
             desc:         "Note: Here you can upload photos for your portfolio, for example, your fleet and your team."

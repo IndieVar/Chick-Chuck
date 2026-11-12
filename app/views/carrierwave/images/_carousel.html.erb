@@ -1,8 +1,9 @@
 <!-- Truck Carousel -->
+<% profile_page = controller_name == 'users' && action_name == 'show' %>
 <%= turbo_frame_tag "carousel" do %>
-    <div id="indicators-carousel" class="relative" data-controller="carousel">
+    <div id="indicators-carousel" class="relative <%= 'company-profile__carousel' if profile_page %>" data-controller="carousel">
         <!-- Carousel wrapper -->
-        <%= tag.div class: "#{(['show', 'edit', 'update'].include?(action_name) && controller_name != 'companies' ? 'h-[16rem] lg:h-[24rem]' : 'h-[16rem]')} relative overflow-hidden rounded-lg" do %>
+        <%= tag.div class: "#{(['show', 'edit', 'update'].include?(action_name) && controller_name != 'companies' ? 'h-[16rem] lg:h-[24rem]' : 'h-[16rem]')} relative overflow-hidden rounded-lg #{'company-profile__carousel-track' if profile_page}" do %>
             <% object.images.each do |image| %>
                 <%= render 'carrierwave/images/image', image: image, path: image_path(image, object), object: object %>
             <% end %>
@@ -10,26 +11,27 @@
    
        <% if object.images.present? && object.images.count > 1 %>
             <!-- Slider indicators -->
-            <div class="absolute z-10 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
+            <div class="absolute z-10 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2 <%= 'company-profile__carousel-indicators' if profile_page %>">
                 <% object.images.each_with_index do |image, index| %>
-                    <button 
-                        type="button" 
-                        class="w-3 h-3 mx-1 rounded-full dark:bg-white bg-gray-800" 
-                        aria-current="<%= index == 0 ? 'true' : 'false' %>" 
-                        aria-label="Slide <%= index %>" 
+                    <button
+                        type="button"
+                        class="w-3 h-3 mx-1 rounded-full dark:bg-white bg-gray-800 <%= 'company-profile__carousel-indicator' if profile_page %>"
+                        aria-current="<%= index == 0 ? 'true' : 'false' %>"
+                        aria-label="Slide <%= index %>"
                         data-carousel-index-value="<%= index %>"
+                        data-action="<%= 'carousel#select' if profile_page %>"
                     ></button>
                 <% end %>
             </div>
 
             <!-- Slider controls -->
-            <button type="button" class="absolute top-0 left-0 z-10 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-action="carousel#previous">
+            <button type="button" class="absolute top-0 left-0 z-10 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none <%= 'company-profile__carousel-control' if profile_page %>" data-action="carousel#previous">
                 <span class="inline-flex items-center justify-center w-6 h-6 rounded-full dark:bg-white/30 bg-gray-600/60 dark:group-hover:bg-white/50 group-hover:bg-gray-800 group-focus:ring-4 dark:group-focus:ring-white group-focus:ring-gray-800/70 group-focus:outline-none">
                     <svg aria-hidden="true" class="w-5 h-5 text-gray-400 hover:text-gray-100 sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                     <span class="sr-only">Previous</span>
                 </span>
             </button>
-            <button type="button" class="absolute top-0 right-0 z-10 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-action="carousel#next">
+            <button type="button" class="absolute top-0 right-0 z-10 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none <%= 'company-profile__carousel-control' if profile_page %>" data-action="carousel#next">
                 <span class="inline-flex items-center justify-center w-6 h-6 rounded-full dark:bg-white/30 bg-gray-600/60 dark:group-hover:bg-white/50 group-hover:bg-gray-800 group-focus:ring-4 dark:group-focus:ring-white group-focus:ring-gray-800/70 group-focus:outline-none">
                     <svg aria-hidden="true" class="w-5 h-5 text-gray-400 hover:text-gray-100 sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     <span class="sr-only">Next</span>

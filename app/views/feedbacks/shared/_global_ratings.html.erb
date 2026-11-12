@@ -1,6 +1,6 @@
 <% company_decorator = company.decorate %>
 <%= turbo_frame_tag dom_id(company, "global_ratings"), 
-    class: "mt-3 -mb-3 w-full md:w-2/3 mx-auto gap-4 grid grid-cols-1 md:grid-cols-2 bg-gray-100 px-1 py-4 border rounded-xl shadow-md hover:shadow-lg" do %>
+    class: "mt-3 -mb-3 w-full md:w-2/3 mx-auto gap-4 grid grid-cols-1 md:grid-cols-2 bg-gray-100 px-1 py-4 border rounded-xl shadow-md hover:shadow-lg #{'company-profile__global-ratings' if controller_name == 'users' && action_name == 'show'}" do %>
     <!-- Rating stars -->
     <div class="flex flex-col justify-center mb-3 space-y-4">
         <% if company.rating.positive? %>

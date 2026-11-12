@@ -22,6 +22,10 @@ export default class extends Controller {
     }
   }
 
+  select(event) {
+    this.indexValue = event.currentTarget.dataset.carouselIndexValue
+  }
+
   indexValueChanged() {
     this.showCurrentSlide()
   }
@@ -29,6 +33,9 @@ export default class extends Controller {
   showCurrentSlide() {
     this.slideTargets.forEach((element, index) => {
       element.hidden = index != this.indexValue
+    })
+    this.element.querySelectorAll("[data-carousel-index-value]").forEach((indicator) => {
+      indicator.setAttribute("aria-current", Number(indicator.dataset.carouselIndexValue) === this.indexValue)
     })
   }
 }

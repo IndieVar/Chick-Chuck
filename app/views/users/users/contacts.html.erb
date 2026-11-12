@@ -1,36 +1,61 @@
 <% currently_at 'Contacts'%>
 <% provide :page_title, 'Contacts'%>
 
-<%= render TurboProfileComponent.new(title: t('contacts'), user: @user) do %>
-    <!-- Contacts -->
-    <%= tag.div class: "flex justify-center items-center mt-3" do %>
-        <div class="grid grid-cols-1 justify-center items-center mb-3 rounded-md gap-0.5" role="group">
-            <%= tag.span t('contacts_desc_html'), class: 'text-gray-500 text-center mb-6' if @user.instance_of?(Company)%>
-            <!-- Additional Phone number -->
-            <%= button_tag itemprop: "telephone", 
-                class: "w-full inline-flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-600 bg-transparent 
-                rounded border border-gray-300 hover:bg-gray-200 hover:text-gray-900 space-x-2 rtl:space-x-reverse" do%>
-                <%= heroicon 'phone-arrow-down-left', class: "w-4 h-4"%>
-                <%= link_to @user.formatted_additional_phone, "tel:#{@user.additional_phone}", target: "_blank"%>
-            <% end if @user.additional_phone.present?%>
-            <!-- What's App -->
-            <%= button_tag class: "w-full inline-flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-600 bg-transparent 
-                border rounded border-gray-300 hover:bg-gray-200 hover:text-gray-900 space-x-2 rtl:space-x-reverse" do%>
-                <%= image_tag(asset_path('icons/icons8-whatsapp-48.png'), class: 'w-5 h-5')%>
-                <%= link_to @user.formatted_whatsapp, "https://wa.me/#{@user.whatsapp.delete_prefix('+')}", target: "_blank"%>
-            <% end if @user.whatsapp.present?%>
-            <!-- Telegram -->
-            <%= button_tag class: "w-full inline-flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-600 bg-transparent 
-                rounded border border-gray-300 hover:bg-gray-200 hover:text-gray-900 space-x-2 rtl:space-x-reverse" do%>
-                <%= image_tag(asset_path('icons/icons8-telegram-app-48.png'), class: 'w-5 h-5')%>
-                <%= link_to @user.telegram, "https://telegram.me/#{@user.telegram.split(/@/).last}", target: "_blank"%>
-            <% end if @user.telegram.present?%>
-            <!-- Facebook -->
-            <%= button_tag class: "w-full inline-flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-600 bg-transparent 
-                rounded border border-gray-300 hover:bg-gray-200 hover:text-gray-900 space-x-2 rtl:space-x-reverse" do%>
-                <%= image_tag(asset_path('icons/icons8-facebook-48.png'), class: 'w-5 h-5')%>
-                <%= link_to '@' + @user.user_name, @user.facebook, target: "_blank"%>
-            <% end if @user.facebook.present?%>
+<%= render TurboProfileComponent.new(title: t('contacts'), user: @user, modal_class: 'contacts-modal') do %>
+    <div class="contacts-modal__content">
+        <%= tag.div class: 'contacts-modal__notice' do %>
+            <%= heroicon 'information-circle', class: 'contacts-modal__notice-icon' %>
+            <%= tag.p t('contacts_desc_html') %>
+        <% end if @user.instance_of?(Company) %>
+
+        <div class="contacts-modal__list" role="group">
+            <% if @user.additional_phone.present? %>
+                <%= link_to "tel:#{@user.additional_phone}", itemprop: 'telephone', class: 'contacts-modal__item contacts-modal__item--phone' do %>
+                    <span class="contacts-modal__icon">
+                        <%= heroicon 'phone-arrow-down-left', class: 'w-5 h-5' %>
+                    </span>
+                    <span class="contacts-modal__details">
+                        <span class="contacts-modal__label"><%= t('activerecord.attributes.user.additional_phone') %></span>
+                        <strong dir="ltr"><%= @user.formatted_additional_phone %></strong>
+                    </span>
+                <% end %>
+            <% end %>
+
+            <% if @user.whatsapp.present? %>
+                <%= link_to "https://wa.me/#{@user.whatsapp.delete_prefix('+')}", target: '_blank', rel: 'noopener noreferrer', class: 'contacts-modal__item contacts-modal__item--whatsapp' do %>
+                    <span class="contacts-modal__icon">
+                        <%= image_tag asset_path('icons/icons8-whatsapp-48.png'), alt: 'WhatsApp' %>
+                    </span>
+                    <span class="contacts-modal__details">
+                        <span class="contacts-modal__label">WhatsApp</span>
+                        <strong dir="ltr"><%= @user.formatted_whatsapp %></strong>
+                    </span>
+                <% end %>
+            <% end %>
+
+            <% if @user.telegram.present? %>
+                <%= link_to "https://telegram.me/#{@user.telegram.split(/@/).last}", target: '_blank', rel: 'noopener noreferrer', class: 'contacts-modal__item contacts-modal__item--telegram' do %>
+                    <span class="contacts-modal__icon">
+                        <%= image_tag asset_path('icons/icons8-telegram-app-48.png'), alt: 'Telegram' %>
+                    </span>
+                    <span class="contacts-modal__details">
+                        <span class="contacts-modal__label">Telegram</span>
+                        <strong dir="ltr"><%= @user.telegram %></strong>
+                    </span>
+                <% end %>
+            <% end %>
+
+            <% if @user.facebook.present? %>
+                <%= link_to @user.facebook, target: '_blank', rel: 'noopener noreferrer', class: 'contacts-modal__item contacts-modal__item--facebook' do %>
+                    <span class="contacts-modal__icon">
+                        <%= image_tag asset_path('icons/icons8-facebook-48.png'), alt: 'Facebook' %>
+                    </span>
+                    <span class="contacts-modal__details">
+                        <span class="contacts-modal__label">Facebook</span>
+                        <strong dir="ltr"><%= "@#{@user.user_name}" %></strong>
+                    </span>
+                <% end %>
+            <% end %>
         </div>
-    <% end %>
+    </div>
 <% end %>

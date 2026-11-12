@@ -6,7 +6,9 @@ export default class extends Controller {
   // hide modal
   // action: "turbo-modal#hideModal"
   hideModal() {
-    this.element.parentElement.removeAttribute("src")
+    const frame = this.element.parentElement
+    frame.querySelector(".contacts-modal__backdrop")?.remove()
+    frame.removeAttribute("src")
     // Remove src reference from parent frame element
     // Without this, turbo won't re-open the modal on subsequent click
     this.modalTarget.remove()

@@ -1,13 +1,17 @@
 <%= turbo_frame_tag "modal" do %>
+  <% if @modal_class == 'contacts-modal' %>
+    <div class="contacts-modal__backdrop" aria-hidden="true"></div>
+  <% end %>
   <%= tag.div data: { 
       controller: "turbo-modal", 
       action: "turbo:submit-end->turbo-modal#submitEnd keyup@window->turbo-modal#closeWithKeyboard click@window->turbo-modal#closeBackground",
       turbo_modal_target: "modal"},
       class: "overflow-y-auto overflow-x-hidden max-h-[40rem] justify-center items-center shadow-md hover:shadow-xl rounded-lg
-              fixed w-4/5 sm:w-2/3 md:w-auto top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 mx-auto" do 
+              fixed w-4/5 sm:w-2/3 md:w-auto top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 mx-auto
+              #{'contacts-modal' if @modal_class == 'contacts-modal'}" do
   %>
-      <div class="relative p-6 w-full max-w-lg h-full sm:h-auto bg-gray-50 border rounded-lg">
-        <div class="text-center mx-2 h-auto">
+      <div class="relative p-6 w-full max-w-lg h-full sm:h-auto bg-gray-50 border rounded-lg <%= 'contacts-modal__panel' if @modal_class == 'contacts-modal' %>">
+        <div class="text-center mx-2 h-auto <%= 'contacts-modal__header' if @modal_class == 'contacts-modal' %>">
             <!-- Title -->
             <%= tag.h1 class: "z-10 w-full flex flex-col justify-center font-medium text-center text-gray-800 mx-auto" do %>
                 <%= tag.span @title, class: 'text-xl text-gray-500'%>

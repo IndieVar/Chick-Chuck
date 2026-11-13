@@ -16,6 +16,23 @@ export default class extends Controller {
     this.filterOptions(this.districtTarget, this.cityTarget, "districtId")
   }
 
+  syncCategory() {
+    this.syncParent(this.thingTarget, this.categoryTarget, "categoryId")
+  }
+
+  syncDistrict() {
+    this.syncParent(this.cityTarget, this.districtTarget, "districtId")
+  }
+
+  // Picks the parent automatically when only the child is selected
+  syncParent(childSelect, parentSelect, dataKey) {
+    const parentId = childSelect.selectedOptions[0]?.dataset[dataKey]
+    if (!childSelect.value || !parentId || parentSelect.value === parentId) return
+
+    parentSelect.value = parentId
+    parentSelect.dispatchEvent(new Event("change", { bubbles: true }))
+  }
+
   filterOptions(parentSelect, childSelect, dataKey) {
     const parentId = parentSelect.value
     let selectedOptionHidden = false
@@ -28,6 +45,9 @@ export default class extends Controller {
       if (!visible && option.selected) selectedOptionHidden = true
     })
 
-    if (selectedOptionHidden) childSelect.value = ""
+    if (selectedOptionHidden) {
+      childSelect.value = ""
+      childSelect.dispatchEvent(new Event("change", { bubbles: true }))
+    }
   }
 }

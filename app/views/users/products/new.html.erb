@@ -1,16 +1,12 @@
 <% currently_at t('product.add_btn') %>
 <% provide :page_title, t('product.add_btn') %>
-<% provide :main_title, t('product.add_btn') %>
 <% provide :parent_title, t('product.my_products') %>
 <% provide :parent_path, users_products_path %>
 <% provide :nav_title, t('product.add_btn') %>
 <% provide :nav_path, new_users_product_path %>
 
-<!-- Form new truck -->
-<%= render "form" %>
-
-<%= link_to t('product.my_products'), users_products_path, 
-    class: "mt-6 rounded-lg py-3 px-5 bg-gray-100 hover:bg-gray-200 inline-block font-medium"
-%>
-
-
+<div class="pform-page">
+    <%= render 'hero', title: t('product.add_btn'), icon: 'plus-circle' %>
+    <!-- Form new product -->
+    <%= render "form" %>
+</div>

@@ -18,7 +18,7 @@
             <% else %>
                 <%= f.grouped_collection_select(:thing_id, @categories, :things, :title, :id, I18n.locale, 
                 { include_blank: Product.human_attribute_name('thing'), selected: params[:thing_id]}, 
-                {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 rtl:bg-left"})%>
+                {data: { controller: 'parent-select', parent_select_parent_value: 'category_id', action: 'change->parent-select#sync' }, class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 rtl:bg-left"})%>
             <% end %>
         </div>
         <!-- District -->
@@ -38,7 +38,7 @@
             <% else %>
                 <%= f.grouped_collection_select(:city_id, @districts, :cities, :title, :id, I18n.locale, 
                 { include_blank: Product.human_attribute_name('city'), selected: params[:city_id]}, 
-                {onchange: 'this.form.submit()', class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 rtl:bg-left"})%>
+                {data: { controller: 'parent-select', parent_select_parent_value: 'district_id', action: 'change->parent-select#sync' }, class: "h-full text-base md:rounded-l-xl block w-full p-2.5 hover:text-gray-900 focus:ring-0 focus:border-gray-100 focus:text-gray-900 border-0 rtl:bg-left"})%>
             <% end %>
         </div>
         <!-- Condition -->

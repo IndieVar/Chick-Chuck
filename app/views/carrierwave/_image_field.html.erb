@@ -1,25 +1,17 @@
 <!-- Image field -->
-<div class="mt-6 grid grid-rows-1 text-center items-center justify-center">
-    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-      <div class="space-y-1 text-center">
-        <%= label_tag "#{imageable.class.name.downcase.split('decorator').first}_file", class: "cursor-pointer" do %>
-            <svg class="mx-auto h-12 w-12 text-gray-700" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-              <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <div class="text-gray-700 mt-1 mb-2 justify-center text-center text-base" data-controller="image" id="Img">
-                <span class="relative rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-                    <%= t(imageable.images.present? ? 'global.update' : 'global.upload', model: t('global.images'))%>
-                </span>
-                    <%= form.fields_for :images, Image.new do |image| %>
-                        <%= image.file_field :file, multiple: true, name: "images[file][]", 
-                            id: "#{imageable.class.name.downcase.split('decorator').first}_file",
-                            class: "sr-only", accept: "image/png, image/jpeg, image/jpg", "data-image-target": "input", "data-action": "image#preview" %>
-                    <% end %>
-            </div>
-            <p class="text-xs text-gray-700">
-              PNG, JPG, GIF up to 10MB
-            </p>
-        <% end %>
-      </div>
-    </div>
+<div class="upload-zone">
+    <%= label_tag "#{imageable.class.name.downcase.split('decorator').first}_file", class: "upload-zone__label" do %>
+        <%= heroicon 'photo', class: 'upload-zone__icon' %>
+        <div class="upload-zone__action" data-controller="image" id="Img">
+            <span class="upload-zone__text">
+                <%= t(imageable.images.present? ? 'global.update' : 'global.upload', model: t('global.images'))%>
+            </span>
+            <%= form.fields_for :images, Image.new do |image| %>
+                <%= image.file_field :file, multiple: true, name: "images[file][]",
+                    id: "#{imageable.class.name.downcase.split('decorator').first}_file",
+                    class: "sr-only", accept: "image/png, image/jpeg, image/jpg", "data-image-target": "input", "data-action": "image#preview" %>
+            <% end %>
+        </div>
+        <p class="upload-zone__hint">PNG, JPG, GIF up to 10MB</p>
+    <% end %>
 </div>

@@ -25,3 +25,5 @@ application.register('scroll-to', ScrollTo)
 // Reveal controller
 import Reveal from 'stimulus-reveal-controller'
 application.register('reveal', Reveal)
+// Searchable selects
+import "controllers/select_enhancer"

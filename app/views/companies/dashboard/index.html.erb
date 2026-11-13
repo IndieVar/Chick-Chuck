@@ -1,51 +1,55 @@
 <% currently_at t('user_menu.dashboard') %>
 <% provide :page_title, t('user_menu.dashboard') %>
-<% provide :main_title, t('user_menu.dashboard')%>
 
 <!-- Load Facebook SDK for JavaScript -->
 <%= render 'shared/buttons/facebook_sdk_js'%>
 
-<div class="space-y-3">
-    <!-- Profile content -->
-    <div class="flex justify-center">
-        <!-- Rating -->
-        <%= link_to user_path(@company), class: "flex w-full" do %>
-          <%= render 'feedbacks/shared/rating', object: @company %>
-        <% end %>
-    </div>
-    <!-- Share facebook button -->
-    <div class="flex items-center flex-col justify-center space-y-2 space-x-2 rtl:space-x-reverse">
-        <%= tag.p t('dashboard.share_facebook'), 
-            class: "text-base text-gray-500 text-center"%>
-        <!-- Your share button code -->
-        <div data-turbo-permanent class="fb-share-button flex items-center" 
-        data-href="<%= user_url(@company) %>" 
-        data-layout="button_count"
-        data-size="large">
+<div class="cdash">
+    <!-- Profile summary -->
+    <%= link_to user_path(@company), data: { turbo: false }, class: "cdash-hero" do %>
+        <%= image_tag(@company.avatar_thumb, class: "cdash-hero__avatar", alt: "user-avatar") %>
+        <div class="cdash-hero__body">
+            <h1 class="cdash-hero__title"><%= t('user_menu.dashboard') %></h1>
+            <p class="cdash-hero__name"><%= @company.user_name %></p>
         </div>
-    </div>
+        <!-- Rating -->
+        <div class="cdash-rating">
+            <%= heroicon 'star', variant: 'solid', class: "cdash-rating__star #{total_star_rating_color(@company.rating) if @company.rating.positive?}" %>
+            <% if @company.rating.positive? %>
+                <span class="cdash-rating__value"><%= number_with_precision(@company.rating, precision: 1) %></span>
+                <%= heroicon 'user', class: "cdash-rating__user" %>
+                <span class="cdash-rating__count"><%= @company.reviews.count %></span>
+            <% else %>
+                <span class="cdash-rating__empty"><%= t('review.no_feedback') %></span>
+            <% end %>
+        </div>
+    <% end %>
 
-    <section class="mt-3 grid md:grid-cols-2 xl:grid-cols-4 gap-6">
-        <!-- Products -->
-        <%= link_to user_path(@company), data: { turbo: false },
-            class: "flex items-center p-8 bg-white shadow-md hover:shadow-lg rounded-lg" do %>
-          <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
-            <%= heroicon 'user-group', class: 'h-7 w-7'%>
-          </div>
-          <div>
-            <%= tag.span @company.views, class: "block text-2xl font-bold" %>
-            <%= tag.span t('dashboard.visitors'), class: "block text-gray-500 hover:text-gray-900" %>
-          </div>
+    <!-- Stats -->
+    <section class="cdash-stats">
+        <%= link_to user_path(@company), data: { turbo: false }, class: "cdash-stat" do %>
+            <span class="cdash-stat__icon"><%= heroicon 'user-group', class: 'h-6 w-6' %></span>
+            <span class="cdash-stat__text">
+                <%= tag.span @company.views, class: "cdash-stat__value" %>
+                <%= tag.span t('dashboard.visitors'), class: "cdash-stat__label" %>
+            </span>
         <% end %>
-        <!-- Products -->
-        <%= link_to users_products_path, class: "flex items-center p-8 bg-white shadow-md hover:shadow-lg rounded-lg" do %>
-          <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
-            <%= heroicon 'shopping-bag', class: 'h-7 w-7'%>
-          </div>
-          <div>
-            <%= tag.span @products.count, class: "block text-2xl font-bold" %>
-            <%= tag.span t('dashboard.sold_products'), class: "block text-gray-500 hover:text-gray-900" %>
-          </div>
+        <%= link_to users_products_path, class: "cdash-stat" do %>
+            <span class="cdash-stat__icon cdash-stat__icon--teal"><%= heroicon 'shopping-bag', class: 'h-6 w-6' %></span>
+            <span class="cdash-stat__text">
+                <%= tag.span @products.count, class: "cdash-stat__value" %>
+                <%= tag.span t('dashboard.sold_products'), class: "cdash-stat__label" %>
+            </span>
         <% end %>
     </section>
+
+    <!-- Share facebook button -->
+    <div class="cdash-share">
+        <%= tag.p t('dashboard.share_facebook'), class: "cdash-share__text" %>
+        <div data-turbo-permanent class="fb-share-button flex items-center"
+            data-href="<%= user_url(@company) %>"
+            data-layout="button_count"
+            data-size="large">
+        </div>
+    </div>
 </div>

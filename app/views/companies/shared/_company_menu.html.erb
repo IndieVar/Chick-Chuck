@@ -2,7 +2,7 @@
 <hr>
 <!-- Dashboard page -->
 <%= link_to companies_dashboard_path,
-   class: link_class,
+   class: [link_class, ("is-active" if current_page?(companies_dashboard_path))],
    data: { turbo: false, action: "dropdown#toggle"},
    tabindex:"-1",
    id:"profilePageLink" do
@@ -13,8 +13,8 @@
 
 <hr>
 <!-- Chats -->
-<%= link_to rooms_path, 
-   class: link_class, 
+<%= link_to rooms_path,
+   class: [link_class, ("is-active" if current_page?(rooms_path))], 
    data: {action: "dropdown#toggle"}, 
    tabindex:"-1",
    id:"profilePageLink" do
@@ -24,8 +24,8 @@
 <% end %>
 
 <!-- Calculator -->
-<%= link_to companies_prices_path, 
-   class: link_class, 
+<%= link_to companies_prices_path,
+   class: [link_class, ("is-active" if current_page?(companies_prices_path))], 
    data: { action: "dropdown#toggle" }, 
    tabindex:"-1",
    id:"profilePageLink" do
@@ -36,8 +36,8 @@
 
 <hr>
 <!-- New product -->
-<%= link_to new_users_product_path, 
-   class: link_class, 
+<%= link_to new_users_product_path,
+   class: [link_class, ("is-active" if current_page?(new_users_product_path))], 
    data: {action: "dropdown#toggle"}, 
    tabindex:"-1",
    id:"profilePageLink" do
@@ -47,8 +47,8 @@
 <% end %>
 
 <!-- All products -->
-<%= link_to users_products_path, 
-   class: link_class, 
+<%= link_to users_products_path,
+   class: [link_class, ("is-active" if current_page?(users_products_path))], 
    data: { action: "dropdown#toggle" }, 
    tabindex:"-1",
    id:"profilePageLink" do
@@ -60,8 +60,8 @@
 <hr>
 
 <!-- Saved list -->
-<%= link_to users_favorites_path, 
-   class: link_class, 
+<%= link_to users_favorites_path,
+   class: [link_class, ("is-active" if current_page?(users_favorites_path))], 
    data: { action: "dropdown#toggle" }, 
    tabindex:"-1",
    id:"profilePageLink" do
@@ -72,8 +72,8 @@
 
 <hr>
 <!-- Personal Info -->
-<%= link_to companies_gallery_path, 
-  class: link_class, 
+<%= link_to companies_gallery_path,
+  class: [link_class, ("is-active" if current_page?(companies_gallery_path))], 
   data: {action: "dropdown#toggle"}, 
   tabindex:"-1",
   id:"personalInfoLink" do
@@ -83,8 +83,8 @@
 <% end %>
 
 <!-- Personal Info -->
-<%= link_to companies_edit_profile_path, 
-  class: link_class, 
+<%= link_to companies_edit_profile_path,
+  class: [link_class, ("is-active" if current_page?(companies_edit_profile_path))], 
   data: {action: "dropdown#toggle"}, 
   tabindex:"-1",
   id:"personalInfoLink" do
@@ -94,8 +94,8 @@
 <% end %>
 
 <!-- Company Info -->
-<%= link_to companies_edit_company_info_path, 
-  class: link_class, 
+<%= link_to companies_edit_company_info_path,
+  class: [link_class, ("is-active" if current_page?(companies_edit_company_info_path))], 
   data: {action: "dropdown#toggle"}, 
   tabindex:"-1",
   id:"personalInfoLink" do
@@ -105,8 +105,8 @@
 <% end %>
 
 <!-- Credential Info -->
-<%= link_to edit_company_registration_path, 
-  class: link_class, 
+<%= link_to edit_company_registration_path,
+  class: [link_class, ("is-active" if current_page?(edit_company_registration_path))], 
   data: { action: "dropdown#toggle" }, 
   tabindex:"-1",
   id:"password&SecurityLink" do 
@@ -117,8 +117,8 @@
 
 <hr>
 <!-- Sign Out -->
-<%= link_to destroy_company_session_path, 
-  class: link_class,
+<%= link_to destroy_company_session_path,
+  class: [link_class, ("is-active" if current_page?(destroy_company_session_path))],
   data: {action: "dropdown#toggle", turbo_method: :delete, turbo_confirm: t('global.are_you_sure')},  
   tabindex:"-1", 
   id:"signOutLink" do 

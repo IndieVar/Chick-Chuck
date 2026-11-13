@@ -20,25 +20,20 @@
       <!-- Header -->
       <%= yield :navbar%>
       <!-- Main -->
-      <main class="w-full mt-20 grid grid-flow-row auto-rows-max grid-cols-4" id="top">
+      <% chat_room = [controller_name, action_name].eql?(['rooms', 'show']) %>
+      <main class="cabinet <%= 'cabinet--chat' if chat_room %>" id="top">
           <!-- Profile sidebar menu -->
-          <%= tag.div (render 'shared/navigations/user_profile_sidebar'), class: "col-span-1 w-full hover:shadow-lg" if user_signed_in?%>
-          <div class="w-full col-span-full lg:col-span-3">
-              <div class="text-gray-700 relative 
-                  <%= [controller_name, action_name].eql?(['rooms', 'show']) ? 'sm:p-4' : 'p-4'%>"
-              >
-                  <!-- Page Navigation -->
-                  <%= render 'shared/navigations/profile_navigation' unless [controller_name, action_name].eql?(['rooms', 'show'])%>
-                  <!-- Flash messages -->
-                  <%= tag.div (render 'shared/flash_messages'), class: 'fixed right-3 sm:right-6 sm:top-20 z-30 sm:max-w-sm', id: "flash_messages"%>
-                  <section class="w-full mx-auto rounded-md shadow-md hover:shadow-lg 
-                      <%= [controller_name, action_name].eql?(['rooms', 'show']) ? 'p-0 h-screen' : 'p-6 min-h-screen'%> "
-                  >
-                      <%= tag.h1 yield(:main_title), class:"mb-6 text-xl font-bold text-gray-700"%>
-                      <!-- Content -->
-                      <%= yield %>
-                  </section>
-              </div>
+          <%= tag.aside (render 'shared/navigations/user_profile_sidebar'), class: "cabinet__sidebar" if user_signed_in? %>
+          <div class="cabinet__main">
+              <!-- Page Navigation -->
+              <%= render 'shared/navigations/profile_navigation' unless chat_room %>
+              <!-- Flash messages -->
+              <%= tag.div (render 'shared/flash_messages'), class: 'fixed right-3 sm:right-6 sm:top-20 z-30 sm:max-w-sm', id: "flash_messages" %>
+              <section class="cabinet__card">
+                  <%= tag.h1 yield(:main_title), class: "cabinet__title" if yield(:main_title).present? %>
+                  <!-- Content -->
+                  <%= yield %>
+              </section>
           </div>
       </main>
       <!-- Footer -->

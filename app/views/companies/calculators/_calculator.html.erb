@@ -1,6 +1,9 @@
 <!-- Company calculator -->
-<%= turbo_frame_tag dom_id(current_company, :calculator), class: 'col-span-full w-full items-center mx-auto grid grid-flow-row gap-6 border-b border-b-gray-300' do %>
-    <%= tag.p t('calculator.company_calculator_html'), class: 'text-center text-gray-500 mb-4 px-4' %>
+<%= turbo_frame_tag dom_id(current_company, :calculator), class: 'pcalc' do %>
+    <div class="pcalc-intro">
+        <%= heroicon 'information-circle', variant: :solid, class: 'pcalc-intro__icon' %>
+        <%= tag.p t('calculator.company_calculator_html'), class: 'pcalc-intro__text' %>
+    </div>
     <!-- Form -->
     <%= render 'companies/calculators/form', model: Calculator.new if current_company.calculator.blank?%>
     <%= render 'companies/calculators/form', model: current_company.calculator if current_company.calculator.present? %>

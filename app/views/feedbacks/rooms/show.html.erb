@@ -7,40 +7,31 @@
 
 <%= turbo_stream_from @room%>
 
-<div class="-mt-8 h-full rounded-lg flex flex-row justify-between bg-gray-50">
-    <!-- Chatting -->
-    <div class="w-full h-full flex flex-col justify-between">
-      <!-- Room header -->
-      <div class="flex items-center w-full justify-center border-b-2 relative">
-          <%= link_to rooms_path, data: {turbo_frame: '_top'}, class: 'absolute ltr:left-3 rtl:right-3' do %>
-              <%= heroicon I18n.locale == :he ? "arrow-uturn-right" : "arrow-uturn-left", class: "w-6 h-6 hover:text-black" %>
-          <% end%>
-          <% if @room.recipient(@current_user).instance_of?(Company) %>
-              <%= link_to user_path(@room.recipient(@current_user)), data: {turbo_frame: '_top'} do %>
-                  <div class="flex flex-row py-4 px-2 items-center space-x-2 rtl:space-x-reverse">
-                      <%= image_tag @room.recipient(@current_user).avatar_thumb, class: "object-cover h-12 w-12 rounded-full"%>
-                      <%= tag.div @room.recipient(@current_user).user_name, class: "text-lg font-semibold"%>
-                  </div>
-              <% end %>
-          <% else %>
-              <div class="flex flex-row py-4 px-2 items-center space-x-2 rtl:space-x-reverse">
-                  <%= image_tag @room.recipient(@current_user).avatar_thumb, class: "object-cover h-12 w-12 rounded-full"%>
-                  <%= tag.div @room.recipient(@current_user).user_name, class: "text-lg font-semibold"%>
-              </div>
-          <% end %>
-      </div>
-      <!-- Messages -->
-      <div class="flex flex-col py-2 h-full overflow-auto"
-          data-controller="scroll"
-          data-scroll-target="messages"
-      >
-          <%= turbo_frame_tag "room_#{@room.id}_messages" do %>
-              <%= render @messages %>
-          <% end %>
-      </div>
-      <!-- Form -->
-      <div class='sticky bottom-0'>
-          <%= render 'feedbacks/messages/form', room: @room, message: @new_message%>
-      </div>
+<% recipient = @room.recipient(@current_user) %>
+<div class="chat">
+    <!-- Room header -->
+    <header class="chat__header">
+        <%= link_to rooms_path, data: {turbo_frame: '_top'}, class: 'chat__back', aria: { label: t('user_menu.chats') } do %>
+            <%= heroicon I18n.locale == :he ? "arrow-right" : "arrow-left", class: "w-5 h-5" %>
+        <% end %>
+        <% peer = capture do %>
+            <%= image_tag recipient.avatar_thumb, class: "chat__avatar", alt: "" %>
+            <%= tag.span recipient.user_name, class: "chat__name" %>
+        <% end %>
+        <% if recipient.instance_of?(Company) %>
+            <%= link_to peer, user_path(recipient), data: {turbo_frame: '_top'}, class: "chat__peer" %>
+        <% else %>
+            <%= tag.div peer, class: "chat__peer" %>
+        <% end %>
+    </header>
+    <!-- Messages -->
+    <div class="chat__messages" data-controller="scroll" data-scroll-target="messages">
+        <%= turbo_frame_tag "room_#{@room.id}_messages" do %>
+            <%= render @messages %>
+        <% end %>
+    </div>
+    <!-- Form -->
+    <div class="chat__form">
+        <%= render 'feedbacks/messages/form', room: @room, message: @new_message%>
     </div>
 </div>

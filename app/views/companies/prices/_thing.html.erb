@@ -1,6 +1,6 @@
-<%= turbo_frame_tag thing, class: "items-center mx-auto w-full grid grid-cols-3 gap-6 border-b border-b-gray-300 text-gray-600 hover:text-gray-800 hover:border-b-gray-500 py-1.5" do %>
+<%= turbo_frame_tag thing, class: "pcalc-row" do %>
     <!-- Title -->
-    <%= tag.div thing.title, class: "col-span-1"%>
+    <%= tag.div thing.title, class: "pcalc-row__title"%>
     <!-- Price -->
     <%= render 'form', thing: thing, model: [thing, Price.new], url: companies_prices_path(thing_id: thing) if price(thing).blank?%>
     <%= render 'form', thing: thing, model: price(thing), url: companies_price_path(price(thing), thing_id: price(thing).thing_id) if price(thing).present? %>

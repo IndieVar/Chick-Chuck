@@ -1,63 +1,27 @@
 <!-- Calculator form -->
-
-<%= form_with model: model, url: companies_calculator_path, class: 'items-center grid grid-cols-2 col-span-full sm:w-[32rem]' do |f|%>
+<%= form_with model: model, url: companies_calculator_path, class: 'pcalc-card' do |f|%>
     <!-- Errors -->
     <%= render 'shared/error_messages', resource: model%>
     <!-- Title -->
-    <%= tag.p t('calculator.options'), class: "text-start col-span-full text-xl font-bold uppercase text-gray-500 border-b border-b-gray-300 mb-4" %>
-    <!-- Distance -->
-    <div class="col-span-2 items-center grid grid-cols-2 text-gray-600 hover:text-gray-800 border-b border-b-gray-300 hover:border-b-gray-500 py-1.5">
-        <%= f.label :distance%>
-        <div class="items-center grid grid-cols-2 gap-3">
-            <%= f.number_field :distance, class: "block sm:w-[8rem] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500", required: true%>
-            <span class="ml-3 text-center flex items-center" id="distance_flash_message"><%= t('calculator.km_span')%>
-                <%= image_tag(asset_path('icons/icons8-done-40.png'), class: 'w-5 h-5 ml-2') if model&.distance&.present?%>
-            </span>
-        </div>
-    </div>
-    <!-- Floor down -->
-    <div class="col-span-2 items-center grid grid-cols-2 text-gray-600 hover:text-gray-800 border-b border-b-gray-300 hover:border-b-gray-500 py-1.5">
-        <%= f.label :floor_down%>
-        <div class="items-center grid grid-cols-2 gap-3">
-            <%= f.number_field :floor_down, class: "block sm:w-[8rem] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500", required: true%>
-            <span class="ml-3 text-center flex items-center"><%= t('calculator.floor_span')%>
-                <%= image_tag(asset_path('icons/icons8-done-40.png'), class: 'w-5 h-5 ml-2') if model&.floor_down&.present?%>
-            </span>
-        </div>
-    </div>
-    <!-- Floor down elevator -->
-    <div class="col-span-2 items-center grid grid-cols-2 text-gray-600 hover:text-gray-800 border-b border-b-gray-300 hover:border-b-gray-500 py-1.5">
-        <%= f.label :floor_down_elevator%>
-        <div class="items-center grid grid-cols-2 gap-3">
-            <%= f.number_field :floor_down_elevator, class: "block sm:w-[8rem] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500", required: true%>
-            <span class="ml-3 text-center flex items-center"><%= t('calculator.floor_span')%>
-                <%= image_tag(asset_path('icons/icons8-done-40.png'), class: 'w-5 h-5 ml-2') if model&.floor_down_elevator&.present?%>
-            </span>
-        </div>
-    </div>
-
-    <!-- Floor up -->
-    <div class="col-span-2 items-center grid grid-cols-2 text-gray-600 hover:text-gray-800 border-b border-b-gray-300 hover:border-b-gray-500 py-1.5">
-        <%= f.label :floor_up%>
-        <div class="items-center grid grid-cols-2 gap-3">
-            <%= f.number_field :floor_up, class: "block sm:w-[8rem] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500", required: true%>
-            <span class="ml-3 text-center flex items-center"><%= t('calculator.floor_span')%>
-                <%= image_tag(asset_path('icons/icons8-done-40.png'), class: 'w-5 h-5 ml-2') if model&.floor_up&.present?%>
-            </span>
-        </div>
-    </div>
-    <!-- Floor up -->
-    <div class="col-span-2 items-center grid grid-cols-2 text-gray-600 hover:text-gray-800 border-b border-b-gray-300 hover:border-b-gray-500 py-1.5">
-        <%= f.label :floor_up_elevator%>
-        <div class="items-center grid grid-cols-2 gap-3">
-            <%= f.number_field :floor_up_elevator, class: "block sm:w-[8rem] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500", required: true%>
-            <span class="ml-3 text-center flex items-center"><%= t('calculator.floor_span')%>
-                <%= image_tag(asset_path('icons/icons8-done-40.png'), class: 'w-5 h-5 ml-2') if model&.floor_up_elevator&.present?%>
-            </span>
-        </div>
+    <%= tag.h2 t('calculator.options'), class: "pcalc-card__title" %>
+    <div class="pcalc-fields">
+        <% [[:distance, t('calculator.km_span')],
+            [:floor_down, t('calculator.floor_span')],
+            [:floor_down_elevator, t('calculator.floor_span')],
+            [:floor_up, t('calculator.floor_span')],
+            [:floor_up_elevator, t('calculator.floor_span')]].each do |field, unit| %>
+            <div class="pcalc-field">
+                <%= f.label field, class: "pcalc-field__label" %>
+                <div class="pcalc-field__control">
+                    <%= f.number_field field, class: "pcalc-input", required: true %>
+                    <span class="pcalc-unit" <%= 'id=distance_flash_message' if field == :distance %>><%= unit %></span>
+                    <%= image_tag(asset_path('icons/icons8-done-40.png'), class: 'pcalc-done', alt: '') if model&.public_send(field).present? %>
+                </div>
+            </div>
+        <% end %>
     </div>
     <!-- Button save -->
-    <div class="col-span-full flex items-center w-full justify-center my-4">
-        <%= f.submit t('global.save_btn'), class: 'text-center py-2 px-3 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300'%>
+    <div class="pcalc-card__actions">
+        <%= f.submit t('global.save_btn'), class: 'pcalc-save' %>
     </div>
 <% end %>

@@ -1,14 +1,12 @@
-<%= turbo_frame_tag category do %>
+<%= turbo_frame_tag category, class: 'pcalc-card' do %>
     <!-- Category title -->
-    <%= tag.div class: 'items-center flex mx-auto my-4 w-full relative border-b border-b-gray-300' do %>
-        <%= tag.p category.title, class: "text-start text-gray-500 text-xl font-bold uppercase" %>
-    <% end %>
+    <%= tag.h2 category.title, class: "pcalc-card__title" %>
     <!-- Things -->
-    <%= tag.div class: "overflow-x-auto mb-4" do %>
-        <div class="grid grid-cols-3 gap-6 bg-gray-200 p-1">
-            <%= tag.div t('price.title'), class: 'col-span-1'%>
-            <%= tag.div t('calculator.price'), class: 'col-span-2'%>
+    <div class="pcalc-table">
+        <div class="pcalc-table__head">
+            <%= tag.div t('price.title') %>
+            <%= tag.div t('calculator.price') %>
         </div>
         <%= render partial: 'companies/prices/thing', collection: category.things.decorate%>
-    <% end %>
+    </div>
 <% end %>

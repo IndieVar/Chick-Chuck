@@ -2,16 +2,23 @@
 <% provide :page_title, t('calculator.title') %>
 <% provide :nav_title, t('calculator.title') %>
 <% provide :nav_path, companies_prices_path %>
-<% provide :main_title, t('calculator.title') %>
 
+<div class="pcalc-page">
+    <!-- Page header -->
+    <header class="pcalc-hero">
+        <div>
+            <span class="pcalc-hero__eyebrow"><%= t('user_menu.dashboard') %></span>
+            <h1 class="pcalc-hero__title"><%= t('calculator.title') %></h1>
+        </div>
+        <span class="pcalc-hero__icon"><%= heroicon 'calculator', class: 'pcalc-hero__svg' %></span>
+    </header>
 
-<%= tag.div class: "grid grid-flow-row auto-rows-max w-full" do %>
-    <!-- Calculator form -->  
+    <!-- Calculator form -->
     <%= render 'companies/calculators/calculator'%>
-    
+
     <!-- Categories table -->
-    <%= turbo_frame_tag 'categories' do %>
+    <%= turbo_frame_tag 'categories', class: 'pcalc' do %>
         <!-- All things -->
         <%= render partial: 'companies/prices/category', collection: @categories%>
     <% end %>
-<% end %>
+</div>

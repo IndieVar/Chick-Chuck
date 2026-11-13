@@ -4,30 +4,26 @@
     <!-- Form -->
     <%= form_with model: [room, message], remote: true, 
         data: { controller: :form, action: "turbo:submit-end->form#clear" } do |form| %>
-        <div class="py-2 px-3 bg-gray-100 rounded-lg shadow-md w-full" data-controller="image" >
-            <span id="Img" class="flex items-center my-2 overflow-x-auto space-x-3"></span>
-          <div class="flex items-center h-12">
+        <div class="chat-form" data-controller="image">
+            <span id="Img" class="chat-form__previews"></span>
+          <div class="chat-form__row">
               <!-- Upload Images -->
-              <button type="button" class="inline-flex justify-center p-2 rounded-lg cursor-pointer text-gray-400 hover:text-white hover:bg-gray-600">
-                    <div class="space-y-1 text-center">
-                      <%= form.label :file, class: "cursor-pointer" do %>
-                          <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg>
-                          <span class="sr-only">Upload image</span>
-                              <%= form.fields_for :images, Image.new do |image| %>
-                                  <%= form.file_field :file, multiple: true, class: "sr-only", name: "images[file][]", 
-                                  accept: "image/png, image/jpeg, image/jpg", "data-image-target": "input", 
-                                  "data-action": "image#comment_preview" %>   
-                              <% end %>
-                      <% end %>
-                    </div>
-              </button>
+              <%= form.label :file, class: "chat-form__attach" do %>
+                  <%= heroicon 'photo', class: "w-6 h-6" %>
+                  <span class="sr-only">Upload image</span>
+                  <%= form.fields_for :images, Image.new do |image| %>
+                      <%= form.file_field :file, multiple: true, class: "sr-only", name: "images[file][]",
+                      accept: "image/png, image/jpeg, image/jpg", "data-image-target": "input",
+                      "data-action": "image#comment_preview" %>
+                  <% end %>
+              <% end %>
               <!-- Room id -->
               <%= form.hidden_field :room_id, value: @room.id %>
               <!-- Message content -->
-              <%= form.text_field :content, id: "chat", autofocus: true, class: "block mx-4 py-1 px-2 w-full h-full items-center text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500", placeholder: t('message.placeholder'), required: true%>
+              <%= form.text_field :content, id: "chat", autofocus: true, autocomplete: 'off', class: "chat-form__input", placeholder: t('message.placeholder'), required: true%>
               <!-- Button submit -->
-              <%= form.button type: 'submit', class: "inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600", data: { disable_with: false }  do %>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 rtl:rotate-180">
+              <%= form.button type: 'submit', class: "chat-form__send", data: { disable_with: false }  do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 rtl:rotate-180">
                     <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
                   </svg>
               <% end %>

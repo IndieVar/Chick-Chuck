@@ -5,16 +5,14 @@
 
 <%= turbo_stream_from [current_user, :rooms]%>
 
-<div class="-mt-12 -mx-4 rounded-lg">
-    <!-- Chatting -->
-    <div class="flex flex-col bg-gray-50 w-full h-[40rem] md:border-r-2 overflow-y-auto">
-        <!-- Search chat -->
-        <%= form_with url: :rooms, method: :get, data: {turbo_frame: '_top'}, class: "border-b-2 py-4 px-2" do |f|%>
-            <%= f.text_field :chatname, class: "py-2 px-2 border-2 border-gray-200 rounded-2xl w-full", placeholder: t('chat.search')%>
-        <% end %>
-        <!-- Rooms list -->
-        <%= turbo_frame_tag :rooms do %>
-            <%= render @rooms, current_user: current_user%>
-        <% end %>
-    </div>
+<div class="chat-list">
+    <!-- Search chat -->
+    <%= form_with url: :rooms, method: :get, data: {turbo_frame: '_top'}, class: "chat-list__search" do |f|%>
+        <%= heroicon 'magnifying-glass', class: "chat-list__search-icon" %>
+        <%= f.text_field :chatname, class: "chat-list__input", placeholder: t('chat.search'), autocomplete: 'off' %>
+    <% end %>
+    <!-- Rooms list -->
+    <%= turbo_frame_tag :rooms, class: "chat-list__items" do %>
+        <%= render @rooms, current_user: current_user%>
+    <% end %>
 </div>

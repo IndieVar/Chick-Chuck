@@ -8,22 +8,16 @@
 
 <%= turbo_frame_tag room do %>
     <% if current_user.class.name != Company.name || messages.any? %>
-        <%= link_to room_path(title: room.title), class: "flex items-center w-full border-b-2 relative hover:border-gray-300" do %>
-            <div class="flex flex-row py-4 px-2 items-center space-x-3 rtl:space-x-reverse">
-              <!-- Recipient avatar -->
-              <div>
-                  <%= image_tag recipient.avatar_thumb, class: "object-cover h-12 w-12 rounded-full"%>
-              </div>
-  
-              <!-- Recipient username and last message -->
-              <div>
-                <%= tag.div recipient.user_name, class: "text-lg font-semibold"%>
+        <%= link_to room_path(title: room.title), class: "chat-room" do %>
+            <!-- Recipient avatar -->
+            <%= image_tag recipient.avatar_thumb, class: "chat-room__avatar", alt: "" %>
+            <!-- Recipient username and last message -->
+            <div class="chat-room__body">
+                <%= tag.div recipient.user_name, class: "chat-room__name" %>
                 <%= render 'feedbacks/rooms/last_message', room: room, last_message: %>
-              </div>
             </div>
-
-            <!-- Unread messages count -->
-            <div class="absolute ltr:right-3 rtl:left-3 bottom-2 text-end">
+            <!-- Unread messages count and time -->
+            <div class="chat-room__meta">
                 <%= render 'feedbacks/rooms/unread_messages', room: room, count: unread_count, last_message: %>
             </div>
         <% end %>

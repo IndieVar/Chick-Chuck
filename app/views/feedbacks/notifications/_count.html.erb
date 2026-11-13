@@ -1,11 +1,11 @@
 <%= turbo_frame_tag :notifications_count do %>
-    <%= link_to notifications_path, type: "button", data: {turbo_frame: "modal"} do %>
+    <%= link_to notifications_path, type: "button", data: {turbo_frame: "notifications_modal"} do %>
         <!-- Counter -->
-        <div class="absolute left-0 top-0 bg-red-500 rounded-full">
-            <% if count > 0 %>
+        <% if count > 0 %>
+            <div class="absolute left-0 top-0 bg-red-500 rounded-full">
                <%= tag.span count > 9 ? "+9" : count, class: "text-sm text-white p-1"%>
-            <% end %>
-        </div>
+            </div>
+        <% end %>
         <!-- Icon -->
         <div class="text-gray-500 hover:text-gray-900 p-2">
            <% if count > 0 %>

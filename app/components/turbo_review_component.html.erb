@@ -1,20 +1,25 @@
 <%= turbo_frame_tag "modal" do %>
+  <%= tag.div class: "review-modal__backdrop", aria: { hidden: true } %>
   <%= tag.div data: { 
       controller: "turbo-modal", 
       action: "turbo:submit-end->turbo-modal#submitEnd keyup@window->turbo-modal#closeWithKeyboard click@window->turbo-modal#closeBackground",
       turbo_modal_target: "modal"},
-      class: "overflow-y-auto overflow-x-hidden h-3/4 sm:h-2/3 justify-center items-center shadow-md hover:shadow-xl rounded-lg
-              fixed w-full px-3 sm:px-0 sm:w-4/5 lg:w-auto inset-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 mx-auto" do 
+      class: "review-modal fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50" do 
   %>
-      <div class="relative p-6 w-full md:min-w-[30rem] h-full bg-gray-100 bg-opacity-95 rounded-lg">
-        <div class="text-center mx-2 h-auto">
+      <div class="review-modal__panel">
+        <div class="review-modal__header">
+            <span class="review-modal__mark" aria-hidden="true">
+              <%= heroicon 'star', variant: 'solid', class: 'w-5 h-5' %>
+            </span>
             <!-- Title -->
-            <%= tag.h1 @title, class: "text-3xl font-semibold text-center text-gray-700"%>
+            <%= tag.h1 @title, class: "review-modal__title"%>
             <!-- Close button -->
             <%= render 'shared/buttons/close'%>
         </div>
         <!-- Content -->
-        <%= content %>
+        <div class="review-modal__content">
+          <%= content %>
+        </div>
       </div>
   <% end %>
 <% end %>

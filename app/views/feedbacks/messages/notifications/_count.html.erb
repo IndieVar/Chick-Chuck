@@ -1,4 +1,4 @@
-<%= turbo_frame_tag :messages_count, class: "absolute left-0 top-0  bg-red-500 rounded-full" do %>
+<%= turbo_frame_tag :messages_count, class: ("absolute left-0 top-0 bg-red-500 rounded-full" if count > 0) do %>
     <% if count > 0 %>
        <%= tag.span count > 9 ? "+9" : count, class: "text-sm text-white p-1"%>
    <% end %>

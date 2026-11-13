@@ -1,11 +1,11 @@
 <% currently_at 'Notifications' %>
 <% provide :page_title, 'Notifications' %>
 
-<%= render TurboNotificationsComponent.new(title: 'Notifications') do %>
+<%= render TurboNotificationsComponent.new(title: t('notifications.title')) do %>
     <% if @visible_notifications.any? %>
         <%= render @visible_notifications.map(&:decorate) %>
     <% else %>
-        <%= tag.li t('notification.no_notice'), class: 'text-center my-3'%>
+        <%= tag.li t('notification.no_notice'), class: 'notifications-popup__empty'%>
     <% end%>
 <% end %>
 

@@ -3,5 +3,5 @@
     <!-- Icon && counter-->
     <%= render 'feedbacks/notifications/count', count: current_user.unviewed_notifications_count %>
     <!-- Notifications list -->
-    <%= turbo_frame_tag :modal %>
+    <%= turbo_frame_tag :notifications_modal %>
 <% end %>

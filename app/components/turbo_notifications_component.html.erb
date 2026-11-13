@@ -1,12 +1,15 @@
-<%= turbo_frame_tag "modal" do %>
-    <%= tag.div data: { 
-        controller: "turbo-modal", 
+<%= turbo_frame_tag "notifications_modal" do %>
+    <%= tag.div data: {
+        controller: "turbo-modal",
         action: "turbo:submit-end->turbo-modal#submitEnd keyup@window->turbo-modal#closeWithKeyboard click@window->turbo-modal#closeBackground",
         turbo_modal_target: "modal"},
-        class: "transition transform origin-top-right absolute rtl:origin-top-left rtl:left-0 ltr:origin-top-right ltr:right-0 w-[17rem] max-h-[25rem] overflow-auto border shadow-md hover:shadow-lg rounded-lg z-50" do 
+        class: "notifications-popup absolute rtl:left-0 ltr:right-0 z-50" do
     %>
-      <ul class="py-1 text-sm text-gray-700 bg-white rounded-lg shadow-lg">
+      <div class="notifications-popup__header">
+        <h2 class="notifications-popup__title"><%= @title %></h2>
+      </div>
+      <ul class="notifications-popup__list">
         <%= content %>
       </ul>
-    <% end%>
+    <% end %>
 <% end %>

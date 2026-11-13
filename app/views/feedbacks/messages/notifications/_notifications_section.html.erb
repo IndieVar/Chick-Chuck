@@ -2,9 +2,7 @@
 <%= tag.div class: "relative h-6 w-6 mb-3" do %>
     <!-- Icon -->
     <%= link_to rooms_path, type: "button", data: {turbo_frame: :rooms} do %>
-        <%= turbo_frame_tag :messages_count do %>
-            <%= render 'feedbacks/messages/notifications/count', count: current_user.unviewed_messages_count %>
-        <% end %>
+        <%= render 'feedbacks/messages/notifications/count', count: current_user.unviewed_messages_count %>
         <div class="text-gray-500 hover:text-gray-900 p-2">
             <%= heroicon "chat-bubble-left-right", class: "w-6 h-6", alt: "messages" %>
         </div>

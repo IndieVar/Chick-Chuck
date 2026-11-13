@@ -1,18 +1,11 @@
 <% notification_content = notification&.to_notification %>
-<li>
-    <%= link_to localized_notification_url(notification_content&.url), data: {turbo_frame: '_top'}, class: "flex items-center font-medium px-4 py-2 text-gray-800 hover:bg-gray-100 #{'bg-blue-50' if notification&.unread?}" do %>
-        <%= image_tag notification_content&.avatar, class: 'w-7 h-7 mr-3 rounded-full object-cover'%>
-        <div>
-            <p class="text-gray-800 mr-3 font-semibold">
-              <%= notification_content&.author %>
-            </p>
-            <p class="text-gray-600 mr-3">
-              <%= notification_content&.message %>
-            </p>
-            <span class="text-gray-400 text-xs -ml-1">
-                <%= notification&.created_at %>
-            </span>
+<li class="notifications-popup__item">
+    <%= link_to localized_notification_url(notification_content&.url), data: {turbo_frame: '_top'}, class: "notifications-popup__link #{'is-unread' if notification&.unread?}" do %>
+        <%= image_tag notification_content&.avatar, class: 'notifications-popup__avatar' %>
+        <div class="notifications-popup__body">
+            <p class="notifications-popup__author"><%= notification_content&.author %></p>
+            <p class="notifications-popup__message"><%= notification_content&.message %></p>
+            <span class="notifications-popup__time"><%= notification&.created_at %></span>
         </div>
     <% end %>
 </li>
-<hr>

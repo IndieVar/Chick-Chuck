@@ -1,30 +1,30 @@
 <% dashboard_page = yield(:nav_path).blank? || [admins_dashboard_path, companies_dashboard_path].include?(yield(:nav_path)) %>
 <nav class="cabinet-crumbs" aria-label="breadcrumb">
     <!-- Back -->
-    <%= link_to (heroicon I18n.locale == :he ? "arrow-uturn-right" : "arrow-uturn-left", class: "cabinet-crumbs__icon"), :back, aria: { label: "back" } %>
-    <span class="cabinet-crumbs__sep">/</span>
+    <%= link_to (heroicon I18n.locale == :he ? "arrow-uturn-right" : "arrow-uturn-left", class: "cabinet-crumbs__icon"), :back, class: "cabinet-crumbs__btn", aria: { label: "back" } %>
+    <span class="cabinet-crumbs__sep" aria-hidden="true"><%= heroicon "chevron-right", class: "cabinet-crumbs__chev" %></span>
 
     <!-- Home path -->
-    <%= link_to (heroicon "home", class: "cabinet-crumbs__icon"), root_path, aria: { label: "home" } %>
+    <%= link_to (heroicon "home", class: "cabinet-crumbs__icon"), root_path, class: "cabinet-crumbs__btn", aria: { label: "home" } %>
 
     <!-- Dashboard path -->
     <% if admin_signed_in? %>
-        <span class="cabinet-crumbs__sep">/</span>
+        <span class="cabinet-crumbs__sep" aria-hidden="true"><%= heroicon "chevron-right", class: "cabinet-crumbs__chev" %></span>
         <%= link_to t('user_menu.dashboard'), admins_dashboard_path, class: "cabinet-crumbs__link" %>
     <% elsif company_signed_in? %>
-        <span class="cabinet-crumbs__sep">/</span>
+        <span class="cabinet-crumbs__sep" aria-hidden="true"><%= heroicon "chevron-right", class: "cabinet-crumbs__chev" %></span>
         <%= link_to t('user_menu.dashboard'), companies_dashboard_path, data: {turbo:false}, class: "cabinet-crumbs__link" %>
     <% end %>
 
     <!-- Parent path -->
     <% if yield(:parent_title).present? && yield(:parent_path).present? %>
-        <span class="cabinet-crumbs__sep">/</span>
+        <span class="cabinet-crumbs__sep" aria-hidden="true"><%= heroicon "chevron-right", class: "cabinet-crumbs__chev" %></span>
         <%= link_to yield(:parent_title), yield(:parent_path), class: "cabinet-crumbs__link" %>
     <% end %>
 
     <!-- Current path -->
     <% unless dashboard_page && (admin_signed_in? || company_signed_in?) %>
-        <span class="cabinet-crumbs__sep">/</span>
+        <span class="cabinet-crumbs__sep" aria-hidden="true"><%= heroicon "chevron-right", class: "cabinet-crumbs__chev" %></span>
         <%= link_to yield(:nav_title), yield(:nav_path), class: "cabinet-crumbs__link cabinet-crumbs__link--current" %>
     <% end %>
 </nav>

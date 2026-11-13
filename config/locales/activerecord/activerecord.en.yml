@@ -4,6 +4,6 @@ en:
            
         errors:
               messages:
-                  in:         "%{value} is not valid, enter a value in range %{count}"
+                  in:         "%{value} is invalid; enter a value within the range %{count}"
         attributes:
            

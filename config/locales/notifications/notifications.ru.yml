@@ -1,9 +1,11 @@
 ru:
+    notifications:
+        title:            'Уведомления'
     activerecord:
         models:
             notification: 'Уведомление'
     notification:
-        no_notice:        'Нету уведомлений'
+        no_notice:        'Нет уведомлений'
         comment:          'Прокомментировал(a)'
         reply:            'Ответил(a) на ваш комментарий в '
         rating:           'Оценил(a) вашу компанию'

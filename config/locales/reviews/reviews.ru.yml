@@ -14,7 +14,7 @@ ru:
         total_ratings_count_html:    "Всего рейтингов: <span itemprop='ratingCount'>%{count}</span>"
         out_of:                      "%{count} из 5"
         out_of_html:                 "<span itemprop='ratingValue'>%{count}</span> из <span itemprop='bestRating'>5</span>"
-        no_feedback:                 "Нету отзывов"
+        no_feedback:                 "Нет отзывов"
         form:
             title:                  "Ваше мнение очень важно"
             rating_desc:            "Как бы вы оценили услуги перевозчика?"

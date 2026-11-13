@@ -10,6 +10,6 @@ en:
         delete_as_admin:  'Delete as admin'
         placeholder:      'Your message...'
         updated:          'Edited'
-        need_to_signin:   'To add a comment you need to '
-        about_page_title: "Leave your feedback"
+        need_to_signin:   'To add a comment, you need to '
+        about_page_title: "Leave feedback to help us improve the service"
         

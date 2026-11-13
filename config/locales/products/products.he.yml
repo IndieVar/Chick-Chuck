@@ -25,15 +25,15 @@ he:
         edit_btn:         "שנה פריט"
         my_products:      "הסחורה שלי"
         title:            "שם"
-        mark_as_sold:     "מארק נמכר"
-        product_by:       "מוצרים של המוביל"
+        mark_as_sold:     "סמן כנמכר"
+        product_by:       "מוצרי המוביל"
         products:         "מוצרים"
         user_products:    "מוצרים %{user_name}"
         all_products:     "כל המוצרים"
         total_products:   "סך הכל"
         condition:
-            any:              "בכל"
-            second_hand:      "שימוש לשעבר"
+            any:              "כל מצב"
+            second_hand:      "יד שנייה"
             new:              "חדש"
         delivery: 
             pickup:           "איסוף עצמי"
@@ -43,13 +43,13 @@ he:
             client:           "אדם פרטי"
             company:          "המוביל"
         price:
-            min:              "של"
-            max:              "ועד"
+            min:              "מ־"
+            max:              "עד"
     category:
         add_btn:          "הוסף קטגוריה"
         edit_btn:         "שנה קטגוריה"
     thing:
-        add_btn:          "תוסיף משהו"
+        add_btn:          "הוסף פריט"
     price:
         title:            "שם"
     

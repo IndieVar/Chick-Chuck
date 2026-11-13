@@ -2,37 +2,37 @@ en:
     meta:
         home_page:
             title:  "Moving | Market | Israel"
-            desc:   "Our site offers convenient search of carriers and used goods throughout Israel. You can find reliable and experienced carriers who will help you deliver the cargo or move things anywhere in the country. And also find the things you need at a bargain price or earn on unnecessary items."
+            desc:   "Our site makes it easy to find movers and second-hand goods throughout Israel. Find reliable, experienced movers to deliver cargo or move your belongings anywhere in the country. You can also find what you need at a great price or earn money by selling items you no longer need."
         moving_preparation:
-            title:  "How to prepare for the move | Israel"
-            desc:   "Moving into a new home means starting a new life. We tell you how to prepare for independent moving and do not miss anything."
+            title:  "How to prepare for a move | Israel"
+            desc:   "Moving to a new home means starting a new life. We explain how to plan a DIY move and make sure you don't miss anything."
         carriers:
-            title:  "Israel Carrier Search"
-            desc:   "Choose a suitable carrier for you based on the region and real reviews about the company."
+            title:  "Find a mover in Israel"
+            desc:   "Choose the right mover for you based on the service area and genuine company reviews."
         calculator:
             title:  "Calculate the cost of moving | Israel"  
-            desc:   "Price calculator allows the client to know the preliminary cost of moving among the companies registered in our service."
+            desc:   "Our moving cost calculator gives you a preliminary estimate from companies registered with our service."
         market:
-            title:  "Buy/sell used things | Israel"
-            desc:   "Any registered user can submit an advertisement for the sale of second-hand items, indicating the region of the location and the category of the item."
+            title:  "Buy and sell second-hand items | Israel"
+            desc:   "Any registered user can post an ad to sell second-hand items, specifying the item's location and category."
         about:
             title:  "More about the service"
-            desc:   "I am talking about the idea of creating a service and its features. Leave your feedback or suggestion to improve the service."
+            desc:   "I explain the idea behind the service and its features. Leave feedback or suggest ways to improve it."
         feedbacks:
-            title:  "Feedbacks"
-            desc:   "Here you can leave your review or offer to improve the service. Together we will make this service better!"
+            title:  "Service feedback"
+            desc:   "Leave feedback or suggest ways to improve the service. Together, we can make it better!"
         company:
             sign_up:
                 title:  "Become a carrier | Company Registration"
                 desc:   "Register your company to receive free advertising and attract even more customers for your business!"
             sign_in:
-                title:  "Log in as company"
-                desc:   "Entrance to the carrier’s private office."
+                title:  "Log in as a company"
+                desc:   "Log in to your carrier account."
         client:
             sign_up:
                 title:  "User registration"
-                desc:   "Create an account to evaluate carriers and advertise for the sale of your belongings."
+                desc:   "Create an account to review movers and post items for sale."
             sign_in:
-                title:  "Lig in"
-                desc:   "Entrance to your private office."
+                title:  "Log in"
+                desc:   "Log in to your account."
                 

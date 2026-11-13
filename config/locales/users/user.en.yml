@@ -22,9 +22,10 @@ en:
                 male:             'Male'
                 female:           'Female'
                 birthday:         'Birthday'
-                avatar:           'avatar'
+                avatar:           'Avatar'
                 password_popover: "%{length} characters minimum."
                 current_popover:  'We need your current password to confirm your changes.'
+                delete_account:   'Delete account'
                 created_at:       'Date of registration'
                 remove_avatar:    'Remove avatar'
                 contacts:         "Contacts"
@@ -35,7 +36,7 @@ en:
     user_menu:   
         account_menu:    'Account menu'
         sign_in:          'Log in'
-        sign_in_company:  'Log in as company'
+        sign_in_company:  'Log in as a company'
         sign_up:          'Sign up'
         sign_out:         'Log out'
         dashboard:        'Dashboard'
@@ -48,8 +49,8 @@ en:
         catalog:          'Catalog'
     sign_in:
         title:            'Log in'
-        title_as_company: 'Log in as company'
-        as_company:       'To log in as company'
+        title_as_company: 'Log in as a company'
+        as_company:       'To log in as a company'
         click_here:       'Click here'
         login_place:      'Enter your email or phone number'
         password_place:   'Enter password'
@@ -81,15 +82,15 @@ en:
         benefits_note:    'You can add a profile photo and contact details now or return to them later.'
         btn:              'Create account'
     contacts:         'Contacts'
-    contacts_desc_html:   "Please inform the carrier that you found it on the site chick-chuck.com and don’t forget to leave your feedback after moving. <br> Your opinion is very important."
+    contacts_desc_html:   "Please let the carrier know you found them on chick-chuck.com, and remember to leave a review after your move. <br> Your feedback is very important."
     write_message:    "Write"
     show_contacts:    "Show contacts"
     telegram:
-        telegram_popover: 'Your telegram username as it is'
+        telegram_popover: 'Your Telegram username, exactly as it appears'
     facebook:
-        facebook_popover: 'Copy and past your Facebook link'
+        facebook_popover: 'Copy and paste your Facebook link'
     sure_to_del_account:  'Are you sure you want to delete your account?'
-    did_not_get_email:  "You didn’t get the letter?"
+    did_not_get_email:  "Didn't receive the email?"
     chat:
         search:           'Search chat'
     language:

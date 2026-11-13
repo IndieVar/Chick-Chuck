@@ -15,9 +15,9 @@ en:
     feedback:
         total_rating:     "Total rating"
         form:
-            usability:    "1. How convenient and easy for you to use the site?"
+            usability:    "1. How convenient and easy is the site to use?"
             speed:        "2. How do you rate the speed of the site?"
-            design:       "3. How do you rate the design and visual design of the site?"
+            design:       "3. How do you rate the site's design and appearance?"
             quality:      "4. What is your overall assessment of the quality of services provided on the site?"
             informative:  "5. Is there enough information on the site about carriers to make an informed choice?"
             problems:     "6. Have you had problems or difficulties using the site? If yes, what? Describe in the comment."

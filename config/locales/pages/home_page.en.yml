@@ -1,9 +1,9 @@
 # Home page
 en:
     home_page: 
-        h1:           "Carriers and used items market throughout Israel"
+        h1:           "Movers and second-hand goods marketplace across Israel"
         # h1:           'Easy way to find the right carrier'
-        h2_html:      "Our site offers convenient search of carriers and used goods throughout Israel. You can find reliable and experienced carriers who will help you deliver the cargo or move things anywhere in the country. In addition, our store allows you to place an announcement about the sale of goods. This is a great opportunity to find the things you need at a bargain price or earn on unnecessary items. We strive to provide a convenient and reliable service for all Israelis."
+        h2_html:      "Our site makes it easy to find movers and second-hand goods throughout Israel. Find reliable, experienced movers to deliver cargo or move your belongings anywhere in the country. You can also post an ad to sell items, find what you need at a great price, or earn money by selling things you no longer need. We strive to provide a convenient and reliable service for everyone in Israel."
         redesign:
             eyebrow:                  "Trusted movers across Israel"
             hero_title:               "Moving in Israel is easier than you think"
@@ -48,10 +48,10 @@ en:
         top_trucks:   'Top trucks'
         main_features:
             title_html:       'Explore our <br> awesome features'
-            combining_desc:   'No more need to search all over the internet or ask friends. Many carriers in one place, just choose the right one for you!'
-            reviews_desc:     'Leave your real review of carrier services to help other people choose the right and professional carrier.'
-            calculator_desc:  'Calculate the approximate cost of transportation to estimate your upcoming costs and choose the suitable carrier for you.'
-            market_desc:      'You can buy used items directly from the carrier and do not bother delivering them.'
+            combining_desc:   'No need to search the whole internet or ask friends. Compare movers in one place and choose the right one for you.'
+            reviews_desc:     'Leave an honest review of a mover’s services to help others choose the right professional.'
+            calculator_desc:  'Estimate your moving costs and choose the right mover for you.'
+            market_desc:      'Buy second-hand items directly from a mover and arrange delivery with them.'
         latest_trucks: 'Latest trucks'
         market:        'Market'
         newslatter:

@@ -12,7 +12,7 @@ en:
       market:           'Market'
       news:             'News'  
       knowledge_base:   'Knowledge base' 
-      about:            'About service'
+      about:            'About the service'
       open_menu:        'Open menu'
       close_menu:       'Close menu'
   # Global
@@ -28,13 +28,13 @@ en:
       view_all:         "View all"
       send_btn:         "Send"
       dismiss_btn:      "Dismiss" 
-      views:            "Views count"
-      publish_btn:      "Publish in general view"
-      hide_btn:         "Hide from general view"
+      views:            "Number of views"
+      publish_btn:      "Publish publicly"
+      hide_btn:         "Hide from public view"
       image:            "Image"
       images:           "Images"
-      unavailable_html: "Our service is just launched and the %{model} are currently unavailable, please come back later.<br>
-Subscribe to our news to monitor our progress."
+      unavailable_html: "Our service has just launched, and %{model} are not available yet. Please come back later.<br>
+Subscribe to our newsletter to follow our progress."
       da:               "Yes"
       net:              "No"
       find_btn:         "Find %{model}"
@@ -64,13 +64,13 @@ Subscribe to our news to monitor our progress."
           created:      "%{model} has been created successfully."
           saved:        "%{model} has been saved successfully."
           updated:      "%{model} has been updated successfully." 
-          destroyed:    "%{model} has been destroyed successfully."
-          published:    "%{model} has been published successfully to general view." 
-          hided:        "%{model} has been hided successfully from general view."
+          destroyed:    "%{model} has been deleted successfully."
+          published:    "%{model} has been published successfully."
+          hided:        "%{model} has been hidden successfully from public view."
       alert:       "Something went wrong."
       mailers:
           success:      "You have successfully subscribed to our news!"
-          info:         "This email already exists, please check your email or expect new news from us!"
+          info:         "This email address is already subscribed. Please check your inbox for our updates."
   # Date and Time
   time:
       formats:

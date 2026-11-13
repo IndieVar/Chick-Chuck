@@ -1,7 +1,7 @@
 en:
     activerecord:
         models:
-            news:         'New'
+            news:         'News item'
         attributes:
             news:
                 title:            'Title'
@@ -11,4 +11,4 @@ en:
     news:
         all_news:         'News'
         add_btn:          'Add news'
-        edit_btn:         'Edit new'
+        edit_btn:         'Edit news item'

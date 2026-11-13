@@ -5,15 +5,15 @@ en:
         attributes:
             calculator:
                 distance:             'Distance'
-                floor_down:           'Floor down'
-                floor_down_elevator:  'Floor down(elevator)'
-                floor_up:             'Floor up'
-                floor_up_elevator:    'Floor down(elevator)'
+                floor_down:           'Floors down'
+                floor_down_elevator:  'Floors down (elevator)'
+                floor_up:             'Floors up'
+                floor_up_elevator:    'Floors up (elevator)'
     calculator:
-        title:            'Cost сalculator'
+        title:            'Moving cost calculator'
         btn:              'Calculate'
         km_span:          '₪ per 1 km'
-        floor_span:       '% per 1 floor'
+        floor_span:       '% per floor'
         options:          'Options'
         estimates:        'Carrier estimates'
         total_estimate:   'Estimated total'

@@ -1,12 +1,14 @@
 he:
+    notifications:
+        title:            "התראות"
     activerecord:
         models:
             notification: "הודעה"
     notification:
-        no_notice:        "אין הודעה מוקדמת"
-        comment:          "הגיב על"
-        reply:            "תגובה לתגובה שלך"
-        rating:           "מעריך את החברה שלך"
-        review:           "השאיר סקירה של החברה שלך"
-        feedback:         "השאיר סקירה חדשה של השירות"
+        no_notice:        "אין הודעות"
+        comment:          "הגיב/ה על"
+        reply:            "השיב/ה לתגובה שלכם"
+        rating:           "דירג/ה את החברה שלכם"
+        review:           "השאיר/ה חוות דעת על החברה שלכם"
+        feedback:         "השאיר/ה חוות דעת חדשה על השירות"
         

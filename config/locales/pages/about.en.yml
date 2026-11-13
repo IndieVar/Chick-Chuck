@@ -1,22 +1,22 @@
 en:
     about:
         header:
-            title:            "Idea of creating a service"
-            desc:             "Hello, my name is Alexander. I am the founder and creator of Relomio. After moving to Israel, my own experience and that of people around me showed me how challenging frequent moves can be. I saw how many moving companies operate in Israel and how much people need a reliable way to choose one. That inspired me to bring carriers together in one place, make it easier to find the right service, and help people choose with confidence through real ratings and customer reviews. Relomio also helps people find useful second-hand items as they prepare for a new home. Below, I’ll tell you more about the service."
+            title:            "The idea behind the service"
+            desc:             "Hello, my name is Alexander. I am the founder and creator of Relomio. After moving to Israel, I experienced firsthand how challenging frequent moves within the country can be, as did the people around me. I noticed how many movers there are in Israel and how much demand there is for their services. I realized it would be useful to bring movers together on one website, making it easier to find one based on each customer's needs—and, most importantly, on real ratings and customer reviews—so people can avoid unreliable movers and have a good moving experience. People who don't own a home and have to keep moving from one rented apartment to another understand what I mean. Below, I'll tell you a little about my service."
             founder_name:     "Aleksandr Varlamov"
             founder_title:    "Founder of Relomio"
         calculator:
-            title:            "Preliminary calculation of moving costs"
-            desc_html:        "No one underestimates the hard physical work of the loaders and the cost of fuel when transporting your belongings, so the service allows the carrier to indicate the cost of the overhaul distance and transportation of certain items of different categories for each overhauled floor down and up. <br> Moving is not easy and very expensive, the price calculator allows the client to know the preliminary cost of moving among the companies registered in our service. It is impossible to calculate all the nuances at the move without personal participation, so the preliminary cost is approximate, the exact cost of the move is agreed directly with the carrier."
+            title:            "Preliminary moving cost estimate"
+            desc_html:        "The hard physical work of movers and the cost of fuel are significant parts of a move. Our service lets movers specify their rates for distance traveled and for carrying items in different categories on each floor, up or down. <br> Moving is difficult and expensive, so our cost calculator helps you get a preliminary estimate from companies registered with our service. Not every detail can be accounted for without an in-person assessment, so the estimate is approximate; the final cost is agreed directly with the mover."
         carriers:
             title:            "Real ratings and reviews"
-            desc_html:        "The opportunity to choose a carrier in the region based on real reviews about the company, as well as to evaluate the services of the carrier based on your experience."
+            desc_html:        "Choose a mover in your area based on genuine reviews of the company, and rate the mover's services based on your own experience."
         market:
-            title:            "Opportunity to buy/sell supported items"
-            desc_html:        "Any registered user can submit an advertisement for the sale of supported items, indicating the region of the location, status and category of the item. <br> You can also buy supported items directly from the carrier, which is very convenient, because carriers know the sense of supported things and with them you can directly agree on delivery." 
+            title:            "Buy and sell second-hand items"
+            desc_html:        "Any registered user can post an ad to sell second-hand items, specifying their location and category. <br> You can also buy second-hand items directly from a mover, which is convenient: movers know a thing or two about used goods, and you can arrange delivery with them directly."
         moving_preparation:
             title:            "Preparation for relocation"
-            desc_html:        "If you have not previously faced moving to another apartment or have insufficient experience in this not simple business, you can read our article on preparation for the move to plan your move more carefully and feel confident."
+            desc_html:        "If you have never moved to another apartment or have little experience with it, read our article on preparing for a move to plan ahead and feel more confident."
         statistics:
             title:            "Relomio in numbers"
     

@@ -10,14 +10,14 @@ en:
                 title:            "Title"
                 working_area:     "District"
                 description:      "Description or slogan"
-                avatar:           "logotype"
-                images:           "images"
+                avatar:           "Logo"
+                images:           "Images"
     company:
         carriers:         "carriers"
         top_carriers:     "Top carriers"
-        latest_carriers:  "Latest carriers"
+        latest_carriers:  "All carriers"
         about:            "About company"
-        we_speak:         "We speak on: "
+        we_speak:         "We speak: "
         find_carrier:     "Find carrier"
         directory:
             eyebrow:                "Movers for your next chapter"
@@ -35,7 +35,7 @@ en:
         sign_up:    
             link:             "Become a Carrier"
             title:            "Company registration"
-            eyebrow:          "For moving companies in Israel"
+            eyebrow:          "For companies that help people move"
             intro:            "Create a mover profile so people planning a move can learn about your services and contact you."
             form_title:       "Tell us about your company"
             form_note:        "Start with the essentials — you can update your profile later."

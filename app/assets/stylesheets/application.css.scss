@@ -5357,3 +5357,27 @@ turbo-frame.myprod-grid { display: grid; }
   .myprod-hero__add { width: 100%; justify-content: center; }
   .myprod-grid { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Carrier services dropdown */
+.svc-count { display: inline-grid; place-items: center; min-width: 20px; height: 20px; margin-inline-start: 8px; padding: 0 6px; border-radius: 999px; background: #2857d9; color: #fff; font-size: 11px; font-weight: 750; }
+.svc-count[hidden] { display: none; }
+.svc-menu { min-width: 260px; padding: 8px; border: 1px solid #e6eaf1; border-radius: 14px; background: #fff !important; box-shadow: 0 16px 36px rgba(23, 36, 59, .16); text-align: start; }
+.svc-search { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; padding: 0 10px; border: 1px solid #dfe5ee; border-radius: 10px; background: #f6f8fc; color: #6b7a90; }
+.svc-search:focus-within { border-color: #2857d9; background: #fff; }
+.svc-search input { flex: 1; min-width: 0; height: 38px; border: 0; background: transparent; color: #202d43; font-size: 14px; outline: 0; box-shadow: none !important; }
+.svc-list { max-height: 280px; margin: 0; padding: 0; overflow-y: auto; list-style: none; }
+.svc-item[hidden], .svc-empty[hidden] { display: none; }
+.svc-item--all { margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1px solid #edf0f5; }
+.svc-label { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 10px; color: #202d43; font-size: 14px; font-weight: 600; cursor: pointer; transition: background .12s; }
+.svc-label:hover { background: #eef3ff; }
+.svc-check { flex: none; width: 18px; height: 18px; border: 1.5px solid #b7c2d4; border-radius: 6px; background-color: #fff; color: #2857d9; cursor: pointer; }
+.svc-check:checked { border-color: #2857d9; }
+.svc-check:focus { box-shadow: 0 0 0 3px rgba(40, 87, 217, .18); outline: 0; }
+.svc-empty { padding: 14px 10px; color: #6b7a90; font-size: 13px; text-align: center; }
+.home-filter__services-menu .svc-label, .carrier-directory-filter__services-menu .svc-label { color: #202d43; border: 0 !important; }
+
+/* Home carrier filter: readable select buttons */
+.home-filter__field .ss__button { width: 100%; height: 49px; padding: 0 13px; color: #202d43 !important; background-color: #fff !important; border: 1px solid #e6e9ef !important; border-radius: 11px !important; font-size: 14px; font-weight: 600; }
+.home-filter__field .ss__button.ss__button--empty { color: #5b6a82 !important; font-weight: 500; }
+.home-filter__field .ss__button:hover, .home-filter__field .ss__button[aria-expanded="true"] { border-color: #2857d9 !important; }
+.home-filter__services-button { color: #5b6a82 !important; font-size: 14px !important; }

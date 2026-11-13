@@ -37,7 +37,7 @@
         </div>
         <!-- Services -->
         <div class="w-full h-14 items-center flex justify-center border-0 relative bg-opacity-90 <%= filter_field_class %>"
-            data-reveal-target="item"
+            data-reveal-target="item" data-controller="services-filter"
         >
             <% if home_page || directory_page %>
                 <%= tag.span Company.human_attribute_name('services'), class: home_page ? 'home-filter__label' : 'carrier-directory-filter__label' %>
@@ -46,27 +46,34 @@
             <button id="dropdownServicesButton" data-dropdown-toggle="dropdownServices" class="inline-flex items-center w-full text-base font-medium text-center <%= home_page ? 'home-filter__services-button' : directory_page ? 'carrier-directory-filter__services-button' : 'text-gray-300 hover:text-gray-100' %>" type="button">
                 <%= heroicon 'list-bullet', class: "w-6 h-6 mx-3 #{directory_page ? 'carrier-directory-filter__icon' : 'text-gray-400'}" unless home_page %>
                 <%= home_page ? t('home_page.redesign.any_service') : Company.human_attribute_name('services') %>
+                <span class="svc-count" data-services-filter-target="count" hidden></span>
                 <%= heroicon 'chevron-down', class: "w-4 h-4 ml-auto #{directory_page ? 'carrier-directory-filter__icon' : 'text-gray-400'}" if home_page || directory_page %>
             </button>
             <!-- Services dropdown menu -->
-            <div id="dropdownServices" class="z-10 hidden rounded-lg shadow bg-gray-700 min-w-full <%= home_page ? 'home-filter__services-menu' : 'carrier-directory-filter__services-menu' if home_page || directory_page %>">
-                <ul class="h-72 px-3 pb-3 overflow-y-auto rounded-lg bg-gray-700 min-w-full text-start <%= home_page ? 'home-filter__services-list' : 'carrier-directory-filter__services-list' if home_page || directory_page %>" aria-labelledby="dropdownServicesButton">
+            <div id="dropdownServices" class="svc-menu z-10 hidden min-w-full <%= home_page ? 'home-filter__services-menu' : 'carrier-directory-filter__services-menu' if home_page || directory_page %>">
+                <div class="svc-search">
+                    <%= heroicon 'magnifying-glass', class: 'w-4 h-4' %>
+                    <input type="search" autocomplete="off" placeholder="<%= t('product.search_placeholder') %>"
+                        data-services-filter-target="search" data-action="input->services-filter#filter keydown->services-filter#preventSubmit">
+                </div>
+                <ul class="svc-list text-start" aria-labelledby="dropdownServicesButton">
                     <!-- Select All / Deselect All -->
-                    <li class="flex items-center p-2 rounded-lg">
-                        <label class="text-base  block w-full p-2 font-normal text-gray-300 hover:text-gray-100 bg-clip-padding rounded-lg border border-solid border-gray-500">
-                            <input type="checkbox" data-checkbox-select-all-target="checkboxAll" />
-                            <%= tag.span "#{t('global.select_all')} / #{t('global.deselect_all')}"%>
+                    <li class="svc-item svc-item--all" data-services-filter-target="all">
+                        <label class="svc-label">
+                            <input type="checkbox" class="svc-check" data-checkbox-select-all-target="checkboxAll" data-action="change->services-filter#update" />
+                            <span><%= "#{t('global.select_all')} / #{t('global.deselect_all')}" %></span>
                         </label>
                     </li>
                     <!-- Services list -->
-                    <%= f.collection_check_boxes(:service_ids, Service.all.decorate, :id, :title, multiple: true, checked: params[:service_ids]) do |b| %> 
-                        <li class="flex items-center p-2 rounded-lg">
-                            <%= b.label(class: "text-base  block w-full p-2 font-normal text-gray-300 hover:text-gray-100 bg-clip-padding rounded-lg border border-solid border-gray-500") do %>
-                                <%= b.check_box data: { checkbox_select_all_target: 'checkbox' } %>
-                                <%= b.text %>
+                    <%= f.collection_check_boxes(:service_ids, Service.all.decorate.sort_by { |service| service.title.to_s.downcase }, :id, :title, multiple: true, checked: params[:service_ids]) do |b| %>
+                        <li class="svc-item" data-services-filter-target="item">
+                            <%= b.label(class: "svc-label") do %>
+                                <%= b.check_box class: 'svc-check', data: { checkbox_select_all_target: 'checkbox', action: 'change->services-filter#update' } %>
+                                <span><%= b.text %></span>
                             <% end %>
                         </li>
-                    <% end%>
+                    <% end %>
+                    <li class="svc-empty" data-services-filter-target="empty" hidden><%= t('product.no_results') %></li>
                 </ul>
             </div>
         </div>

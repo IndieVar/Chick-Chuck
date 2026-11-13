@@ -1,4 +1,3 @@
-<%= turbo_stream.replace dom_id(@product, :publish), (render 'shared/buttons/publish', model: @product, 
-    publish_path: [:users, @product, :publish])%>
-        
+<%= turbo_stream.update dom_id(@product), render('contents/products/product', product: @product) %>
+
 <%= prepend_flash %>

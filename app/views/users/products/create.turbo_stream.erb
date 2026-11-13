@@ -1,5 +1,2 @@
-<%= turbo_stream.replace Product.new do %>
-  <%= render 'shared/buttons/add', id: Product.new, title: t('product.add_btn'), path: new_users_product_path%>
-<% end %>
-<%= turbo_stream.append 'products', render( 'contents/products/product', product: @product)%>
+<%= turbo_stream.append 'products', render('contents/products/product', product: @product) %>
 <%= prepend_flash %>

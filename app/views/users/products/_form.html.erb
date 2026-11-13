@@ -91,7 +91,7 @@
 
       <!-- Actions -->
       <div class="pform-actions">
-          <%= link_to t('product.my_products'), users_products_path, class: "pform-back" %>
+          <%= link_to t('product.my_products'), users_products_path, class: "pform-back", data: { turbo_frame: "_top" } %>
           <%= f.submit t('global.save_btn'), class: 'pcalc-save' %>
       </div>
     <% end %>

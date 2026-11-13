@@ -1,0 +1,33 @@
+<div class="mcard-owner">
+    <div class="mcard-owner__status">
+        <% if product.sold %>
+            <span class="mcard-badge mcard-badge--sold"><%= Product.human_attribute_name('sold') %></span>
+        <% elsif product.published %>
+            <span class="mcard-badge mcard-badge--live"><%= t('product.status_live') %></span>
+        <% else %>
+            <span class="mcard-badge mcard-badge--hidden"><%= t('product.status_hidden') %></span>
+        <% end %>
+        <%= link_to users_product_mark_as_sold_path(product),
+            class: "mcard-owner__sold",
+            data: { turbo_method: :post, turbo_confirm: t('global.are_you_sure') } do %>
+            <%= heroicon(product.sold ? 'arrow-uturn-left' : 'check-circle', class: 'w-4 h-4') %>
+            <%= product.sold ? t('product.mark_as_available') : t('product.mark_as_sold') %>
+        <% end %>
+    </div>
+    <div class="mcard-owner__actions">
+        <%= link_to [:edit, :users, product], class: "mcard-btn", data: { turbo_frame: "_top" } do %>
+            <%= heroicon 'pencil-square', class: 'w-4 h-4' %>
+            <%= t('global.edit_btn') %>
+        <% end %>
+        <%= link_to [:users, product, :publish], class: "mcard-btn",
+            data: { turbo_method: :post, turbo_confirm: t('global.are_you_sure') } do %>
+            <%= heroicon(product.published ? 'eye-slash' : 'eye', class: 'w-4 h-4') %>
+            <%= product.published ? t('global.hide') : t('global.publish_btn') %>
+        <% end %>
+        <%= link_to [:users, product], class: "mcard-btn mcard-btn--danger",
+            data: { turbo_method: :delete, turbo_confirm: t('global.are_you_sure') } do %>
+            <%= heroicon 'trash', class: 'w-4 h-4' %>
+            <%= t('global.destroy_btn') %>
+        <% end %>
+    </div>
+</div>

@@ -30,6 +30,10 @@ ru:
         no_results:         'Ничего не найдено'
         title:            'Название'
         mark_as_sold:     'Отметить как продано'
+        mark_as_available: "Вернуть в продажу"
+        status_live: "Опубликован"
+        status_hidden: "Скрыт"
+        empty_list: "Вы ещё не добавили ни одного товара"
         product_by:       'Товар от перевозчика'
         products:         'товары'
         user_products:    'Товары %{user_name}'

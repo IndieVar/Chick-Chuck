@@ -1,19 +1,34 @@
 <% currently_at t('product.my_products') %>
 <% provide :page_title, t('product.my_products') %>
-<% provide :main_title, "#{t('product.my_products')}: #{@products.count}" %>
 <% provide :nav_title, t('product.my_products') %>
 <% provide :nav_path, users_products_path %>
 
+<!-- Page header -->
+<header class="pcalc-hero myprod-hero">
+    <div>
+        <span class="pcalc-hero__eyebrow"><%= t('product.total_products') %>: <%= @pagy.count %></span>
+        <h1 class="pcalc-hero__title"><%= t('product.my_products') %></h1>
+    </div>
+    <%= link_to new_users_product_path, class: "myprod-hero__add", data: { turbo_frame: "_top" } do %>
+        <%= heroicon 'plus', class: 'w-5 h-5' %>
+        <span><%= t('product.add_btn') %></span>
+    <% end %>
+</header>
+
 <!-- Products Cards -->
-<%= turbo_frame_tag 'products',
-    class: "grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2 xl:grid-cols-3 justify-center mx-auto" do 
-%>
-    <%= render partial: 'contents/products/product', collection: @products%>
+<%= turbo_frame_tag 'products', class: "myprod-grid" do %>
+    <%= render partial: 'contents/products/product', collection: @products %>
+<% end %>
+
+<% if @products.empty? %>
+    <div class="myprod-empty">
+        <%= heroicon 'archive-box', class: 'w-10 h-10' %>
+        <p><%= t('product.empty_list') %></p>
+        <%= link_to t('product.add_btn'), new_users_product_path, class: "myprod-hero__add", data: { turbo_frame: "_top" } %>
+    </div>
 <% end %>
 
 <!-- Pagy -->
-<%== pagy_nav(@pagy) if current_user.products.count > 6%>
-
-<!-- New truck -->
-<hr class="my-6">
-<%= render 'shared/buttons/add', id: Product.new, title: t('product.add_btn'), path: new_users_product_path%>
+<div class="myprod-pagination">
+    <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+</div>

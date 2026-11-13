@@ -30,6 +30,10 @@ en:
         no_results:         'Nothing found'
         title:            'Title'
         mark_as_sold:     'Mark as sold'
+        mark_as_available: "Return to sale"
+        status_live: "Published"
+        status_hidden: "Hidden"
+        empty_list: "You haven't added any products yet"
         product_by:       'Product from a carrier'
         products:         'products'
         user_products:    'Products %{user_name}'

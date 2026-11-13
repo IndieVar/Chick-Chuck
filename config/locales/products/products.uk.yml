@@ -30,6 +30,10 @@ uk:
         no_results:         'Нічого не знайдено'
         title:            'Назва'
         mark_as_sold:     'Позначити як проданий'
+        mark_as_available: "Повернути в продаж"
+        status_live: "Опубліковано"
+        status_hidden: "Приховано"
+        empty_list: "Ви ще не додали жодного товару"
         product_by:       'Товар від перевізника'
         products:         'товари'
         user_products:    'Товари %{user_name}'

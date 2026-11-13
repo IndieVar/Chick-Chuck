@@ -4,8 +4,8 @@
     <!-- Form -->
     <%= form_with model: [room, message], remote: true, 
         data: { controller: :form, action: "turbo:submit-end->form#clear" } do |form| %>
-        <div class="chat-form" data-controller="image">
-            <span id="Img" class="chat-form__previews"></span>
+        <div class="chat-form" data-controller="upload-preview">
+            <div class="chat-form__previews upload-thumbs upload-thumbs--compact" data-upload-preview-target="grid" hidden></div>
           <div class="chat-form__row">
               <!-- Upload Images -->
               <%= form.label :file, class: "chat-form__attach" do %>
@@ -13,8 +13,8 @@
                   <span class="sr-only">Upload image</span>
                   <%= form.fields_for :images, Image.new do |image| %>
                       <%= form.file_field :file, multiple: true, class: "sr-only", name: "images[file][]",
-                      accept: "image/png, image/jpeg, image/jpg", "data-image-target": "input",
-                      "data-action": "image#comment_preview" %>
+                      accept: "image/png, image/jpeg, image/jpg", "data-upload-preview-target": "input",
+                      "data-action": "upload-preview#add" %>
                   <% end %>
               <% end %>
               <!-- Room id -->

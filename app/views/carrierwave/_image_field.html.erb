@@ -1,17 +1,18 @@
 <!-- Image field -->
-<div class="upload-zone">
+<div class="upload-zone" data-controller="upload-preview">
     <%= label_tag "#{imageable.class.name.downcase.split('decorator').first}_file", class: "upload-zone__label" do %>
         <%= heroicon 'photo', class: 'upload-zone__icon' %>
-        <div class="upload-zone__action" data-controller="image" id="Img">
+        <div class="upload-zone__action">
             <span class="upload-zone__text">
                 <%= t(imageable.images.present? ? 'global.update' : 'global.upload', model: t('global.images'))%>
             </span>
             <%= form.fields_for :images, Image.new do |image| %>
                 <%= image.file_field :file, multiple: true, name: "images[file][]",
                     id: "#{imageable.class.name.downcase.split('decorator').first}_file",
-                    class: "sr-only", accept: "image/png, image/jpeg, image/jpg", "data-image-target": "input", "data-action": "image#preview" %>
+                    class: "sr-only", accept: "image/png, image/jpeg, image/jpg", "data-upload-preview-target": "input", "data-action": "upload-preview#add" %>
             <% end %>
         </div>
         <p class="upload-zone__hint">PNG, JPG, GIF up to 10MB</p>
     <% end %>
+    <div class="upload-thumbs" data-upload-preview-target="grid" hidden></div>
 </div>

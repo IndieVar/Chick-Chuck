@@ -1,31 +1,23 @@
-<div class="my-6 grid grid-rows-1 text-center items-center justify-center">
-  <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-    <div class="space-y-1 text-center">
-      <%= form.label :avatar, class: "cursor-pointer" do %>
-          <% if imageable&.avatar.present?%>
-              <%= image_tag(imageable&.avatar_thumb, alt: "avatar", 
-                  class: "cursor-pointer object-cover mx-auto 
-                      #{imageable.instance_of?(Company) ? 'h-32 w-46' : 'h-12 w-12 rounded-full'}") %>
-          <% else %>
-          <svg class="mx-auto h-12 w-12 text-gray-700" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          <% end %>
-          <div class="text-gray-700 mt-1 mb-2 justify-center text-center text-base" data-controller="image" id="Img">
-              <span class="relative rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-                  <%= t(imageable&.avatar.present? ? 'global.update' : 'global.upload', 
-                     model: (imageable&.instance_of?(Company) ? Company : User).human_attribute_name('avatar'))%>
-              </span>
-                  <%= form.file_field :avatar, multiple: false, class: "sr-only", accept: "image/png, image/jpeg, image/jpg", "data-image-target": "input", "data-action": "image#preview" %>
-          </div>
-          <p class="text-xs text-gray-700">
-            PNG, JPG, GIF up to 10MB
-          </p>
-      <% end %>
+<div class="upload-zone upload-zone--avatar" data-controller="upload-preview" data-upload-preview-single-value="true">
+  <%= form.label :avatar, class: "upload-zone__label" do %>
+    <% if imageable&.avatar.present? %>
+      <%= image_tag(imageable&.avatar_thumb, alt: "avatar", class: "upload-zone__current #{imageable.instance_of?(Company) ? 'upload-zone__current--wide' : ''}") %>
+    <% else %>
+      <%= heroicon 'photo', class: 'upload-zone__icon' %>
+    <% end %>
+    <div class="upload-zone__action">
+      <span class="upload-zone__text">
+        <%= t(imageable&.avatar.present? ? 'global.update' : 'global.upload',
+              model: (imageable&.instance_of?(Company) ? Company : User).human_attribute_name('avatar')) %>
+      </span>
+      <%= form.file_field :avatar, multiple: false, class: "sr-only", accept: "image/png, image/jpeg, image/jpg",
+          "data-upload-preview-target": "input", "data-action": "upload-preview#add" %>
     </div>
-  </div>
-  <%= tag.p class: 'mt-3 space-x-1' do %>
-        <%= form.check_box :remove_avatar %>
-        <%= form.label :remove_avatar%>
+    <p class="upload-zone__hint">PNG, JPG, GIF up to 10MB</p>
+  <% end %>
+  <div class="upload-thumbs upload-thumbs--single" data-upload-preview-target="grid" hidden></div>
+  <%= tag.p class: 'upload-zone__remove' do %>
+    <%= form.check_box :remove_avatar %>
+    <%= form.label :remove_avatar %>
   <% end if imageable&.avatar.present? %>
 </div>

@@ -5305,3 +5305,23 @@ select.pform-input.pform-input { padding-inline-end: 36px; }
 .ss__group { padding: 8px 10px 4px; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #98a2b3; }
 .ss__item--empty { color: #98a2b3; }
 .ss__none { padding: 10px; font-size: 13px; color: #98a2b3; text-align: center; }
+
+.upload-thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 12px; padding: 0 16px 16px; }
+.upload-thumbs[hidden] { display: none; }
+.upload-thumb { position: relative; border: 1px solid #e6eaf1; border-radius: 12px; overflow: hidden; background: #f6f8fc; }
+.upload-thumb__img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+.upload-thumb__name { display: block; padding: 6px 8px; font-size: 11px; color: #6b7a90; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: #fff; }
+.upload-thumb__remove { position: absolute; top: 6px; inset-inline-end: 6px; width: 24px; height: 24px; display: grid; place-items: center; border: 0; border-radius: 999px; background: rgba(23,36,59,.78); color: #fff; cursor: pointer; transition: background .15s; }
+.upload-thumb__remove:hover { background: #d92d20; }
+
+.upload-zone--avatar { max-width: 320px; margin: 24px auto; }
+.upload-zone__current { width: 72px; height: 72px; border-radius: 999px; object-fit: cover; }
+.upload-zone__current--wide { width: 128px; height: 96px; border-radius: 12px; }
+.upload-zone__remove { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 0; padding: 0 16px 14px; font-size: 13px; color: #6b7a90; }
+.upload-thumbs--single { grid-template-columns: 112px; justify-content: center; }
+.upload-thumbs--compact { display: flex; flex-wrap: wrap; gap: 8px; padding: 8px; }
+.upload-thumbs--compact[hidden] { display: none; }
+.upload-thumbs--compact .upload-thumb { width: 72px; }
+.upload-thumbs--compact .upload-thumb__name { display: none; }
+.upload-thumbs--compact .upload-thumb__remove { width: 20px; height: 20px; top: 4px; inset-inline-end: 4px; }
+.chat-form__previews.upload-thumbs--compact { overflow-x: auto; flex-wrap: nowrap; }

@@ -7,10 +7,10 @@
           <%= error.full_message %>
         <% end %>
       <% end %>
-      <div class="w-full my-4 border border-gray-200 rounded-lg bg-gray-50 shadow-md hover:shadow-lg"  data-controller="image">
+      <div class="w-full my-4 border border-gray-200 rounded-lg bg-gray-50 shadow-md hover:shadow-lg"  data-controller="upload-preview">
           <!-- Comment content -->
           <div class="px-4 py-2 bg-white rounded-t-lg">
-              <span id="Img" class="flex items-center my-2 overflow-x-auto space-x-3"></span>
+              <div class="upload-thumbs upload-thumbs--compact" data-upload-preview-target="grid" hidden></div>
               <%= form.text_area :content, id: "chat", class: "w-full px-0 text-sm text-gray-900 bg-white border-0 focus:ring-0", 
                   placeholder: t('comment.placeholder'), required: true,
                   autofocus: @commentable.class.name == Comment.name ? true : false%>
@@ -28,8 +28,8 @@
                               <span class="sr-only">Upload image</span>
                                   <%= form.fields_for :images, Image.new do |image| %>
                                       <%= form.file_field :images, multiple: true, class: "sr-only", name: "images[file][]", 
-                                          accept: "image/png, image/jpeg, image/jpg", "data-image-target": "input", 
-                                          "data-action": "image#comment_preview" %>
+                                          accept: "image/png, image/jpeg, image/jpg", "data-upload-preview-target": "input", 
+                                          "data-action": "upload-preview#add" %>
                                   <% end %>
                           <% end %>
                         </div>
